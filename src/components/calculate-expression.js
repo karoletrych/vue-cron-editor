@@ -1,4 +1,4 @@
-export const calculateExpression = () => {
+export const calculateExpression = (event) => {
     if(event.type === "minutes")
     {
         return event.minutes;

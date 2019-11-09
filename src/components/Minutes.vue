@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {calculateExpression} from "./ExpressionCalculator"
+import { EventBus } from '@/event-bus.js';
 
 export default {
   name: 'Minutes',
@@ -20,12 +20,12 @@ export default {
 
   },
   data: () => ({
-    vueCronEditorTab: true
+    isVueCronEditorTab: true
   }),
   methods:{
     notifyParent(newValue){
-      const expression = calculateExpression({type: "minutes", minutes: newValue});
-      this.$emit("vuecroneditor:expressionChanged", {value: expression})
+      const event = {type: "minutes", minutes: newValue};
+      EventBus.$emit("expressionChanged", event)
     }
   }
 }

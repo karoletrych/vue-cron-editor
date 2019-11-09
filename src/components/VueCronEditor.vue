@@ -1,12 +1,10 @@
 <script>
+import {EventBus} from "@/event-bus";
+
 export default {
   name: "VueCronEditor",
   mounted() {
-    debugger;
-    const childrenTabs = this.$children.filter(child => child.vueCronEditorTab);
-    childrenTabs.forEach(tab =>
-      tab.$on("vuecroneditor:expressionChanged", this.updateExpression)
-    );
+    EventBus.$on("expressionChanged", this.updateExpression);
   },
   data: () => ({
     value: { type: String }
