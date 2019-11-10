@@ -1,5 +1,4 @@
 <script>
-import {EventBus} from "@/event-bus";
 
 export default {
   name: "VueCronEditor",
