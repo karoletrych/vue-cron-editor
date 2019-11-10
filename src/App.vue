@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <VueCronEditor v-model="cronExpression">
+      <div>
       <v-tabs v-model="activeTab">
         <v-tab v-for="tab in tabs" :key="tab">{{tab}}</v-tab>
 
@@ -22,6 +23,9 @@
           </v-card>
         </v-tab-item>
       </v-tabs>
+      <CronDisplay
+        :value="cronExpression"/>
+      </div>
     </VueCronEditor>
   </v-app>
 </template>
@@ -31,7 +35,7 @@ import VueCronEditor from "./components/VueCronEditor";
 import Minutes from "./components/Minutes";
 import Hourly from "./components/Hourly";
 import Daily from "./components/Daily";
-// import CronDisplay from "./components/CronDisplay";
+import CronDisplay from "./components/CronDisplay";
 
 export default {
   name: "App",
@@ -39,10 +43,10 @@ export default {
     VueCronEditor,
     Minutes,
     Hourly,
-    Daily
+    Daily,
+    CronDisplay
   },
   mounted() {
-    this.cronExpression = "8 0/5 1/1 * ?";
   },
   data: () => ({
     cronExpression: null,

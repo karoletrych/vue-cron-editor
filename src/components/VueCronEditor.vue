@@ -15,11 +15,11 @@ export default {
     value: { type: String }
   }),
   methods: {
-    updateExpression(event) {
+    updateExpression(event){
       const newExpression = calculateExpression(event);
 
       this.value = newExpression;
-      this.$emit("update:value", newExpression);
+      this.$emit("input", newExpression);
     }
   },
   render() {
