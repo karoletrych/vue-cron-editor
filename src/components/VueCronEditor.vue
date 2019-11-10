@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 import Vue from "vue";
+import {calculateExpression} from "./calculateExpression";
 
 export default {
   name: "VueCronEditor",
@@ -14,9 +15,11 @@ export default {
     value: { type: String }
   }),
   methods: {
-    updateExpression(newValue) {
-      this.value = newValue;
-      this.$emit("update:value", newValue);
+    updateExpression(event) {
+      const newExpression = calculateExpression(event);
+
+      this.value = newExpression;
+      this.$emit("update:value", newExpression);
     }
   },
   render() {

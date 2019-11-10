@@ -4,15 +4,18 @@
         <v-select
           dense
           :items="Array(31).fill(0).map(Number.call, Number)"
+          @change="notifyParent"
           />
         day(s) at
         <v-select
           dense
           :items="Array(24).fill(0).map(Number.call, Number)"
+          @change="notifyParent"
           />
         <v-select
           dense
           :items="Array(60).fill(0).map(Number.call, Number)"
+          @change="notifyParent"
           />
     </div>
 </template>
@@ -21,12 +24,19 @@
 
 export default {
   name: 'Daily',
+  inject: ["eventBus"],
   computed: {
 
   },
   data: () => ({
 
-  })
+  }),
+  methods:{
+    notifyParent(newValue){
+      const event = {type: "daily", minutes: newValue};
+      this.eventBus.$emit("expressionChanged", event)
+    }
+  }
 }
 </script>
 
