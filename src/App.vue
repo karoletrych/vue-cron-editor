@@ -1,30 +1,38 @@
 <template>
   <v-app>
     <VueCronEditor v-model="cronExpression">
+      
+      <template #select="{items, onChange}">
+        <v-select
+          @change="onChange"
+          dense
+          :items="items"
+          />
+      </template>
+
       <div>
-      <v-tabs v-model="activeTab">
-        <v-tab v-for="tab in tabs" :key="tab">{{tab}}</v-tab>
+        <v-tabs v-model="activeTab">
+          <v-tab v-for="tab in tabs" :key="tab">{{tab}}</v-tab>
+          
+          <v-tab-item :value="0">
+            <v-card flat tile>
+              <Minutes />
+            </v-card>
+          </v-tab-item>
 
-        <v-tab-item :value="0">
-          <v-card flat tile>
-            <Minutes />
-          </v-card>
-        </v-tab-item>
+          <v-tab-item :value="1">
+            <v-card flat tile>
+              <Hourly />
+            </v-card>
+          </v-tab-item>
 
-        <v-tab-item :value="1">
-          <v-card flat tile>
-            <Hourly />
-          </v-card>
-        </v-tab-item>
-
-        <v-tab-item :value="2">
-          <v-card flat tile>
-            <Daily />
-          </v-card>
-        </v-tab-item>
-      </v-tabs>
-      <CronDisplay
-        :value="cronExpression"/>
+          <v-tab-item :value="2">
+            <v-card flat tile>
+              <Daily />
+            </v-card>
+          </v-tab-item>
+        </v-tabs>
+        <CronDisplay :value="cronExpression" />
       </div>
     </VueCronEditor>
   </v-app>
@@ -46,8 +54,7 @@ export default {
     Daily,
     CronDisplay
   },
-  mounted() {
-  },
+  mounted() {},
   data: () => ({
     cronExpression: null,
     text: "dasdas",

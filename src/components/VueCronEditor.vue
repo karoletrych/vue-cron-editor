@@ -1,11 +1,9 @@
-<script lang="ts">
+<script>
 import Vue from "vue";
 import {calculateExpression} from "./calculateExpression";
 
 export default {
   name: "VueCronEditor",
-  mounted() {
-  },
   provide(){
     const eventBus = new Vue();
     eventBus.$on("expressionChanged", this.updateExpression);
