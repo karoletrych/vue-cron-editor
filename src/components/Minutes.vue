@@ -18,13 +18,14 @@ export default {
   computed: {
 
   },
+  inject: ["eventBus"],
   data: () => ({
     isVueCronEditorTab: true
   }),
   methods:{
     notifyParent(newValue){
       const event = {type: "minutes", minutes: newValue};
-      EventBus.$emit("expressionChanged", event)
+      this.eventBus.$emit("expressionChanged", event)
     }
   }
 }

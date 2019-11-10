@@ -1,9 +1,14 @@
 <script>
+import Vue from "vue";
 
 export default {
   name: "VueCronEditor",
   mounted() {
-    EventBus.$on("expressionChanged", this.updateExpression);
+  },
+  provide(){
+    const eventBus = new Vue();
+    eventBus.$on("expressionChanged", this.updateExpression);
+    return {eventBus};
   },
   data: () => ({
     value: { type: String }
