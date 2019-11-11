@@ -8,7 +8,12 @@ export default {
     render(){
         return this.selectImplementation({
             items: this.items,
-            onChange: (event) => this.$emit("change", event)
+            onChange: (event) => this.$emit("change", event),
+            inputEvents: {
+                input: (e) => { 
+                    this.$emit("input", e);
+                },
+            }
         });
     }
 }

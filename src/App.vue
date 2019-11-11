@@ -2,10 +2,11 @@
   <v-app>
     <VueCronEditor v-model="cronExpression">
       
-      <template #select="{items, onChange}">
+      <template #select="{items, onChange, inputEvents}">
         <v-select dense
           :items="items"
           @change="onChange"
+          v-on="inputEvents"
           />
       </template>
 

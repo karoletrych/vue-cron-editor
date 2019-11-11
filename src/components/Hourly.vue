@@ -1,14 +1,12 @@
 <template>
     <div class="inline">
         Every
-        <v-select
-          dense
+        <AbstractSelect
           :items="Array(24).fill(0).map(Number.call, Number)"
           v-model="hours"
           />
         hour(s) on minute
-        <v-select
-          dense
+        <AbstractSelect
           :items="Array(60).fill(0).map(Number.call, Number)"
           v-model="minutes"
           />
@@ -16,12 +14,13 @@
 </template>
 
 <script>
+import AbstractSelect from "./AbstractSelect";
 
 export default {
   name: 'Hourly',
   inject: ["eventBus"],
-  computed: {
-
+  components: {
+    AbstractSelect
   },
   data: () => ({
     minutes: null,
