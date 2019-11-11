@@ -3,10 +3,9 @@
     <VueCronEditor v-model="cronExpression">
       
       <template #select="{items, onChange}">
-        <v-select
-          @change="onChange"
-          dense
+        <v-select dense
           :items="items"
+          @change="onChange"
           />
       </template>
 

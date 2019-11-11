@@ -2,9 +2,8 @@
     <div 
       class="minutes">
         Every
-        <v-select
+        <AbstractSelect
           @change="notifyParent"
-          dense
           :items="Array(60).fill(0).map(Number.call, Number)"
           />
         minute(s)
@@ -12,6 +11,7 @@
 </template>
 
 <script>
+import AbstractSelect from "./AbstractSelect";
 
 export default {
   name: 'Minutes',
@@ -27,6 +27,9 @@ export default {
       const event = {type: "minutes", minutes: newValue};
       this.eventBus.$emit("expressionChanged", event)
     }
+  },
+  components:{
+    AbstractSelect
   }
 }
 </script>

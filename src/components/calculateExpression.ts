@@ -19,7 +19,7 @@ type TabUpdatedEvent =
   | HourlyTabUpdatedEvent
   | DailyTabUpdatedEvent;
 
-export const calculateExpression = (event : TabUpdatedEvent) => {
+export const calculateExpression = (event: TabUpdatedEvent) => {
   if (event.type === "minutes") {
     return `0/${event.minutes} * 1/1 * ?`;
   } else if (event.type === "hourly") {
@@ -29,7 +29,7 @@ export const calculateExpression = (event : TabUpdatedEvent) => {
   }
 };
 
-export const tabFromExpression = (expression : string) => {
+export const tabFromExpression = (expression: string) => {
   expression;
   throw "not implemented";
 };

@@ -7,7 +7,12 @@ export default {
   provide(){
     const eventBus = new Vue();
     eventBus.$on("expressionChanged", this.updateExpression);
-    return {eventBus};
+    
+    const selectImplementation = this.$vnode.data.scopedSlots.select;
+    return {eventBus, selectImplementation};
+  },
+  mounted(){
+    this
   },
   data: () => ({
     value: { type: String }
@@ -20,7 +25,7 @@ export default {
       this.$emit("input", newExpression);
     }
   },
-  render() {
+  render(h){
     return this.$slots.default;
   }
 };
