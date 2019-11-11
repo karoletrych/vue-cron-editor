@@ -9,7 +9,8 @@ export default {
     eventBus.$on("expressionChanged", this.updateExpression);
     
     const selectImplementation = this.$vnode.data.scopedSlots.select;
-    return {eventBus, selectImplementation};
+    const checkboxImplementation = this.$vnode.data.scopedSlots.checkbox;
+    return {eventBus, selectImplementation, checkboxImplementation};
   },
   mounted(){
     this

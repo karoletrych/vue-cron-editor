@@ -1,13 +1,19 @@
 <template>
   <v-app>
     <VueCronEditor v-model="cronExpression">
-      
       <template #select="{items, onChange, inputEvents}">
         <v-select dense
           :items="items"
           @change="onChange"
           v-on="inputEvents"
           />
+      </template>
+      <template #checkbox="{inputEvents, label, value}">
+        <v-checkbox 
+          v-on="inputEvents" 
+          :label="label" 
+          :value="value">
+        </v-checkbox>
       </template>
 
       <div>
@@ -31,6 +37,12 @@
               <Daily />
             </v-card>
           </v-tab-item>
+
+          <v-tab-item :value="3">
+            <v-card flat tile>
+              <Weekly />
+            </v-card>
+          </v-tab-item>
         </v-tabs>
         <CronDisplay :value="cronExpression" />
       </div>
@@ -43,6 +55,7 @@ import VueCronEditor from "./components/VueCronEditor";
 import Minutes from "./components/Minutes";
 import Hourly from "./components/Hourly";
 import Daily from "./components/Daily";
+import Weekly from "./components/Weekly";
 import CronDisplay from "./components/CronDisplay";
 
 export default {
@@ -52,6 +65,7 @@ export default {
     Minutes,
     Hourly,
     Daily,
+    Weekly,
     CronDisplay
   },
   mounted() {},

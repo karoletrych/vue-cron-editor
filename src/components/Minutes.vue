@@ -19,9 +19,6 @@ export default {
 
   },
   inject: ["eventBus"],
-  data: () => ({
-    isVueCronEditorTab: true
-  }),
   methods:{
     notifyParent(newValue){
       const event = {type: "minutes", minutes: newValue};
