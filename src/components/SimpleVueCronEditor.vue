@@ -5,9 +5,12 @@
 
       <v-tab-item :value="0">
         <v-card flat tile>
-          <div>
+          <div class="inline">
             Every
-            <v-select @change="notifyParent" :items="Array(60).fill(0).map(Number.call, Number)" />minute(s)
+            <v-select
+              v-model="minutes.minutes"
+              :items="Array(60).fill(0).map(Number.call, Number)"
+            />minute(s)
           </div>
         </v-card>
       </v-tab-item>
@@ -16,8 +19,8 @@
         <v-card flat tile>
           <div class="inline">
             Every
-            <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="hours" />hour(s) on minute
-            <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="minutes" />
+            <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="hourly.hours" />hour(s) on minute
+            <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="hourly.minutes" />
           </div>
         </v-card>
       </v-tab-item>
@@ -26,9 +29,12 @@
         <v-card flat tile>
           <div class="inline">
             Every
-            <v-select :items="Array(31).fill(0).map(Number.call, Number)" v-model="dayInterval" />day(s) at
-            <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="hours" />
-            <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="minutes" />
+            <v-select
+              :items="Array(31).fill(0).map(Number.call, Number)"
+              v-model="daily.dayInterval"
+            />day(s) at
+            <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="daily.hours" />
+            <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="daily.minutes" />
           </div>
         </v-card>
       </v-tab-item>
@@ -36,15 +42,15 @@
       <v-tab-item :value="3">
         <v-card flat tile>
           <div class="inline">
-            <v-checkbox v-model="mon" label="Mon" />
-            <v-checkbox v-model="tue" label="Tue" />
-            <v-checkbox v-model="wed" label="Wed" />
-            <v-checkbox v-model="thu" label="Thu" />
-            <v-checkbox v-model="fri" label="Fri" />
-            <v-checkbox v-model="sat" label="Sat" />
-            <v-checkbox v-model="sun" label="Sun" />at
-            <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="hours" />
-            <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="minutes" />
+            <v-checkbox v-model="weekly.days" label="Mon" />
+            <v-checkbox v-model="weekly.days" label="Tue" />
+            <v-checkbox v-model="weekly.days" label="Wed" />
+            <v-checkbox v-model="weekly.days" label="Thu" />
+            <v-checkbox v-model="weekly.days" label="Fri" />
+            <v-checkbox v-model="weekly.days" label="Sat" />
+            <v-checkbox v-model="weekly.days" label="Sun" />at
+            <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="weekly.hours" />
+            <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="weekly.minutes" />
           </div>
         </v-card>
       </v-tab-item>
@@ -53,23 +59,33 @@
         <v-card flat tile>
           <div class="inline">
             On the
-            <v-select :items="Array(31).fill(0).map(Number.call, Number)" v-model="dayInterval" />of every
-            <v-select :items="Array(12).fill(0).map(Number.call, Number)" v-model="monthInterval" />month(s) at
-            <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="hours" />
-            <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="minutes" />
+            <v-select
+              :items="Array(31).fill(0).map(Number.call, Number)"
+              v-model="monthly.dayInterval"
+            />of every
+            <v-select
+              :items="Array(12).fill(0).map(Number.call, Number)"
+              v-model="monthly.monthInterval"
+            />month(s) at
+            <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="monthly.hours" />
+            <v-select
+              :items="Array(60).fill(0).map(Number.call, Number)"
+              v-model="monthly.minutes"
+            />
           </div>
         </v-card>
       </v-tab-item>
     </v-tabs>
-    <CronDisplay :value="cronExpression" />
+    {{innerValue}}
   </div>
 </template>
 
 <script>
+import vueCronEditorMixin from "./vueCronEditorMixin";
 export default {
   name: "SimpleVueCronEditor",
+  mixins: [vueCronEditorMixin],
   data: () => ({
-    cronExpression: null,
     activeTab: null,
     tabs: [
       "Minutes",
@@ -85,4 +101,7 @@ export default {
 </script>
 
 <style>
+.inline {
+  display: inline-flex;
+}
 </style>

@@ -27,6 +27,7 @@ type TabUpdatedEvent =
   | WeeklyTabUpdatedEvent;
 
 export const calculateExpression = (event: TabUpdatedEvent) : string => {
+  console.log(JSON.stringify(event));
   if (event.type === "minutes") {
     return `0/${event.minutes} * 1/1 * ?`;
   } else if (event.type === "hourly") {
