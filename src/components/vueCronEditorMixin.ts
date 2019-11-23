@@ -1,42 +1,50 @@
-import {calculateExpression} from './calculateExpression';
+import {calculateExpression, tabFromExpression, TabUpdatedEventKey} from './calculateExpression';
+import Vue from "vue";
 
-export default {
+export default Vue.extend({
+    created() {
+        this.initialTab = tabFromExpression(this.value);
+    },
+    props: {
+        value: { type: String }
+    },
     data() {
         return {
-            innerValue: null,
+            innerValue: "",
+            initialTab: "",
             minutes:{
-                minutes: null
+                minuteInterval: 1
             },
             hourly: {
-                minutes: null,
-                hours: null
+                minutes: 0,
+                hourInterval: 1
             },
             daily: {
-                minutes: null,
-                hours: null,
-                dayInterval: null
+                minutes: 0,
+                hours: 0,
+                dayInterval: 1
             },
             weekly: {
-                minutes: null,
-                hours: null,
+                minutes: 0,
+                hours: 0,
                 days: []
             },
             monthly:{
-                hours: null,
-                minutes: null,
-                dayInterval: null,
-                monthInterval: null
+                hours: 0,
+                minutes: 0,
+                dayInterval: 1,
+                monthInterval: 1
             },
             advanced:{
-                cronExpression: null
+                cronExpression: ""
             }
         };
     },
     methods:{
-        _updateCronExpr(event, type){
-            const cronExpr = calculateExpression({...event, type: type});
-            this.innerValue = cronExpr;
-            this.$emit("input", cronExpr);
+        _updateCronExpr(event: any, type : TabUpdatedEventKey){
+            const cronExpression = calculateExpression({...event, type: type});
+            this.innerValue = cronExpression;
+            this.$emit("input", cronExpression);
         }
     },
     watch: {
@@ -77,4 +85,4 @@ export default {
             }
         }
     }
-}
+})

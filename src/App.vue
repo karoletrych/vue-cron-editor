@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <SimpleVueCronEditor v-model="cronExpression">
-
     </SimpleVueCronEditor>
+    <v-text-field v-model="cronExpression"/>
   </v-app>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   },
   mounted() {},
   data: () => ({
-    cronExpression: null,
+    cronExpression: "4 */4 * * *",
   })
 };
 </script>

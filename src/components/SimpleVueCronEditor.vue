@@ -1,7 +1,7 @@
 <template>
   <div class="px-2">
     <v-tabs v-model="activeTab">
-      <v-tab v-for="tab in tabs" :key="tab">{{tab}}</v-tab>
+      <v-tab v-for="tab in tabs" :key="tab.key">{{tab.name}}</v-tab>
 
       <v-tab-item :value="0">
         <v-card class="d-inline-flex pa-2 align-center" outlined tile>
@@ -9,7 +9,7 @@
           <v-select
             class="px-2"
             bottom
-            v-model="minutes.minutes"
+            v-model="minutes.minuteInterval"
             :items="range(1, 59)"
           />
           <div class="px-2">minute(s)</div>
@@ -19,7 +19,7 @@
       <v-tab-item :value="1">
         <v-card class="d-inline-flex pa-2 align-center" outlined tile>
           <div class="px-2">Every</div>
-          <v-select :items="range(1, 24)" v-model="hourly.hours" />
+          <v-select :items="range(1, 24)" v-model="hourly.hourInterval" />
           <div class="px-2">hour(s) on minute</div>
           <v-select :items="range(0, 59)" v-model="hourly.minutes" />
         </v-card>
@@ -29,7 +29,7 @@
         <v-card class="d-inline-flex pa-2 align-center" outlined tile>
           <div class="px-2">Every</div>
           <v-select
-            :items="Array(31).fill(0).map(Number.call, Number)"
+            :items="range(1,30)"
             v-model="daily.dayInterval"
           />
           <div class="px-2">day(s) at</div>
@@ -42,13 +42,13 @@
         <v-card outlined class="d-inline-flex pa-2 align-center" tile>
           <div class="px-2">Every</div>
           <div class="d-inline-flex">
-            <v-checkbox dense class="px-1" v-model="weekly.days" label="Mon" value="Mon" />
-            <v-checkbox dense class="px-1" v-model="weekly.days" label="Tue" value="Tue" />
-            <v-checkbox dense class="px-1" v-model="weekly.days" label="Wed" value="Wed" />
-            <v-checkbox dense class="px-1" v-model="weekly.days" label="Thu" value="Thu" />
-            <v-checkbox dense class="px-1" v-model="weekly.days" label="Fri" value="Fri" />
-            <v-checkbox dense class="px-1" v-model="weekly.days" label="Sat" value="Sat" />
-            <v-checkbox dense class="px-1" v-model="weekly.days" label="Sun" value="Sun" />
+            <v-checkbox dense class="px-1" v-model="weekly.days" label="Sun" value="0" />
+            <v-checkbox dense class="px-1" v-model="weekly.days" label="Mon" value="1" />
+            <v-checkbox dense class="px-1" v-model="weekly.days" label="Tue" value="2" />
+            <v-checkbox dense class="px-1" v-model="weekly.days" label="Wed" value="3" />
+            <v-checkbox dense class="px-1" v-model="weekly.days" label="Thu" value="4" />
+            <v-checkbox dense class="px-1" v-model="weekly.days" label="Fri" value="5" />
+            <v-checkbox dense class="px-1" v-model="weekly.days" label="Sat" value="6" />
           </div>
           <div class="px-2">at</div>
           <v-select :items="range(0, 23)" v-model="weekly.hours" />
@@ -77,7 +77,6 @@
         </v-card>
       </v-tab-item>
     </v-tabs>
-    {{innerValue}}
   </div>
 </template>
 
@@ -87,9 +86,19 @@ export default {
   name: "SimpleVueCronEditor",
   mixins: [vueCronEditorMixin],
   data: () => ({
-    activeTab: null,
-    tabs: ["Minutes", "Hourly", "Daily", "Weekly", "Monthly", "Advanced"]
+    activeTab : null,
+    tabs: [
+        { id: 0, name: 'minutes' },
+        { id: 1, name: 'hourly' },
+        { id: 2, name: 'daily' },
+        { id: 3, name: 'weekly' },
+        { id: 4, name: 'monthly' },
+        { id: 5, name: 'advanced' },
+      ]
   }),
+  mounted(){
+      this.activeTab = this.tabs.find(t => t.name === this.initialTab).id;
+  },
   methods:{
     range(from, to) {
         return [...Array(to - from + 1).keys()].map(i => i + from);
