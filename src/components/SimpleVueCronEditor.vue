@@ -10,7 +10,7 @@
             class="px-2"
             bottom
             v-model="minutes.minutes"
-            :items="Array(60).fill(0).map(Number.call, Number)"
+            :items="range(1, 59)"
           />
           <div class="px-2">minute(s)</div>
         </v-card>
@@ -19,9 +19,9 @@
       <v-tab-item :value="1">
         <v-card class="d-inline-flex pa-2 align-center" outlined tile>
           <div class="px-2">Every</div>
-          <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="hourly.hours" />
+          <v-select :items="range(1, 24)" v-model="hourly.hours" />
           <div class="px-2">hour(s) on minute</div>
-          <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="hourly.minutes" />
+          <v-select :items="range(0, 59)" v-model="hourly.minutes" />
         </v-card>
       </v-tab-item>
 
@@ -33,8 +33,8 @@
             v-model="daily.dayInterval"
           />
           <div class="px-2">day(s) at</div>
-          <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="daily.hours" />
-          <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="daily.minutes" />
+          <v-select :items="range(0, 23)" v-model="daily.hours" />
+          <v-select :items="range(0, 59)" v-model="daily.minutes" />
         </v-card>
       </v-tab-item>
 
@@ -51,23 +51,23 @@
             <v-checkbox dense class="px-1" v-model="weekly.days" label="Sun" value="Sun" />
           </div>
           <div class="px-2">at</div>
-          <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="weekly.hours" />
-          <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="weekly.minutes" />
+          <v-select :items="range(0, 23)" v-model="weekly.hours" />
+          <v-select :items="range(0, 59)" v-model="weekly.minutes" />
         </v-card>
       </v-tab-item>
 
       <v-tab-item :value="4">
         <v-card class="d-inline-flex pa-2 align-center" outlined tile>
           <div class="px-2">On the</div>
-          <v-select :items="Array(31).fill(0).map(Number.call, Number)" v-model="monthly.day" />
-          <div class="px-2">of every</div>
+          <v-select :items="range(1, 30)" v-model="monthly.day" />
+          <div class="px-2">day of every</div>
           <v-select
-            :items="Array(12).fill(0).map(Number.call, Number)"
+            :items="range(1, 12)"
             v-model="monthly.monthInterval"
           />
           <div class="px-2">month(s) at</div>
-          <v-select :items="Array(24).fill(0).map(Number.call, Number)" v-model="monthly.hours" />
-          <v-select :items="Array(60).fill(0).map(Number.call, Number)" v-model="monthly.minutes" />
+          <v-select :items="range(0, 23)" v-model="monthly.hours" />
+          <v-select :items="range(0, 59)" v-model="monthly.minutes" />
         </v-card>
       </v-tab-item>
 
@@ -89,7 +89,12 @@ export default {
   data: () => ({
     activeTab: null,
     tabs: ["Minutes", "Hourly", "Daily", "Weekly", "Monthly", "Advanced"]
-  })
+  }),
+  methods:{
+    range(from, to) {
+        return [...Array(to - from + 1).keys()].map(i => i + from);
+    }
+  }
 };
 </script>
 
