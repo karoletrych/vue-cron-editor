@@ -18,26 +18,44 @@ interface WeeklyTabUpdatedEvent {
     minutes: number;
     hours: number;
     days: boolean[];
-  }
+}
+interface MonthlyTabUpdatedEvent {
+    type: "monthly";
+    minutes: number;
+    hours: number;
+    day: number;
+    monthInterval: number;
+}
+  
+interface AdvancedTabUpdatedEvent {
+    type: "advanced";
+    cronExpression: string;
+}
 
 type TabUpdatedEvent =
   | MinutesTabUpdatedEvent
   | HourlyTabUpdatedEvent
   | DailyTabUpdatedEvent
-  | WeeklyTabUpdatedEvent;
+  | WeeklyTabUpdatedEvent
+  | MonthlyTabUpdatedEvent
+  | AdvancedTabUpdatedEvent
 
 export const calculateExpression = (event: TabUpdatedEvent) : string => {
   console.log(JSON.stringify(event));
   if (event.type === "minutes") {
-    return `0/${event.minutes} * 1/1 * ?`;
+    return `*/${event.minutes} * * * *`;
   } else if (event.type === "hourly") {
-    return `${event.hours} 0/${event.minutes} 1/1 * ?`;
+    return `${event.minutes} */${event.hours} * * *`;
   } else if (event.type === "daily") {
-    return `${event.minutes} ${event.hours} 1/${event.dayInterval} * ?`;
+    return `${event.minutes} ${event.hours} */${event.dayInterval} * *`;
   } else if (event.type === "weekly") {
-    return `${event.minutes} ${event.hours} ? * ${event.days.filter(d=> d).join()}`;
+    return `${event.minutes} ${event.hours} * * ${event.days.filter(d=> d).join()}`;
+  } else if (event.type === "monthly") {
+    return `${event.minutes} ${event.hours} ${event.day} */${event.monthInterval} *`;
+  } else if (event.type === "advanced") {
+    return event.cronExpression;
   }
-  throw event;
+  throw `unknown event type: ${event}`;
 };
 
 export const tabFromExpression = (expression: string) => {

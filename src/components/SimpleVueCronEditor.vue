@@ -61,7 +61,7 @@
             On the
             <v-select
               :items="Array(31).fill(0).map(Number.call, Number)"
-              v-model="monthly.dayInterval"
+              v-model="monthly.day"
             />of every
             <v-select
               :items="Array(12).fill(0).map(Number.call, Number)"
@@ -72,6 +72,16 @@
               :items="Array(60).fill(0).map(Number.call, Number)"
               v-model="monthly.minutes"
             />
+          </div>
+        </v-card>
+      </v-tab-item>
+
+    <v-tab-item :value="5">
+        <v-card flat tile>
+          <div class="inline">
+            <v-text-field v-model="advanced.cronExpression">
+
+            </v-text-field>
           </div>
         </v-card>
       </v-tab-item>
@@ -93,7 +103,6 @@ export default {
       "Daily",
       "Weekly",
       "Monthly",
-      "Yearly",
       "Advanced"
     ]
   })

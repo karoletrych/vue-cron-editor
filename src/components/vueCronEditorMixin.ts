@@ -26,6 +26,9 @@ export default {
                 minutes: null,
                 dayInterval: null,
                 monthInterval: null
+            },
+            advanced:{
+                cronExpression: null
             }
         };
     },
@@ -65,6 +68,12 @@ export default {
             deep: true,
             handler(e){
                 this._updateCronExpr(e, "monthly");
+            }
+        },
+        advanced:{
+            deep: true,
+            handler(e){
+                this._updateCronExpr(e, "advanced");
             }
         }
     }
