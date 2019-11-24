@@ -1,17 +1,17 @@
 <template>
     <v-app>
-        <SimpleVueCronEditor v-model="cronExpression"></SimpleVueCronEditor>
+        <VueCronEditor v-model="cronExpression"></VueCronEditor>
         <v-text-field v-model="cronExpression" />
     </v-app>
 </template>
 
 <script>
-import SimpleVueCronEditor from "./components/SimpleVueCronEditor";
+import VueCronEditor from "./components/VueCronEditor";
 
 export default {
     name: "App",
     components: {
-        SimpleVueCronEditor
+        VueCronEditor
     },
     mounted() {},
     data: () => ({

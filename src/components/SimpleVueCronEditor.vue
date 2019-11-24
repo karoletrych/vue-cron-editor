@@ -130,7 +130,7 @@
 <script>
 import vueCronEditorMixin from "./vueCronEditorMixin";
 export default {
-    name: "SimpleVueCronEditor",
+    name: "VueCronEditor",
     mixins: [vueCronEditorMixin],
     data: () => ({
         activeTab: null,
