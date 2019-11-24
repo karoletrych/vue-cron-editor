@@ -52,7 +52,7 @@ export default {
     methods: {
         editItem(item) {
             this.editedIndex = this.expressions.indexOf(item);
-            this.editedItem = item;
+            this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
         deleteItem(item) {
@@ -68,7 +68,7 @@ export default {
         },
         save() {
             if (this.editedIndex > -1) {
-                this.expressions[this.editedIndex] = this.editedItem;
+                Object.assign(this.expressions[this.editedIndex], this.editedItem);
             } else {
                 this.expressions.push(this.editedItem);
             }
