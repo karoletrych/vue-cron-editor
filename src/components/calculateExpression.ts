@@ -101,12 +101,23 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
             dayInterval: Number(groups[3])
         };
     }
-    if ((groups = expression.match(/^(\d+) (\d+) \* \* (\d)(,\d)*$/))) {
+    if (
+        (groups = expression.match(
+            /^(\d+) (\d+) \* \* (\d)(,\d)?(,\d)?(,\d)?(,\d)?(,\d)?(\d)?$/
+        ))
+    ) {
+        const optionalDaysBeginIndex = 4;
+        const matchesEndIndex = 10;
         return {
             type: "weekly",
             minutes: Number(groups[1]),
             hours: Number(groups[2]),
-            days: [groups[3]].concat(groups[4])
+            days: [groups[3]].concat(
+                groups
+                    .slice(optionalDaysBeginIndex, matchesEndIndex)
+                    .map(d => d && d.replace(/,/, ""))
+                    .filter(d => d)
+            )
         };
     }
     if ((groups = expression.match(/^(\d+) (\d+) (\d+) \*\/(\d+) \*$/))) {

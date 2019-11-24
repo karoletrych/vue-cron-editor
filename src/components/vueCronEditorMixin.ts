@@ -5,6 +5,36 @@ import {
 } from "./calculateExpression";
 import Vue from "vue";
 
+const initialData = {
+    initialTab: "",
+    minutes: {
+        minuteInterval: 1
+    },
+    hourly: {
+        minutes: 0,
+        hourInterval: 1
+    },
+    daily: {
+        minutes: 0,
+        hours: 0,
+        dayInterval: 1
+    },
+    weekly: {
+        minutes: 0,
+        hours: 0,
+        days: []
+    },
+    monthly: {
+        hours: 0,
+        minutes: 0,
+        day: 1,
+        monthInterval: 1
+    },
+    advanced: {
+        cronExpression: ""
+    }
+};
+
 export default Vue.extend({
     created() {
         const tabData = parseExpression(this.value);
@@ -16,36 +46,7 @@ export default Vue.extend({
         value: { type: String }
     },
     data() {
-        return {
-            innerValue: "",
-            initialTab: "",
-            minutes: {
-                minuteInterval: 1
-            },
-            hourly: {
-                minutes: 0,
-                hourInterval: 1
-            },
-            daily: {
-                minutes: 0,
-                hours: 0,
-                dayInterval: 1
-            },
-            weekly: {
-                minutes: 0,
-                hours: 0,
-                days: []
-            },
-            monthly: {
-                hours: 0,
-                minutes: 0,
-                day: 1,
-                monthInterval: 1
-            },
-            advanced: {
-                cronExpression: ""
-            }
-        };
+        return JSON.parse(JSON.stringify(initialData)); // deep copy
     },
     methods: {
         _updateCronExpr(event: any, type: TabUpdatedEventKey) {
@@ -53,7 +54,6 @@ export default Vue.extend({
                 ...event,
                 type: type
             });
-            this.innerValue = cronExpression;
             this.$emit("input", cronExpression);
         }
     },

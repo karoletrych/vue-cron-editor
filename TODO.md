@@ -1,10 +1,4 @@
+- i18n
 - sample
-- API
-    client should provide:
-        - visual components:
-            - dropdown
-            - checkbox
-            - tab
-            - textinput
-        - tab container
-- library provides tab content components
+- extensibility
+- separate mixin to another library
