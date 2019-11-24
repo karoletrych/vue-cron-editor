@@ -40,7 +40,7 @@ export type TabUpdatedEvent =
     | MonthlyTabUpdatedEvent
     | AdvancedTabUpdatedEvent;
 
-export type TabUpdatedEventKey = TabUpdatedEvent[keyof TabUpdatedEvent];
+export type TabKey = TabUpdatedEvent[keyof TabUpdatedEvent];
 
 export const calculateExpression = (event: TabUpdatedEvent): string => {
     console.log(JSON.stringify(event));

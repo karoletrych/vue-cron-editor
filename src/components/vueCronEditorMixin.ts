@@ -1,7 +1,7 @@
 import {
     calculateExpression,
     parseExpression,
-    TabUpdatedEventKey
+    TabKey
 } from "./calculateExpression";
 import Vue from "vue";
 
@@ -49,12 +49,16 @@ export default Vue.extend({
         return JSON.parse(JSON.stringify(initialData)); // deep copy
     },
     methods: {
-        _updateCronExpr(event: any, type: TabUpdatedEventKey) {
+        _updateCronExpr(event: any, type: TabKey) {
             const cronExpression = calculateExpression({
                 ...event,
                 type: type
             });
             this.$emit("input", cronExpression);
+        },
+        resetToTab(tabKey: TabKey) {
+            this.$data[tabKey] = initialData[tabKey];
+            this._updateCronExpr(initialData[tabKey], tabKey);
         }
     },
     watch: {
