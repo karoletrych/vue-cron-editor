@@ -1,4 +1,8 @@
-import {calculateExpression, parseExpression, TabUpdatedEventKey} from './calculateExpression';
+import {
+    calculateExpression,
+    parseExpression,
+    TabUpdatedEventKey
+} from "./calculateExpression";
 import Vue from "vue";
 
 export default Vue.extend({
@@ -6,7 +10,7 @@ export default Vue.extend({
         const tabData = parseExpression(this.value);
         const initialTab = tabData.type as string;
         this.initialTab = initialTab;
-        this.$data[initialTab] = {...tabData };
+        this.$data[initialTab] = { ...tabData };
     },
     props: {
         value: { type: String }
@@ -15,7 +19,7 @@ export default Vue.extend({
         return {
             innerValue: "",
             initialTab: "",
-            minutes:{
+            minutes: {
                 minuteInterval: 1
             },
             hourly: {
@@ -32,60 +36,63 @@ export default Vue.extend({
                 hours: 0,
                 days: []
             },
-            monthly:{
+            monthly: {
                 hours: 0,
                 minutes: 0,
                 day: 1,
                 monthInterval: 1
             },
-            advanced:{
+            advanced: {
                 cronExpression: ""
             }
         };
     },
-    methods:{
-        _updateCronExpr(event: any, type : TabUpdatedEventKey){
-            const cronExpression = calculateExpression({...event, type: type});
+    methods: {
+        _updateCronExpr(event: any, type: TabUpdatedEventKey) {
+            const cronExpression = calculateExpression({
+                ...event,
+                type: type
+            });
             this.innerValue = cronExpression;
             this.$emit("input", cronExpression);
         }
     },
     watch: {
-        minutes:{
+        minutes: {
             deep: true,
-            handler(e){
+            handler(e) {
                 this._updateCronExpr(e, "minutes");
             }
         },
-        hourly:{
+        hourly: {
             deep: true,
-            handler(e){
+            handler(e) {
                 this._updateCronExpr(e, "hourly");
             }
         },
-        daily:{
+        daily: {
             deep: true,
-            handler(e){
+            handler(e) {
                 this._updateCronExpr(e, "daily");
             }
         },
-        weekly:{
+        weekly: {
             deep: true,
-            handler(e){
+            handler(e) {
                 this._updateCronExpr(e, "weekly");
             }
         },
-        monthly:{
+        monthly: {
             deep: true,
-            handler(e){
+            handler(e) {
                 this._updateCronExpr(e, "monthly");
             }
         },
-        advanced:{
+        advanced: {
             deep: true,
-            handler(e){
+            handler(e) {
                 this._updateCronExpr(e, "advanced");
             }
         }
     }
-})
+});

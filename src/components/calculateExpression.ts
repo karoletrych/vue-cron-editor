@@ -54,11 +54,13 @@ export const calculateExpression = (event: TabUpdatedEvent): string => {
         return `${event.minutes} ${event.hours} */${event.dayInterval} * *`;
     }
     if (event.type === "weekly") {
-        return `${event.minutes} ${event.hours} * * ` +
+        return (
+            `${event.minutes} ${event.hours} * * ` +
             `${event.days
-            .filter(d => d)
-            .sort()
-            .join()}`;
+                .filter(d => d)
+                .sort()
+                .join()}`
+        );
     }
     if (event.type === "monthly") {
         return `${event.minutes} ${event.hours} ${event.day} */${event.monthInterval} *`;
@@ -78,28 +80,28 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
             cronExpression: expression
         };
     }
-    if (( groups = expression.match(/^\*\/(\d+) \* \* \* \*$/))) {
+    if ((groups = expression.match(/^\*\/(\d+) \* \* \* \*$/))) {
         return {
             type: "minutes",
             minuteInterval: Number(groups[1])
         };
     }
-    if (( groups = expression.match(/^(\d+) \*\/(\d+) \* \* \*$/))) {
+    if ((groups = expression.match(/^(\d+) \*\/(\d+) \* \* \*$/))) {
         return {
             type: "hourly",
             minutes: Number(groups[1]),
-            hourInterval: Number(groups[2]),
+            hourInterval: Number(groups[2])
         };
     }
-    if (( groups = expression.match(/^(\d+) (\d+) \*\/(\d+) \* \*$/))){
+    if ((groups = expression.match(/^(\d+) (\d+) \*\/(\d+) \* \*$/))) {
         return {
             type: "daily",
             minutes: Number(groups[1]),
             hours: Number(groups[2]),
-            dayInterval : Number(groups[3])
+            dayInterval: Number(groups[3])
         };
     }
-    if (( groups = expression.match(/^(\d+) (\d+) \* \* (\d)(,\d)*$/))) {
+    if ((groups = expression.match(/^(\d+) (\d+) \* \* (\d)(,\d)*$/))) {
         return {
             type: "weekly",
             minutes: Number(groups[1]),
@@ -107,7 +109,7 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
             days: [groups[3]].concat(groups[4])
         };
     }
-    if (( groups = expression.match(/^(\d+) (\d+) (\d+) \*\/(\d+) \*$/)) ) {
+    if ((groups = expression.match(/^(\d+) (\d+) (\d+) \*\/(\d+) \*$/))) {
         return {
             type: "monthly",
             minutes: Number(groups[1]),
