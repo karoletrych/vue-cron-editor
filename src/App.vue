@@ -16,7 +16,7 @@ export default {
   },
   mounted() {},
   data: () => ({
-    cronExpression: "4 */4 * * *",
+    cronExpression: "4 4 * * 0,2,3,5",
   })
 };
 </script>

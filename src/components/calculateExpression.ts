@@ -17,7 +17,7 @@ interface WeeklyTabUpdatedEvent {
     type: "weekly";
     minutes: number;
     hours: number;
-    days: boolean[];
+    days: string[];
 }
 interface MonthlyTabUpdatedEvent {
     type: "monthly";
@@ -69,24 +69,55 @@ export const calculateExpression = (event: TabUpdatedEvent): string => {
     throw `unknown event type: ${event}`;
 };
 
-export const tabFromExpression = (expression: string): TabUpdatedEventKey => {
+export const parseExpression = (expression: string): TabUpdatedEvent => {
+    let groups = null;
+
     if (expression.split(" ").length != 5) {
-        return "advanced";
+        return {
+            type: "advanced",
+            cronExpression: expression
+        };
     }
-    if (expression.match(/^\*\/\d+ \* \* \* \*$/)) {
-        return "minutes";
+    if (( groups = expression.match(/^\*\/(\d+) \* \* \* \*$/))) {
+        return {
+            type: "minutes",
+            minuteInterval: Number(groups[1])
+        };
     }
-    if (expression.match(/^\d+ \*\/\d+ \* \* \*$/)) {
-        return "hourly";
+    if (( groups = expression.match(/^(\d+) \*\/(\d+) \* \* \*$/))) {
+        return {
+            type: "hourly",
+            minutes: Number(groups[1]),
+            hourInterval: Number(groups[2]),
+        };
     }
-    if (expression.match(/^\d+ \d+ \*\/\d+ \* \*$/)) {
-        return "daily";
+    if (( groups = expression.match(/^(\d+) (\d+) \*\/(\d+) \* \*$/))){
+        return {
+            type: "daily",
+            minutes: Number(groups[1]),
+            hours: Number(groups[2]),
+            dayInterval : Number(groups[3])
+        };
     }
-    if (expression.match(/^\d+ \d+ \* \* (\d)(,\d)*$/)) {
-        return "weekly";
+    if (( groups = expression.match(/^(\d+) (\d+) \* \* (\d)(,\d)*$/))) {
+        return {
+            type: "weekly",
+            minutes: Number(groups[1]),
+            hours: Number(groups[2]),
+            days: [groups[3]].concat(groups[4])
+        };
     }
-    if (expression.match(/^\d+ \d+ \d+ \*\/\d+ \*$/)) {
-        return "monthly";
+    if (( groups = expression.match(/^(\d+) (\d+) (\d+) \*\/(\d+) \*$/)) ) {
+        return {
+            type: "monthly",
+            minutes: Number(groups[1]),
+            hours: Number(groups[2]),
+            day: Number(groups[3]),
+            monthInterval: Number(groups[4])
+        };
     }
-    return "advanced";
+    return {
+        type: "advanced",
+        cronExpression: expression
+    };
 };

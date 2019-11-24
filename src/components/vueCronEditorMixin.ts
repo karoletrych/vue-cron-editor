@@ -1,9 +1,12 @@
-import {calculateExpression, tabFromExpression, TabUpdatedEventKey} from './calculateExpression';
+import {calculateExpression, parseExpression, TabUpdatedEventKey} from './calculateExpression';
 import Vue from "vue";
 
 export default Vue.extend({
     created() {
-        this.initialTab = tabFromExpression(this.value);
+        const tabData = parseExpression(this.value);
+        const initialTab = tabData.type as string;
+        this.initialTab = initialTab;
+        this.$data[initialTab] = {...tabData };
     },
     props: {
         value: { type: String }
@@ -32,7 +35,7 @@ export default Vue.extend({
             monthly:{
                 hours: 0,
                 minutes: 0,
-                dayInterval: 1,
+                day: 1,
                 monthInterval: 1
             },
             advanced:{
