@@ -22,7 +22,7 @@ const initialData = {
     weekly: {
         minutes: 0,
         hours: 0,
-        days: []
+        days: ["1"]
     },
     monthly: {
         hours: 0,
