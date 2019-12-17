@@ -9,7 +9,7 @@
                     <v-select
                         class="px-2"
                         bottom
-                        v-model="minutes.minuteInterval"
+                        v-model="editorData.minuteInterval"
                         :items="range(1, 59)"
                     />
                     <div class="px-2">minute(s)</div>
@@ -21,10 +21,10 @@
                     <div class="px-2">Every</div>
                     <v-select
                         :items="range(1, 24)"
-                        v-model="hourly.hourInterval"
+                        v-model="editorData.hourInterval"
                     />
                     <div class="px-2">hour(s) on minute</div>
-                    <v-select :items="range(0, 59)" v-model="hourly.minutes" />
+                    <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
@@ -33,11 +33,11 @@
                     <div class="px-2">Every</div>
                     <v-select
                         :items="range(1, 30)"
-                        v-model="daily.dayInterval"
+                        v-model="editorData.dayInterval"
                     />
                     <div class="px-2">day(s) at</div>
-                    <v-select :items="range(0, 23)" v-model="daily.hours" />
-                    <v-select :items="range(0, 59)" v-model="daily.minutes" />
+                    <v-select :items="range(0, 23)" v-model="editorData.hours" />
+                    <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
@@ -48,78 +48,78 @@
                         <v-checkbox
                             dense
                             class="px-1"
-                            v-model="weekly.days"
+                            v-model="editorData.days"
                             label="Sun"
                             value="0"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
-                            v-model="weekly.days"
+                            v-model="editorData.days"
                             label="Mon"
                             value="1"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
-                            v-model="weekly.days"
+                            v-model="editorData.days"
                             label="Tue"
                             value="2"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
-                            v-model="weekly.days"
+                            v-model="editorData.days"
                             label="Wed"
                             value="3"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
-                            v-model="weekly.days"
+                            v-model="editorData.days"
                             label="Thu"
                             value="4"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
-                            v-model="weekly.days"
+                            v-model="editorData.days"
                             label="Fri"
                             value="5"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
-                            v-model="weekly.days"
+                            v-model="editorData.days"
                             label="Sat"
                             value="6"
                         />
                     </div>
                     <div class="px-2">at</div>
-                    <v-select :items="range(0, 23)" v-model="weekly.hours" />
-                    <v-select :items="range(0, 59)" v-model="weekly.minutes" />
+                    <v-select :items="range(0, 23)" v-model="editorData.hours" />
+                    <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="4">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">On the</div>
-                    <v-select :items="range(1, 30)" v-model="monthly.day" />
+                    <v-select :items="range(1, 30)" v-model="editorData.day" />
                     <div class="px-2">day of every</div>
                     <v-select
                         :items="range(1, 12)"
-                        v-model="monthly.monthInterval"
+                        v-model="editorData.monthInterval"
                     />
                     <div class="px-2">month(s) at</div>
-                    <v-select :items="range(0, 23)" v-model="monthly.hours" />
-                    <v-select :items="range(0, 59)" v-model="monthly.minutes" />
+                    <v-select :items="range(0, 23)" v-model="editorData.hours" />
+                    <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="5">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <v-text-field
-                        v-model="advanced.cronExpression"
+                        v-model="editorData.cronExpression"
                     ></v-text-field>
                 </v-card>
             </v-tab-item>

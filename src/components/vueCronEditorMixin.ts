@@ -40,13 +40,17 @@ export default Vue.extend({
         const tabData = parseExpression(this.value);
         const initialTab = tabData.type as string;
         this.initialTab = initialTab;
-        this.$data[initialTab] = { ...tabData };
+        this.$data.editorData = { ...tabData };
     },
     props: {
         value: { type: String, default: "*/1 * * * *" }
     },
     data() {
-        return JSON.parse(JSON.stringify(initialData)); // deep copy
+        return {
+            editorData: Object.assign({}, initialData.minutes),
+            initialTab: "",
+            currentTab: ""
+        }
     },
     methods: {
         _updateCronExpr(event: any, type: TabKey) {
@@ -57,45 +61,16 @@ export default Vue.extend({
             this.$emit("input", cronExpression);
         },
         resetToTab(tabKey: TabKey) {
-            this.$data[tabKey] = initialData[tabKey];
+            this.$data.editorData = Object.assign({}, initialData[tabKey]);
+            this.currentTab = tabKey;
             this._updateCronExpr(initialData[tabKey], tabKey);
         }
     },
     watch: {
-        minutes: {
+        editorData: {
             deep: true,
             handler(e) {
-                this._updateCronExpr(e, "minutes");
-            }
-        },
-        hourly: {
-            deep: true,
-            handler(e) {
-                this._updateCronExpr(e, "hourly");
-            }
-        },
-        daily: {
-            deep: true,
-            handler(e) {
-                this._updateCronExpr(e, "daily");
-            }
-        },
-        weekly: {
-            deep: true,
-            handler(e) {
-                this._updateCronExpr(e, "weekly");
-            }
-        },
-        monthly: {
-            deep: true,
-            handler(e) {
-                this._updateCronExpr(e, "monthly");
-            }
-        },
-        advanced: {
-            deep: true,
-            handler(e) {
-                this._updateCronExpr(e, "advanced");
+                this._updateCronExpr(e, this.currentTab as TabKey);
             }
         }
     }
