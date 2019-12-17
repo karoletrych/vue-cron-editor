@@ -43,7 +43,7 @@ export default Vue.extend({
         this.$data[initialTab] = { ...tabData };
     },
     props: {
-        value: { type: String }
+        value: { type: String, default: "*/1 * * * *" }
     },
     data() {
         return JSON.parse(JSON.stringify(initialData)); // deep copy

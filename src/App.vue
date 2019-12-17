@@ -12,7 +12,7 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                                <span class="headline">New Expression</span>
+                                <span class="headline">Adding a CRON expression</span>
                             </v-card-title>
 
                             <v-card-text>
@@ -36,13 +36,16 @@
                 <v-icon small @click="deleteItem(item)">delete</v-icon>
             </template>
         </v-data-table>
-        <VueCronEditor v-model="cronExpression"></VueCronEditor>
-        <v-text-field v-model="cronExpression" />
+
+        <!-- TODO: move to other sample -->
+        <!-- <VueCronEditor v-model="cronExpression"></VueCronEditor>
+        <v-text-field v-model="cronExpression" /> -->
     </v-app>
 </template>
 
 <script>
 import VueCronEditor from "./components/VueCronEditor";
+
 
 export default {
     name: "App",
@@ -64,13 +67,15 @@ export default {
             this.dialog = false;
             setTimeout(() => {
                 this.editedIndex = -1;
+                this.editedItem = {}
             }, 300);
         },
         save() {
             if (this.editedIndex > -1) {
                 Object.assign(this.expressions[this.editedIndex], this.editedItem);
             } else {
-                this.expressions.push(this.editedItem);
+                const newIndex = this.expressions.push(this.editedItem);
+                this.expressions[newIndex - 1].id = newIndex;
             }
             this.close();
         }
@@ -81,10 +86,10 @@ export default {
             { text: "Expression", value: "expression" },
             { text: "Actions", value: "action", sortable: false }
         ],
-        expressions: [{ id: 0, expression: "4 4 * * 0,2,3,5" }],
-        editedItem: {expression: ""},
+        expressions: [{ expression: "4 4 * * 0,2,3,5", id: 1 }],
+        editedItem: {},
         dialog: false,
-        editedIndex: null
+        editedIndex: -1,
     })
 };
 </script>
