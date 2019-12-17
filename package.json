@@ -5,11 +5,13 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "deploy-samples": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@types/jest": "^24.0.23",
     "core-js": "^3.3.2",
+    "gh-pages": "^2.1.1",
     "vue": "^2.6.10",
     "vuetify": "^2.1.0"
   },
