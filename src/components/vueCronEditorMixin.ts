@@ -37,10 +37,7 @@ const initialData = {
 
 export default Vue.extend({
     created() {
-        const tabData = parseExpression(this.value);
-        const initialTab = tabData.type as string;
-        this.initialTab = initialTab;
-        this.$data.editorData = { ...tabData };
+        this._loadDataFromExpression(this.value);
     },
     props: {
         value: { type: String, default: "*/1 * * * *" }
@@ -48,11 +45,15 @@ export default Vue.extend({
     data() {
         return {
             editorData: Object.assign({}, initialData.minutes),
-            initialTab: "",
             currentTab: ""
         }
     },
     methods: {
+        _loadDataFromExpression(expression: string) {
+            const tabData = parseExpression(this.value);
+            this.$data.editorData = { ...tabData };
+            this.currentTab = tabData.type;
+        },
         _updateCronExpr(event: any, type: TabKey) {
             const cronExpression = calculateExpression({
                 ...event,
@@ -67,6 +68,9 @@ export default Vue.extend({
         }
     },
     watch: {
+        value() {
+            this._loadDataFromExpression(this.value);
+        },
         editorData: {
             deep: true,
             handler(e) {

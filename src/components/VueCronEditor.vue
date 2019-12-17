@@ -144,7 +144,12 @@ export default {
         ]
     }),
     mounted() {
-        this.activeTab = this.tabs.find(t => t.key === this.initialTab).id;
+        this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
+    },
+    watch: {
+        currentTab(){
+            this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
+        }
     },
     methods: {
         range(from, to) {
