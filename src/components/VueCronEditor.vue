@@ -141,7 +141,8 @@ export default {
             { id: 3, key: "weekly" },
             { id: 4, key: "monthly" },
             { id: 5, key: "advanced" }
-        ]
+        ],
+        vTabsInitialized: false
     }),
     mounted() {
         this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
@@ -156,6 +157,12 @@ export default {
             return [...Array(to - from + 1).keys()].map(i => i + from);
         },
         reset(e) {
+            if(e == 0 && !this.vTabsInitialized) // TODO: do it better
+            {
+                this.vTabsInitialized = true;
+                return;
+            }
+
             const tabKey = this.tabs.find(t => t.id === e).key;
             this.resetToTab(tabKey);
         }

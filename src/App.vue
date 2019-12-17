@@ -88,7 +88,7 @@ export default {
             { text: "Expression", value: "expression" },
             { text: "Actions", value: "action", sortable: false }
         ],
-        expressions: [{ expression: "4 4 * * 0,2,3,5", id: 1 }],
+        expressions: [{ expression: "4 4 * * 0,2,3,5", id: 0 }],
         editedItem: {},
         dialog: false,
         editedIndex: -1,

@@ -37,7 +37,7 @@ const initialData = {
 
 export default Vue.extend({
     created() {
-        this._loadDataFromExpression(this.value);
+        this._loadDataFromExpression();
     },
     props: {
         value: { type: String, default: "*/1 * * * *" }
@@ -49,7 +49,7 @@ export default Vue.extend({
         }
     },
     methods: {
-        _loadDataFromExpression(expression: string) {
+        _loadDataFromExpression() {
             const tabData = parseExpression(this.value);
             this.$data.editorData = { ...tabData };
             this.currentTab = tabData.type;
@@ -68,8 +68,10 @@ export default Vue.extend({
         }
     },
     watch: {
-        value() {
-            this._loadDataFromExpression(this.value);
+        value: {
+            handler(){
+                this._loadDataFromExpression();
+            }
         },
         editorData: {
             deep: true,
