@@ -19,6 +19,8 @@
                                 <v-container>
                                     <vue-cron-editor v-model="editedItem.expression">
                                     </vue-cron-editor>
+
+                                    CRON expression: {{editedItem.expression}}
                                 </v-container>
                             </v-card-text>
 
