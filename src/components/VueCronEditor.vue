@@ -5,37 +5,37 @@
 
             <v-tab-item :value="0">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">Every</div>
+                    <div class="px-2">$t(every)</div>
                     <v-select
                         class="px-2"
                         bottom
                         v-model="editorData.minuteInterval"
                         :items="range(1, 59)"
                     />
-                    <div class="px-2">minute(s)</div>
+                    <div class="px-2">$t(minutes) </div>
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="1">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">Every</div>
+                    <div class="px-2">$t(every)</div>
                     <v-select
                         :items="range(1, 24)"
                         v-model="editorData.hourInterval"
                     />
-                    <div class="px-2">hour(s) on minute</div>
+                    <div class="px-2">$t(hoursOnMinute)</div>
                     <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="2">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">Every</div>
+                    <div class="px-2">$t(every)</div>
                     <v-select
                         :items="range(1, 30)"
                         v-model="editorData.dayInterval"
                     />
-                    <div class="px-2">day(s) at</div>
+                    <div class="px-2">$t(daysAt)</div>
                     <v-select :items="range(0, 23)" v-model="editorData.hours" />
                     <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
@@ -43,7 +43,7 @@
 
             <v-tab-item :value="3">
                 <v-card outlined class="d-inline-flex pa-2 align-center" tile>
-                    <div class="px-2">Every</div>
+                    <div class="px-2">$t(every)</div>
                     <div class="d-inline-flex">
                         <v-checkbox
                             dense
@@ -95,7 +95,7 @@
                             value="6"
                         />
                     </div>
-                    <div class="px-2">at</div>
+                    <div class="px-2">$t(at)</div>
                     <v-select :items="range(0, 23)" v-model="editorData.hours" />
                     <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
@@ -103,14 +103,14 @@
 
             <v-tab-item :value="4">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">On the</div>
+                    <div class="px-2">$t(onThe)</div>
                     <v-select :items="range(1, 30)" v-model="editorData.day" />
-                    <div class="px-2">day of every</div>
+                    <div class="px-2">$t(dayOfEvety)</div>
                     <v-select
                         :items="range(1, 12)"
                         v-model="editorData.monthInterval"
                     />
-                    <div class="px-2">month(s) at</div>
+                    <div class="px-2">$t(monthsAt)</div>
                     <v-select :items="range(0, 23)" v-model="editorData.hours" />
                     <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
