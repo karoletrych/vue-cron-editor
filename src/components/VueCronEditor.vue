@@ -5,37 +5,37 @@
 
             <v-tab-item :value="0">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">$t(every)</div>
+                    <div class="px-2">{{$t("every")}}</div>
                     <v-select
                         class="px-2"
                         bottom
                         v-model="editorData.minuteInterval"
                         :items="range(1, 59)"
                     />
-                    <div class="px-2">$t(minutes) </div>
+                    <div class="px-2">{{$t("minutes")}}</div>
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="1">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">$t(every)</div>
+                    <div class="px-2">{{$t("every")}}</div>
                     <v-select
                         :items="range(1, 24)"
                         v-model="editorData.hourInterval"
                     />
-                    <div class="px-2">$t(hoursOnMinute)</div>
+                    <div class="px-2">{{$t("hoursOnMinute")}}</div>
                     <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="2">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">$t(every)</div>
+                    <div class="px-2">{{$t("every")}}</div>
                     <v-select
                         :items="range(1, 30)"
                         v-model="editorData.dayInterval"
                     />
-                    <div class="px-2">$t(daysAt)</div>
+                    <div class="px-2">{{$t("daysAt")}}</div>
                     <v-select :items="range(0, 23)" v-model="editorData.hours" />
                     <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
@@ -43,59 +43,59 @@
 
             <v-tab-item :value="3">
                 <v-card outlined class="d-inline-flex pa-2 align-center" tile>
-                    <div class="px-2">$t(every)</div>
+                    <div class="px-2">{{$t("everyDay")}}</div>
                     <div class="d-inline-flex">
                         <v-checkbox
                             dense
                             class="px-1"
                             v-model="editorData.days"
-                            label="Sun"
+                            :label="$t('sun')"
                             value="0"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
                             v-model="editorData.days"
-                            label="Mon"
+                            :label="$t('mon')"
                             value="1"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
                             v-model="editorData.days"
-                            label="Tue"
+                            :label="$t('tue')"
                             value="2"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
                             v-model="editorData.days"
-                            label="Wed"
+                            :label="$t('wed')"
                             value="3"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
                             v-model="editorData.days"
-                            label="Thu"
+                            :label="$t('thu')"
                             value="4"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
                             v-model="editorData.days"
-                            label="Fri"
+                            :label="$t('fri')"
                             value="5"
                         />
                         <v-checkbox
                             dense
                             class="px-1"
                             v-model="editorData.days"
-                            label="Sat"
+                            :label="$t('sat')"
                             value="6"
                         />
                     </div>
-                    <div class="px-2">$t(at)</div>
+                    <div class="px-2">{{$t("at")}}</div>
                     <v-select :items="range(0, 23)" v-model="editorData.hours" />
                     <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
@@ -103,14 +103,14 @@
 
             <v-tab-item :value="4">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">$t(onThe)</div>
+                    <div class="px-2">{{$t("onThe")}}</div>
                     <v-select :items="range(1, 30)" v-model="editorData.day" />
-                    <div class="px-2">$t(dayOfEvety)</div>
+                    <div class="px-2">{{$t("dayOfEvery")}}</div>
                     <v-select
                         :items="range(1, 12)"
                         v-model="editorData.monthInterval"
                     />
-                    <div class="px-2">$t(monthsAt)</div>
+                    <div class="px-2">{{$t("monthsAt")}}</div>
                     <v-select :items="range(0, 23)" v-model="editorData.hours" />
                     <v-select :items="range(0, 59)" v-model="editorData.minutes" />
                 </v-card>
@@ -129,9 +129,15 @@
 
 <script>
 import vueCronEditorMixin from "./vueCronEditorMixin";
+import defaultI18n from "./i18n";
+
 export default {
     name: "VueCronEditor",
     mixins: [vueCronEditorMixin],
+    props: {
+        locale: {type: String, default: "en"},
+        customLocales: {type: Object, default: null},
+    },
     data: () => ({
         activeTab: null,
         tabs: [
@@ -142,8 +148,12 @@ export default {
             { id: 4, key: "monthly" },
             { id: 5, key: "advanced" }
         ],
-        vTabsInitialized: false
+        vTabsInitialized: false,
+        i18n: null
     }),
+    created(){
+        this.i18n = defaultI18n.withRegisteredLocales(this.customLocales);
+    },
     mounted() {
         this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
     },
@@ -165,6 +175,9 @@ export default {
 
             const tabKey = this.tabs.find(t => t.id === e).key;
             this.resetToTab(tabKey);
+        },
+        $t(key){
+            return this.i18n[this.locale][key];
         }
     }
 };

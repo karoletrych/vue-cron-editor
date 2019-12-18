@@ -17,7 +17,11 @@
 
                             <v-card-text>
                                 <v-container>
-                                    <vue-cron-editor v-model="editedItem.expression">
+                                    <vue-cron-editor 
+                                    v-model="editedItem.expression"
+                                    locale="test"
+                                    :custom-locales="customLocales"
+                                    >
                                     </vue-cron-editor>
 
                                     CRON expression: {{editedItem.expression}}
@@ -83,6 +87,26 @@ export default {
         }
     },
     data: () => ({
+        customLocales:{
+            test: {
+                every: "Every",
+                minutes: "minute(s)",
+                hoursOnMinute: "hour(s) on minute",
+                daysAt: "day(s) at",
+                at: "at",
+                onThe: "On the",
+                dayOfEvery: "day of every",
+                monthsAt: "month(s) at",
+                everyDay: "Every",
+                mon: "Mon",
+                tue: "Tue",
+                wed: "Wed",
+                thu: "Thu",
+                fri: "Fri",
+                sat: "Sat",
+                sun: "Sun"
+            }
+        },
         headers: [
             { text: "Id", value: "id" },
             { text: "Expression", value: "expression" },
