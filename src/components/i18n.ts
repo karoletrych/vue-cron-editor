@@ -21,7 +21,9 @@ export default {
         thu: "Thu",
         fri: "Fri",
         sat: "Sat",
-        sun: "Sun"
+        sun: "Sun",
+        hasToBeBetween: "Has to be between",
+        and: "and"
     },
     pl: {
         every: "Co",
@@ -39,6 +41,8 @@ export default {
         thu: "Czw",
         fri: "Pt",
         sat: "So",
-        sun: "Nie"
+        sun: "Nie",
+        hasToBeBetween: "Wymagana wartość pomiędzy",
+        and: "i"
     }
   }

@@ -1,5 +1,9 @@
 <template>
     <v-app>
+<!-- 
+        <VueCronEditor v-model="cronExpression"></VueCronEditor>
+        CRON expression: {{cronExpression"}} -->
+
         <v-data-table :headers="headers" :items-per-page="5" :items="expressions">
             <template #top>
                 <v-toolbar flat color="white">
@@ -43,9 +47,6 @@
             </template>
         </v-data-table>
 
-        <!-- TODO: move to other sample -->
-        <!-- <VueCronEditor v-model="cronExpression"></VueCronEditor>
-        <v-text-field v-model="cronExpression" /> -->
     </v-app>
 </template>
 

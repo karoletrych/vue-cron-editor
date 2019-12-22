@@ -6,12 +6,9 @@
             <v-tab-item :value="0">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{$t("every")}}</div>
-                    <v-select
-                        class="px-2"
-                        bottom
-                        v-model="editorData.minuteInterval"
-                        :items="range(1, 59)"
-                    />
+                        <number-input 
+                            v-model="editorData.minuteInterval"
+                        />
                     <div class="px-2">{{$t("minutes")}}</div>
                 </v-card>
             </v-tab-item>
@@ -19,25 +16,27 @@
             <v-tab-item :value="1">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{$t("every")}}</div>
-                    <v-select
-                        :items="range(1, 24)"
-                        v-model="editorData.hourInterval"
-                    />
+                        <number-input 
+                            v-model="editorData.hourInterval"
+                        />
                     <div class="px-2">{{$t("hoursOnMinute")}}</div>
-                    <v-select :items="range(0, 59)" v-model="editorData.minutes" />
+                    <number-input 
+                            :min="0"
+                            :max="59"
+                            v-model="editorData.minutes"
+                        />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="2">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{$t("every")}}</div>
-                    <v-select
-                        :items="range(1, 30)"
+                    <number-input
                         v-model="editorData.dayInterval"
                     />
                     <div class="px-2">{{$t("daysAt")}}</div>
-                    <v-select :items="range(0, 23)" v-model="editorData.hours" />
-                    <v-select :items="range(0, 59)" v-model="editorData.minutes" />
+                    <number-input :min="0" :max="23" v-model="editorData.hours" />
+                    <number-input :min="0" :max="59" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
@@ -96,23 +95,22 @@
                         />
                     </div>
                     <div class="px-2">{{$t("at")}}</div>
-                    <v-select :items="range(0, 23)" v-model="editorData.hours" />
-                    <v-select :items="range(0, 59)" v-model="editorData.minutes" />
+                    <number-input :min="0" :max="23" v-model="editorData.hours" />
+                    <number-input :min="0" :max="59" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="4">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{$t("onThe")}}</div>
-                    <v-select :items="range(1, 30)" v-model="editorData.day" />
+                    <number-input :min="1" :max="30" v-model="editorData.day" />
+                    
                     <div class="px-2">{{$t("dayOfEvery")}}</div>
-                    <v-select
-                        :items="range(1, 12)"
-                        v-model="editorData.monthInterval"
-                    />
+                    <number-input :min="1" :max="12" v-model="editorData.monthInterval" />
+
                     <div class="px-2">{{$t("monthsAt")}}</div>
-                    <v-select :items="range(0, 23)" v-model="editorData.hours" />
-                    <v-select :items="range(0, 59)" v-model="editorData.minutes" />
+                    <number-input :min="0" :max="23" v-model="editorData.hours" />
+                    <number-input :min="0" :max="59" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
@@ -129,11 +127,13 @@
 
 <script>
 import vueCronEditorMixin from "./vueCronEditorMixin";
+import NumberInput from "./NumberInput";
 import defaultI18n from "./i18n";
 
 export default {
     name: "VueCronEditor",
     mixins: [vueCronEditorMixin],
+    components: {NumberInput},
     props: {
         locale: {type: String, default: "en"},
         customLocales: {type: Object, default: null},
