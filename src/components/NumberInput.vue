@@ -1,10 +1,5 @@
 <template>
-    <v-text-field
-        v-model="innerValue"
-        type="number"
-        :rules="[numberRule]"
-        class="px2"
-    ></v-text-field>
+        <v-text-field v-model="innerValue" type="number" :rules="[numberRule]" class="px2"></v-text-field>
 </template>
 
 <script>
@@ -18,8 +13,8 @@ export default {
     data() {
         return {
             innerValue: null,
-            numberRule: v  => {
-                if (!v.trim()) return true;
+            numberRule: v => {
+                if (v == null) return true;
 
                 if (!isNaN(parseFloat(v)) && v >= this.min && v <= this.max) {
                     return true;
@@ -27,15 +22,16 @@ export default {
                 return `Has to be between ${this.min} and ${this.max}`;
             }
         };
-                    
     },
-    watch:{
-        innerValue(){
-            debugger;
+    watch: {
+        innerValue() {
+            if(this.numberRule(this.innerValue) === true){
+                this.$emit("input", this.innerValue);
+            }
         }
     },
     mounted() {
         this.innerValue = this.value;
-    },
+    }
 };
 </script>
