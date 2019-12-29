@@ -1,32 +1,35 @@
 <template>
-        <v-text-field v-model="innerValue" type="number" :rules="[numberRule]" class="px2"></v-text-field>
+    <v-text-field v-model="innerValue" type="number" :rules="[numberRule]" class="px2"></v-text-field>
 </template>
 
 <script>
 export default {
+    inject: ['i18n'],
     name: "NumberInput",
     props: {
         min: { type: Number, default: 0 },
         max: { type: Number, default: 999999 },
         value: { type: Number }
     },
-    data() {
-        return {
-            innerValue: null,
-            numberRule: v => {
+    methods:{
+            numberRule(v) {
                 if (v == null) return true;
 
-                if (!isNaN(parseFloat(v)) && v >= this.min && v <= this.max) {
+                if (!isNaN(parseInt(v)) && v >= this.min && v <= this.max) {
                     return true;
                 }
-                return `Has to be between ${this.min} and ${this.max}`;
+                return `${this.i18n.hasToBeBetween} ${this.min} ${this.i18n.and} ${this.max}`;
             }
+    },
+    data() {
+        return {
+            innerValue: null
         };
     },
     watch: {
         innerValue() {
             if(this.numberRule(this.innerValue) === true){
-                this.$emit("input", this.innerValue);
+                this.$emit("input", parseInt(this.innerValue));
             }
         }
     },

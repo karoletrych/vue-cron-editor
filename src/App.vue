@@ -105,7 +105,9 @@ export default {
                 thu: "Thu",
                 fri: "Fri",
                 sat: "Sat",
-                sun: "Sun"
+                sun: "Sun",
+                hasToBeBetween: "Has to be between",
+                and: "and"
             }
         },
         headers: [

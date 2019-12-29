@@ -6,9 +6,7 @@
             <v-tab-item :value="0">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{$t("every")}}</div>
-                        <number-input 
-                            v-model="editorData.minuteInterval"
-                        />
+                    <number-input v-model="editorData.minuteInterval" />
                     <div class="px-2">{{$t("minutes")}}</div>
                 </v-card>
             </v-tab-item>
@@ -16,24 +14,16 @@
             <v-tab-item :value="1">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{$t("every")}}</div>
-                        <number-input 
-                            v-model="editorData.hourInterval"
-                        />
+                    <number-input v-model="editorData.hourInterval" />
                     <div class="px-2">{{$t("hoursOnMinute")}}</div>
-                    <number-input 
-                            :min="0"
-                            :max="59"
-                            v-model="editorData.minutes"
-                        />
+                    <number-input :min="0" :max="59" v-model="editorData.minutes" />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="2">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{$t("every")}}</div>
-                    <number-input
-                        v-model="editorData.dayInterval"
-                    />
+                    <number-input v-model="editorData.dayInterval" />
                     <div class="px-2">{{$t("daysAt")}}</div>
                     <number-input :min="0" :max="23" v-model="editorData.hours" />
                     <number-input :min="0" :max="59" v-model="editorData.minutes" />
@@ -104,7 +94,7 @@
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{$t("onThe")}}</div>
                     <number-input :min="1" :max="30" v-model="editorData.day" />
-                    
+
                     <div class="px-2">{{$t("dayOfEvery")}}</div>
                     <number-input :min="1" :max="12" v-model="editorData.monthInterval" />
 
@@ -116,9 +106,7 @@
 
             <v-tab-item :value="5">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <v-text-field
-                        v-model="editorData.cronExpression"
-                    ></v-text-field>
+                    <v-text-field v-model="editorData.cronExpression"></v-text-field>
                 </v-card>
             </v-tab-item>
         </v-tabs>
@@ -133,10 +121,15 @@ import defaultI18n from "./i18n";
 export default {
     name: "VueCronEditor",
     mixins: [vueCronEditorMixin],
-    components: {NumberInput},
+    components: { NumberInput },
+    provide: function() {
+        return {
+            i18n: this.createI18n()
+        };
+    },
     props: {
-        locale: {type: String, default: "en"},
-        customLocales: {type: Object, default: null},
+        locale: { type: String, default: "en" },
+        customLocales: { type: Object, default: null }
     },
     data: () => ({
         activeTab: null,
@@ -151,14 +144,14 @@ export default {
         vTabsInitialized: false,
         i18n: null
     }),
-    created(){
-        this.i18n = defaultI18n.withRegisteredLocales(this.customLocales);
+    created() {
+        this.i18n = this.createI18n();
     },
     mounted() {
         this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
     },
     watch: {
-        currentTab(){
+        currentTab() {
             this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
         }
     },
@@ -166,9 +159,12 @@ export default {
         range(from, to) {
             return [...Array(to - from + 1).keys()].map(i => i + from);
         },
+        createI18n(){
+            return defaultI18n.withRegisteredLocales(this.customLocales)[this.locale];
+        },
         reset(e) {
-            if(e == 0 && !this.vTabsInitialized) // TODO: do it better
-            {
+            if (e == 0 && !this.vTabsInitialized) {
+                // FIXME
                 this.vTabsInitialized = true;
                 return;
             }
@@ -176,8 +172,8 @@ export default {
             const tabKey = this.tabs.find(t => t.id === e).key;
             this.resetToTab(tabKey);
         },
-        $t(key){
-            return this.i18n[this.locale][key];
+        $t(key) {
+            return this.i18n[key];
         }
     }
 };
