@@ -1,4 +1,0 @@
-- i18n
-- sample
-- extensibility
-- separate mixin to another library
