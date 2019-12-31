@@ -1,6 +1,6 @@
 {
   "name": "vue-cron-editor",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-cron-editor src/VueCronEditor.vue",
@@ -45,5 +45,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/karoletrych/vue-cron-editor.git"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
