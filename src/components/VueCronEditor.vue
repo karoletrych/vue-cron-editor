@@ -190,9 +190,6 @@ export default {
         }
     },
     methods: {
-        range(from, to) {
-            return [...Array(to - from + 1).keys()].map(i => i + from);
-        },
         createI18n() {
             return defaultI18n.withRegisteredLocales(this.customLocales)[
                 this.locale

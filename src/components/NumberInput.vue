@@ -18,7 +18,9 @@ export default {
     },
     methods: {
         numberRule(v) {
-            if (v == null) return true;
+            if (v == null) {
+                return true;
+            }
 
             if (!isNaN(parseInt(v)) && v >= this.min && v <= this.max) {
                 return true;

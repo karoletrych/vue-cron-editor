@@ -1,3 +1,9 @@
+/**
+ * vueCronEditorMixin
+ * Core logic of a component.
+ * Functionality dependent on UI frameworks should be implemented in derived components
+ */
+
 import {
     calculateExpression,
     parseExpression,
