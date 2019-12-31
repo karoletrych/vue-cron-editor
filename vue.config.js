@@ -1,4 +1,4 @@
 module.exports = {
-	publicPath: "vue-cron-editor",
+    publicPath: "vue-cron-editor",
     transpileDependencies: ["vuetify"]
 };

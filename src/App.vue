@@ -3,14 +3,20 @@
         <v-container>
             <section>
                 <VueCronEditor v-model="sample1CronExpression"></VueCronEditor>
-                CRON expression: {{sample1CronExpression}}
+                CRON expression: {{ sample1CronExpression }}
             </section>
 
             <section>
-                <v-data-table :headers="headers" :items-per-page="5" :items="expressions">
+                <v-data-table
+                    :headers="headers"
+                    :items-per-page="5"
+                    :items="expressions"
+                >
                     <template #top>
                         <v-toolbar flat color="white">
-                            <v-toolbar-title>CRUD expressions sample</v-toolbar-title>
+                            <v-toolbar-title
+                                >CRUD expressions sample</v-toolbar-title
+                            >
                             <v-divider class="mx-4" inset vertical></v-divider>
                             <v-spacer></v-spacer>
                             <v-dialog v-model="dialog" max-width="800px">
@@ -20,11 +26,14 @@
                                         dark
                                         class="mb-2"
                                         v-on="on"
-                                    >New Expression</v-btn>
+                                        >New Expression</v-btn
+                                    >
                                 </template>
                                 <v-card>
                                     <v-card-title>
-                                        <span class="headline">Adding a CRON expression</span>
+                                        <span class="headline"
+                                            >Adding a CRON expression</span
+                                        >
                                     </v-card-title>
 
                                     <v-card-text>
@@ -34,21 +43,34 @@
                                                 locale="test"
                                                 :custom-locales="customLocales"
                                             ></vue-cron-editor>
-                                            CRON expression: {{editedItem.expression}}
+                                            CRON expression:
+                                            {{ editedItem.expression }}
                                         </v-container>
                                     </v-card-text>
 
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                                        <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                                        <v-btn
+                                            color="blue darken-1"
+                                            text
+                                            @click="close"
+                                            >Cancel</v-btn
+                                        >
+                                        <v-btn
+                                            color="blue darken-1"
+                                            text
+                                            @click="save"
+                                            >Save</v-btn
+                                        >
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>
                         </v-toolbar>
                     </template>
                     <template #item.action="{ item }">
-                        <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
+                        <v-icon small class="mr-2" @click="editItem(item)"
+                            >edit</v-icon
+                        >
                         <v-icon small @click="deleteItem(item)">delete</v-icon>
                     </template>
                 </v-data-table>

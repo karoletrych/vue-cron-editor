@@ -5,34 +5,46 @@
 
             <v-tab-item :value="0">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">{{$t("every")}}</div>
+                    <div class="px-2">{{ $t("every") }}</div>
                     <number-input v-model="editorData.minuteInterval" />
-                    <div class="px-2">{{$t("minutes")}}</div>
+                    <div class="px-2">{{ $t("minutes") }}</div>
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="1">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">{{$t("every")}}</div>
+                    <div class="px-2">{{ $t("every") }}</div>
                     <number-input v-model="editorData.hourInterval" />
-                    <div class="px-2">{{$t("hoursOnMinute")}}</div>
-                    <number-input :min="0" :max="59" v-model="editorData.minutes" />
+                    <div class="px-2">{{ $t("hoursOnMinute") }}</div>
+                    <number-input
+                        :min="0"
+                        :max="59"
+                        v-model="editorData.minutes"
+                    />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="2">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">{{$t("every")}}</div>
+                    <div class="px-2">{{ $t("every") }}</div>
                     <number-input v-model="editorData.dayInterval" />
-                    <div class="px-2">{{$t("daysAt")}}</div>
-                    <number-input :min="0" :max="23" v-model="editorData.hours" />
-                    <number-input :min="0" :max="59" v-model="editorData.minutes" />
+                    <div class="px-2">{{ $t("daysAt") }}</div>
+                    <number-input
+                        :min="0"
+                        :max="23"
+                        v-model="editorData.hours"
+                    />
+                    <number-input
+                        :min="0"
+                        :max="59"
+                        v-model="editorData.minutes"
+                    />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="3">
                 <v-card outlined class="d-inline-flex pa-2 align-center" tile>
-                    <div class="px-2">{{$t("everyDay")}}</div>
+                    <div class="px-2">{{ $t("everyDay") }}</div>
                     <div class="d-inline-flex">
                         <v-checkbox
                             dense
@@ -84,29 +96,51 @@
                             value="6"
                         />
                     </div>
-                    <div class="px-2">{{$t("at")}}</div>
-                    <number-input :min="0" :max="23" v-model="editorData.hours" />
-                    <number-input :min="0" :max="59" v-model="editorData.minutes" />
+                    <div class="px-2">{{ $t("at") }}</div>
+                    <number-input
+                        :min="0"
+                        :max="23"
+                        v-model="editorData.hours"
+                    />
+                    <number-input
+                        :min="0"
+                        :max="59"
+                        v-model="editorData.minutes"
+                    />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="4">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <div class="px-2">{{$t("onThe")}}</div>
+                    <div class="px-2">{{ $t("onThe") }}</div>
                     <number-input :min="1" :max="30" v-model="editorData.day" />
 
-                    <div class="px-2">{{$t("dayOfEvery")}}</div>
-                    <number-input :min="1" :max="12" v-model="editorData.monthInterval" />
+                    <div class="px-2">{{ $t("dayOfEvery") }}</div>
+                    <number-input
+                        :min="1"
+                        :max="12"
+                        v-model="editorData.monthInterval"
+                    />
 
-                    <div class="px-2">{{$t("monthsAt")}}</div>
-                    <number-input :min="0" :max="23" v-model="editorData.hours" />
-                    <number-input :min="0" :max="59" v-model="editorData.minutes" />
+                    <div class="px-2">{{ $t("monthsAt") }}</div>
+                    <number-input
+                        :min="0"
+                        :max="23"
+                        v-model="editorData.hours"
+                    />
+                    <number-input
+                        :min="0"
+                        :max="59"
+                        v-model="editorData.minutes"
+                    />
                 </v-card>
             </v-tab-item>
 
             <v-tab-item :value="5">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
-                    <v-text-field v-model="editorData.cronExpression"></v-text-field>
+                    <v-text-field
+                        v-model="editorData.cronExpression"
+                    ></v-text-field>
                 </v-card>
             </v-tab-item>
         </v-tabs>
@@ -159,8 +193,10 @@ export default {
         range(from, to) {
             return [...Array(to - from + 1).keys()].map(i => i + from);
         },
-        createI18n(){
-            return defaultI18n.withRegisteredLocales(this.customLocales)[this.locale];
+        createI18n() {
+            return defaultI18n.withRegisteredLocales(this.customLocales)[
+                this.locale
+            ];
         },
         reset(e) {
             if (e == 0 && !this.vTabsInitialized) {

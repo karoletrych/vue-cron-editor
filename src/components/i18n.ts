@@ -1,8 +1,7 @@
 export default {
-    withRegisteredLocales(locales: Object){
-      if(!locales)
-        return this;
-      return {...this, ...locales}
+    withRegisteredLocales(locales: Object) {
+        if (!locales) return this;
+        return { ...this, ...locales };
     },
 
     en: {
@@ -45,4 +44,4 @@ export default {
         hasToBeBetween: "Wymagana wartość pomiędzy",
         and: "i"
     }
-  }
+};

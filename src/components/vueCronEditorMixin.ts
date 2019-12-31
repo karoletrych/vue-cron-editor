@@ -46,7 +46,7 @@ export default Vue.extend({
         return {
             editorData: Object.assign({}, initialData.minutes),
             currentTab: ""
-        }
+        };
     },
     methods: {
         _loadDataFromExpression() {
@@ -69,7 +69,7 @@ export default Vue.extend({
     },
     watch: {
         value: {
-            handler(){
+            handler() {
                 this._loadDataFromExpression();
             }
         },
