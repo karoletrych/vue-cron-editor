@@ -42,7 +42,7 @@ export type TabUpdatedEvent =
 
 export type TabKey = TabUpdatedEvent[keyof TabUpdatedEvent];
 
-export const calculateExpression = (event: TabUpdatedEvent): string => {
+export const buildExpression = (event: TabUpdatedEvent): string => {
     if (event.type === "minutes") {
         return `*/${event.minuteInterval} * * * *`;
     }

@@ -4,11 +4,7 @@
  * Functionality dependent on UI frameworks should be implemented in derived components
  */
 
-import {
-    calculateExpression,
-    parseExpression,
-    TabKey
-} from "./calculateExpression";
+import { buildExpression, parseExpression, TabKey } from "./cronExpressions";
 import Vue from "vue";
 
 const initialData = {
@@ -61,7 +57,7 @@ export default Vue.extend({
             this.currentTab = tabData.type;
         },
         _updateCronExpr(event: any, type: TabKey) {
-            const cronExpression = calculateExpression({
+            const cronExpression = buildExpression({
                 ...event,
                 type: type
             });

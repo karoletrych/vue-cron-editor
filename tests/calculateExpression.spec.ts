@@ -1,4 +1,4 @@
-import { parseExpression } from "../src/components/calculateExpression";
+import { parseExpression } from "src/cronExpressions";
 
 test("parse week expression", () => {
     expect(parseExpression("4 4 * * 0,2,3,5")).toStrictEqual({
