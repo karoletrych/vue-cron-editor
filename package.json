@@ -1,7 +1,7 @@
 {
   "name": "vue-cron-editor",
   "license": "MIT",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "dist/vue-cron-editor.umd.js",
   "module": "dist/vue-cron-editor.esm.js",
   "unpkg": "dist/vue-cron-editor.min.js",
