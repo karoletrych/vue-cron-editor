@@ -1,6 +1,6 @@
 {
   "name": "vue-cron-editor",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "dist/vue-cron-editor.umd.js",
   "module": "dist/vue-cron-editor.esm.js",
   "unpkg": "dist/vue-cron-editor.min.js",
