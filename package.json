@@ -16,13 +16,13 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "@types/jest": "^24.0.25",
     "core-js": "^3.6.1",
-    "gh-pages": "^2.1.1",
     "vue": "^2.6.11",
     "vuetify": "^2.1.15"
   },
   "devDependencies": {
+    "gh-pages": "^2.1.1",
+    "@types/jest": "^24.0.25",
     "@vue/cli-plugin-babel": "^4.1.2",
     "@vue/cli-plugin-eslint": "^4.1.2",
     "@vue/cli-plugin-typescript": "^4.1.2",
