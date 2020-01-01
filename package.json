@@ -10,10 +10,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-cron-editor src/VueCronEditor.vue",
-    "build:samples": "vue-cli-service build",
     "lint": "vue-cli-service lint --ext .js,.vue,.ts --fix",
     "test": "vue-cli-service test:unit",
-    "release:samples": "npm run build:samples && gh-pages -d dist",
+    "release:samples": "vue-cli-service build && gh-pages -d dist",
     "release": "standard-version"
   },
   "dependencies": {
