@@ -1,9 +1,12 @@
 {
   "name": "vue-cron-editor",
   "version": "0.1.7",
-  "main": "dist/vue-cron-editor.common.js",
-  "unpkg": "dist/vue-cron-editor.umd.min.js",
-  "browser": "dist/vue-cron-editor.umd.min.js",
+  "main": "dist/vue-cron-editor.umd.js",
+  "module": "dist/vue-cron-editor.esm.js",
+  "unpkg": "dist/vue-cron-editor.min.js",
+  "browser": {
+    "./sfc": "src/vue-cron-editor.vue"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-cron-editor src/VueCronEditor.vue",

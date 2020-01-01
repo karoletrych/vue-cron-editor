@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import VueCronEditor from "./components/VueCronEditor";
+import VueCronEditor from "./VueCronEditor";
 
 export default {
     name: "App",
