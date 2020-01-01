@@ -1,12 +1,15 @@
 <template>
     <v-app>
         <v-container>
+            <h1>vue-cron-editor samples</h1>
             <section>
+                <h2>Basic</h2>
                 <VueCronEditor v-model="sample1CronExpression"></VueCronEditor>
                 CRON expression: {{ sample1CronExpression }}
             </section>
 
             <section>
+                <h2>Grid editing</h2>
                 <v-data-table
                     :headers="headers"
                     :items-per-page="5"
