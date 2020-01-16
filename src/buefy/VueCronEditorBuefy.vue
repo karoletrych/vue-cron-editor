@@ -44,18 +44,11 @@
                             v-model="editorData.dayInterval"
                         />
                         <span class="centered-text">{{ $t("daysAt") }}</span>
-                        <b-numberinput
-                            :controls="false"
-                            :min="0"
-                            :max="23"
-                            v-model="editorData.hours"
-                        />
-                        <b-numberinput
-                            :controls="false"
-                            :min="0"
-                            :max="59"
-                            v-model="editorData.minutes"
-                        />
+                        <b-timepicker
+                            icon="clock"
+                            editable
+                            @input="setDateTime"
+                            />
                     </b-field>
                 </div>
             </b-tab-item>
@@ -114,18 +107,11 @@
                             </b-checkbox>
                         </div>
                         <span class="centered-text">{{ $t("at") }}</span>
-                        <b-numberinput
-                            :controls="false"
-                            :min="0"
-                            :max="23"
-                            v-model="editorData.hours"
-                        />
-                        <b-numberinput
-                            :controls="false"
-                            :min="0"
-                            :max="59"
-                            v-model="editorData.minutes"
-                        />
+                        <b-timepicker
+                            icon="clock"
+                            editable
+                            @input="setDateTime"
+                            />
                     </b-field>
                 </div>
             </b-tab-item>
@@ -150,18 +136,11 @@
                         />
 
                         <span class="centered-text">{{ $t("monthsAt") }}</span>
-                        <b-numberinput
-                            :controls="false"
-                            :min="0"
-                            :max="23"
-                            v-model="editorData.hours"
-                        />
-                        <b-numberinput
-                            :controls="false"
-                            :min="0"
-                            :max="59"
-                            v-model="editorData.minutes"
-                        />
+                        <b-timepicker
+                            icon="clock"
+                            editable
+                            @input="setDateTime"
+                            />
                     </b-field>
                 </div>
             </b-tab-item>
@@ -237,6 +216,13 @@ export default {
 
             const tabKey = this.tabs.find(t => t.id === e).key;
             this.resetToTab(tabKey);
+        },
+        setDateTime(e){
+            if(e == null){
+                return;
+            }
+            this.editorData.hours = e.getHours();
+            this.editorData.minutes = e.getMinutes();
         },
         $t(key) {
             return this.i18n[key];
