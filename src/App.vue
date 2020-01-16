@@ -48,16 +48,14 @@
 
                                     <v-card-text>
                                         <v-container>
-                                            <VueCronEditorVuetify
-                                                v-model="editedItem.expression"
-                                                locale="test"
-                                                :custom-locales="customLocales"
-                                            ></VueCronEditorVuetify>
-                                            <VueCronEditorBuefy
-                                                v-model="editedItem.expression"
-                                                locale="test"
-                                                :custom-locales="customLocales"
-                                            ></VueCronEditorBuefy>
+                                            <section>
+                                                <h3>vue-cron-editor-vuetify</h3>
+                                                <VueCronEditorVuetify v-model="editedItem.expression"></VueCronEditorVuetify>
+                                            </section>
+                                            <section>
+                                                <h3>vue-cron-editor-buefy</h3>
+                                                <VueCronEditorBuefy v-model="editedItem.expression"></VueCronEditorBuefy>
+                                            </section>
                                             CRON expression:
                                             {{ editedItem.expression }}
                                         </v-container>
