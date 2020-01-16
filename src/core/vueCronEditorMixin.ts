@@ -6,6 +6,7 @@
 
 import { buildExpression, parseExpression, TabKey } from "./cronExpressions";
 import Vue from "vue";
+var cronValidator = require("cron-validator");
 
 const initialData = {
     initialTab: "",
@@ -61,7 +62,10 @@ export default Vue.extend({
                 ...event,
                 type: type
             });
-            this.$emit("input", cronExpression);
+
+            if (cronValidator.isValidCron(cronExpression)) {
+                this.$emit("input", cronExpression);
+            }
         },
         resetToTab(tabKey: TabKey) {
             this.$data.editorData = Object.assign({}, initialData[tabKey]);

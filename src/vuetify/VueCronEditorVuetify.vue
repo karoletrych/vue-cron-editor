@@ -117,8 +117,6 @@
 
                     <div class="px-2">{{ $t("dayOfEvery") }}</div>
                     <number-input
-                        :min="1"
-                        :max="12"
                         v-model="editorData.monthInterval"
                     />
 
@@ -148,12 +146,12 @@
 </template>
 
 <script>
-import vueCronEditorMixin from "./vueCronEditorMixin";
-import NumberInput from "./NumberInput";
-import defaultI18n from "./i18n";
+import vueCronEditorMixin from "../core/vueCronEditorMixin";
+import defaultI18n from "../core/i18n";
+import NumberInput from "./NumberInput.vue";
 
 export default {
-    name: "VueCronEditor",
+    name: "VueCronEditorVuetify",
     mixins: [vueCronEditorMixin],
     components: { NumberInput },
     provide: function() {

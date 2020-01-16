@@ -17,9 +17,13 @@
     "release": "standard-version"
   },
   "dependencies": {
+    "@mdi/font": "^4.7.95",
     "@types/jest": "^24.0.23",
+    "buefy": "^0.8.9",
     "core-js": "^3.3.2",
+    "cron-validator": "^1.1.0",
     "gh-pages": "^2.1.1",
+    "node-sass": "^4.13.0",
     "vue": "^2.6.10",
     "vuetify": "^2.1.0"
   },
