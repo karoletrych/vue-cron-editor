@@ -18,16 +18,14 @@
   },
   "dependencies": {
     "@mdi/font": "^4.7.95",
-    "@types/jest": "^24.0.23",
     "buefy": "^0.8.9",
     "core-js": "^3.3.2",
     "cron-validator": "^1.1.0",
-    "gh-pages": "^2.1.1",
-    "node-sass": "^4.13.0",
     "vue": "^2.6.10",
     "vuetify": "^2.1.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.23",
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-plugin-typescript": "^4.0.5",
@@ -39,6 +37,8 @@
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
+    "gh-pages": "^2.1.1",
+    "node-sass": "^4.13.1",
     "prettier": "^1.18.2",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",

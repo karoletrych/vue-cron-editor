@@ -116,9 +116,7 @@
                     <number-input :min="1" :max="30" v-model="editorData.day" />
 
                     <div class="px-2">{{ $t("dayOfEvery") }}</div>
-                    <number-input
-                        v-model="editorData.monthInterval"
-                    />
+                    <number-input v-model="editorData.monthInterval" />
 
                     <div class="px-2">{{ $t("monthsAt") }}</div>
                     <number-input

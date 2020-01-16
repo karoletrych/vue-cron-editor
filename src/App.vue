@@ -1,19 +1,22 @@
 <template>
-<v-app>
+    <v-app>
         <v-container>
             <section>
                 <h2>Basic</h2>
                 <section>
-                     <h3>vue-cron-editor-vuetify</h3>
-                    <VueCronEditorVuetify v-model="sample1CronExpression"></VueCronEditorVuetify>
+                    <h3>vue-cron-editor-vuetify</h3>
+                    <VueCronEditorVuetify
+                        v-model="sample1CronExpression"
+                    ></VueCronEditorVuetify>
                 </section>
                 <section>
-                     <h3>vue-cron-editor-buefy</h3>
-                    <VueCronEditorBuefy v-model="sample1CronExpression"></VueCronEditorBuefy>
+                    <h3>vue-cron-editor-buefy</h3>
+                    <VueCronEditorBuefy
+                        v-model="sample1CronExpression"
+                    ></VueCronEditorBuefy>
                 </section>
                 {{ sample1CronExpression }}
             </section>
-
 
             <section>
                 <h3>Grid editing</h3>
@@ -50,11 +53,19 @@
                                         <v-container>
                                             <section>
                                                 <h3>vue-cron-editor-vuetify</h3>
-                                                <VueCronEditorVuetify v-model="editedItem.expression"></VueCronEditorVuetify>
+                                                <VueCronEditorVuetify
+                                                    v-model="
+                                                        editedItem.expression
+                                                    "
+                                                ></VueCronEditorVuetify>
                                             </section>
                                             <section>
                                                 <h3>vue-cron-editor-buefy</h3>
-                                                <VueCronEditorBuefy v-model="editedItem.expression"></VueCronEditorBuefy>
+                                                <VueCronEditorBuefy
+                                                    v-model="
+                                                        editedItem.expression
+                                                    "
+                                                ></VueCronEditorBuefy>
                                             </section>
                                             CRON expression:
                                             {{ editedItem.expression }}
@@ -89,7 +100,7 @@
                 </v-data-table>
             </section>
         </v-container>
-</v-app>
+    </v-app>
 </template>
 
 <script>

@@ -48,7 +48,7 @@
                             icon="clock"
                             editable
                             @input="setDateTime"
-                            />
+                        />
                     </b-field>
                 </div>
             </b-tab-item>
@@ -111,7 +111,7 @@
                             icon="clock"
                             editable
                             @input="setDateTime"
-                            />
+                        />
                     </b-field>
                 </div>
             </b-tab-item>
@@ -140,7 +140,7 @@
                             icon="clock"
                             editable
                             @input="setDateTime"
-                            />
+                        />
                     </b-field>
                 </div>
             </b-tab-item>
@@ -217,8 +217,8 @@ export default {
             const tabKey = this.tabs.find(t => t.id === e).key;
             this.resetToTab(tabKey);
         },
-        setDateTime(e){
-            if(e == null){
+        setDateTime(e) {
+            if (e == null) {
                 return;
             }
             this.editorData.hours = e.getHours();
@@ -232,33 +232,32 @@ export default {
 </script>
 
 <style lang="scss">
-
-    .enable-bulma {
-        .centered-text {
-            justify-content: center;
-            padding-bottom: calc(0.375em - 1px);
-            padding-left: 0.75em;
-            padding-right: 0.75em;
-            padding-top: calc(0.375em - 1px);
-            text-align: center;
-            display: flex;
-        }
-
-        @import "~bulma/sass/utilities/functions";
-
-        $primary: #3273dc;
-        $primary-invert: findColorInvert($primary);
-
-        @import "~bulma";
-        @import "~buefy/src/scss/buefy";
-
-        .centered-text {
-            justify-content: center;
-            padding-bottom: calc(0.375em - 1px);
-            padding-left: 0.75em;
-            padding-right: 0.75em;
-            padding-top: calc(0.375em - 1px);
-            text-align: center;
-        }
+.enable-bulma {
+    .centered-text {
+        justify-content: center;
+        padding-bottom: calc(0.375em - 1px);
+        padding-left: 0.75em;
+        padding-right: 0.75em;
+        padding-top: calc(0.375em - 1px);
+        text-align: center;
+        display: flex;
     }
+
+    @import "~bulma/sass/utilities/functions";
+
+    $primary: #3273dc;
+    $primary-invert: findColorInvert($primary);
+
+    @import "~bulma";
+    @import "~buefy/src/scss/buefy";
+
+    .centered-text {
+        justify-content: center;
+        padding-bottom: calc(0.375em - 1px);
+        padding-left: 0.75em;
+        padding-right: 0.75em;
+        padding-top: calc(0.375em - 1px);
+        text-align: center;
+    }
+}
 </style>

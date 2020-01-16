@@ -39,7 +39,7 @@ export default {
                 this.$emit("input", parseInt(this.innerValue));
             }
         },
-        value(){
+        value() {
             this.innerValue = this.value;
         }
     },
