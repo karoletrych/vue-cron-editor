@@ -1,0 +1,31 @@
+{
+  "name": "vue-cron-editor-buefy",
+  "license": "MIT",
+  "version": "0.1.0",
+  "main": "dist/vue-cron-editor-buefy.umd.js",
+  "module": "dist/vue-cron-editor-buefy.esm.js",
+  "unpkg": "dist/vue-cron-editor-buefy.min.js",
+  "browser": {
+    "./sfc": "src/VueCronEditorBuefy.vue"
+  },
+  "scripts": {
+    "build": "vue-cli-service build --target lib --name vue-cron-editor-buefy VueCronEditorBuefy.vue",
+    "release": "standard-version"
+  },
+  "dependencies": {
+    "buefy": "^0.8.9",
+    "core-js": "^3.3.2",
+    "vue": "^2.6.10",
+    "vue-cron-editor-core": "../core/dist"
+  },
+  "bundledDependencies": [
+    "vue-cron-editor-core"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karoletrych/vue-cron-editor.git"
+  },
+  "files": [
+    "dist"
+  ]
+}

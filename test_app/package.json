@@ -1,0 +1,21 @@
+{
+  "name": "test_app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "vue": "^2.6.10",
+    "vue-cron-editor-buefy": "../src/buefy/vue-cron-editor-buefy-0.1.0.tgz"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^4.1.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}

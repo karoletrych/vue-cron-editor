@@ -157,9 +157,8 @@
 </template>
 
 <script>
-import vueCronEditorMixin from "../core/vueCronEditorMixin";
-import defaultI18n from "../core/i18n";
-import "@mdi/font/css/materialdesignicons.css";
+import vueCronEditorMixin from "vue-cron-editor-core/vueCronEditorMixin";
+import defaultI18n from "vue-cron-editor-core/i18n";
 import Buefy from "buefy";
 import Vue from "vue";
 
