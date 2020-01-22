@@ -9,8 +9,7 @@
     "./sfc": "src/VueCronEditorBuefy.vue"
   },
   "scripts": {
-    "build": "vue-cli-service build --target lib --name vue-cron-editor-buefy VueCronEditorBuefy.vue",
-    "release": "standard-version"
+    "build": "vue-cli-service build --target lib --name vue-cron-editor-buefy VueCronEditorBuefy.vue"
   },
   "dependencies": {
     "buefy": "^0.8.9",

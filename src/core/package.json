@@ -3,7 +3,8 @@
   "license": "MIT",
   "version": "0.1.0",
   "scripts": {
-    "release": "tsc --outDir dist"
+    "build": "webpack --config webpack.config.js",
+    "release": "vue-cli-service build --target lib --name vue-cron-editor-core dist/index.js && npm pack"
   },
   "dependencies": {
     "cron-validator": "^1.1.0",
@@ -15,5 +16,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "devDependencies": {}
 }

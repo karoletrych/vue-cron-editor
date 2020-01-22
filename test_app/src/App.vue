@@ -10,7 +10,6 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import VueCronEditorBuefy from 'vue-cron-editor-buefy'
-import "vue-cron-editor-buefy/dist/vue-cron-editor-buefy.css"
 export default {
   name: 'app',
   components: {

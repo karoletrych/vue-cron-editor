@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "vue": "^2.6.10",
-    "vue-cron-editor-buefy": "../src/buefy/vue-cron-editor-buefy-0.1.0.tgz"
+    "vue-cron-editor-buefy": "file:../src/buefy/vue-cron-editor-buefy-0.1.1.tgz"
   },
   "devDependencies": {
     "@vue/cli-service": "^4.1.0",

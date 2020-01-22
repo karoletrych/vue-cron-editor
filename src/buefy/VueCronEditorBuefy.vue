@@ -157,12 +157,25 @@
 </template>
 
 <script>
-import vueCronEditorMixin from "vue-cron-editor-core/vueCronEditorMixin";
-import defaultI18n from "vue-cron-editor-core/i18n";
-import Buefy from "buefy";
-import Vue from "vue";
+import vueCronEditorMixin from "vue-cron-editor-core/dist/vueCronEditorMixin";
+import defaultI18n from "vue-cron-editor-core/dist/i18n";
 
-Vue.use(Buefy);
+
+import Vue from "vue";
+import Field from 'buefy/dist/components/field'
+import Input from 'buefy/dist/components/input'
+import Tabs from 'buefy/dist/components/tabs'
+import Timepicker from 'buefy/dist/components/timepicker'
+import NumberInput from 'buefy/dist/components/numberinput'
+import Checkbox from 'buefy/dist/components/checkbox'
+Vue.use(Field)
+Vue.use(Input)
+Vue.use(Tabs)
+Vue.use(Timepicker)
+Vue.use(NumberInput)
+Vue.use(Checkbox)
+
+
 
 export default {
     name: "VueCronEditorBuefy",
