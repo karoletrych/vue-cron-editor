@@ -1,7 +1,7 @@
 {
   "name": "vue-cron-editor-buefy",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/vue-cron-editor-buefy.umd.js",
   "module": "dist/vue-cron-editor-buefy.esm.js",
   "unpkg": "dist/vue-cron-editor-buefy.min.js",
@@ -16,7 +16,7 @@
     "buefy": "^0.8.9",
     "core-js": "^3.3.2",
     "vue": "^2.6.10",
-    "vue-cron-editor-core": "../core/dist"
+    "vue-cron-editor-core": "../core/vue-cron-editor-core-0.1.0.tgz"
   },
   "bundledDependencies": [
     "vue-cron-editor-core"
