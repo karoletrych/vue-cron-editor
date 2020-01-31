@@ -24,6 +24,7 @@
     "core-js": "^3.3.2",
     "cron-validator": "^1.1.0",
     "vue": "^2.6.10",
+    "vue-cron-editor-core": "file:src/core/vue-cron-editor-core-0.1.0.tgz",
     "vuetify": "^2.1.0"
   },
   "devDependencies": {

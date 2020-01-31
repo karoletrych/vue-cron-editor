@@ -13,7 +13,6 @@
                     </b-field>
                 </div>
             </b-tab-item>
-
             <b-tab-item :value="1" label="HOURLY">
                 <div class="card">
                     <b-field>
@@ -157,30 +156,28 @@
 </template>
 
 <script>
-import vueCronEditorMixin from "vue-cron-editor-core/dist/vueCronEditorMixin";
-import defaultI18n from "vue-cron-editor-core/dist/i18n";
+import {vueCronEditorMixin, i18n as defaultI18n} from "vue-cron-editor-core";
+// import defaultI18n from "vue-cron-editor-core/dist/i18n";
 
-
-import Vue from "vue";
-import Field from 'buefy/dist/components/field'
-import Input from 'buefy/dist/components/input'
-import Tabs from 'buefy/dist/components/tabs'
-import Timepicker from 'buefy/dist/components/timepicker'
-import NumberInput from 'buefy/dist/components/numberinput'
-import Checkbox from 'buefy/dist/components/checkbox'
-Vue.use(Field)
-Vue.use(Input)
-Vue.use(Tabs)
-Vue.use(Timepicker)
-Vue.use(NumberInput)
-Vue.use(Checkbox)
-
-
+import { BField } from "buefy/dist/components/field";
+import { BInput } from "buefy/dist/components/input";
+import { BTabs, BTabItem } from "buefy/dist/components/tabs";
+import { BTimepicker } from "buefy/dist/components/timepicker";
+import { BNumberinput } from "buefy/dist/components/numberinput";
+import { BCheckbox } from "buefy/dist/components/checkbox";
 
 export default {
     name: "VueCronEditorBuefy",
     mixins: [vueCronEditorMixin],
-    components: {},
+    components: {
+        BField,
+        BInput,
+        BTabs,
+        BTabItem,
+        BTimepicker,
+        BNumberinput,
+        BCheckbox
+    },
     provide: function() {
         return {
             i18n: this.createI18n()

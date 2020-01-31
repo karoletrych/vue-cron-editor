@@ -25,7 +25,7 @@
     ]
   },
   "include": [
-    "./*.ts"
+    "./*.ts", "vueCronEditorMixin.js"
   ],
   "exclude": [
     "node_modules"

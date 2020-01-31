@@ -2,9 +2,10 @@
   "name": "vue-cron-editor-core",
   "license": "MIT",
   "version": "0.1.0",
+  "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "release": "vue-cli-service build --target lib --name vue-cron-editor-core dist/index.js && npm pack"
+    "release": "webpack --config webpack.config.js && npm pack"
   },
   "dependencies": {
     "cron-validator": "^1.1.0",

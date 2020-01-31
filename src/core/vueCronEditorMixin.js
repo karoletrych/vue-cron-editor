@@ -4,9 +4,8 @@
  * Functionality dependent on UI frameworks should be implemented in derived components
  */
 
-import { buildExpression, parseExpression, TabKey } from "./cronExpressions";
-import Vue from "vue";
-var cronValidator = require("cron-validator");
+import { buildExpression, parseExpression } from "./cronExpressions";
+import { isValidCron } from "cron-validator";
 
 const initialData = {
     initialTab: "",
@@ -38,7 +37,7 @@ const initialData = {
     }
 };
 
-export default Vue.extend({
+export default {
     created() {
         this._loadDataFromExpression();
     },
@@ -57,17 +56,20 @@ export default Vue.extend({
             this.$data.editorData = { ...tabData };
             this.currentTab = tabData.type;
         },
-        _updateCronExpr(event: any, type: TabKey) {
+        _updateCronExpr(event, type) {
             const cronExpression = buildExpression({
                 ...event,
                 type: type
             });
 
-            if (cronValidator.isValidCron(cronExpression)) {
+            if (isValidCron(cronExpression)) {
                 this.$emit("input", cronExpression);
             }
+            else {
+                this.$emit("input", null);
+            }
         },
-        resetToTab(tabKey: TabKey) {
+        resetToTab(tabKey) {
             this.$data.editorData = Object.assign({}, initialData[tabKey]);
             this.currentTab = tabKey;
             this._updateCronExpr(initialData[tabKey], tabKey);
@@ -82,8 +84,8 @@ export default Vue.extend({
         editorData: {
             deep: true,
             handler(e) {
-                this._updateCronExpr(e, this.currentTab as TabKey);
+                this._updateCronExpr(e, this.currentTab);
             }
         }
     }
-});
+};

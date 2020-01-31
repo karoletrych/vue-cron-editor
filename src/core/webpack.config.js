@@ -19,8 +19,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     },
     externals: {
-        vue: 'vue',
-        'cron-validator': 'cron-validator'
+        vue: 'vue'
       },
   mode: 'production'
 };
