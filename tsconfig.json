@@ -11,7 +11,9 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env", "vuetify", "jest"
+      "webpack-env",
+      "jest",
+      "vuetify"
     ],
     "paths": {
       "@/*": [
@@ -30,9 +32,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx", 
-    "src/core/index.js", 
-    "src/core/vueCronEditorMixin.js"
+    "tests/**/*.tsx"
   ],
   "exclude": [
     "node_modules"
