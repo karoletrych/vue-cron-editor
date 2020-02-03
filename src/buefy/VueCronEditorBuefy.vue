@@ -156,8 +156,8 @@
 </template>
 
 <script>
-import {vueCronEditorMixin, i18n as defaultI18n} from "vue-cron-editor-core";
-// import defaultI18n from "vue-cron-editor-core/dist/i18n";
+import defaultI18n from "./core/i18n.ts";
+import vueCronEditorMixin from "./core/vueCronEditorMixin.js";
 
 import { BField } from "buefy/dist/components/field";
 import { BInput } from "buefy/dist/components/input";

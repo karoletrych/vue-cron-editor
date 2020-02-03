@@ -1,30 +1,21 @@
 {
   "name": "vue-cron-editor",
-  "license": "MIT",
   "version": "0.1.11",
-  "main": "dist/vue-cron-editor.umd.js",
-  "module": "dist/vue-cron-editor.esm.js",
-  "unpkg": "dist/vue-cron-editor.min.js",
-  "browser": {
-    "./sfc": "src/vue-cron-editor.vue"
-  },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name vue-cron-editor src/VueCronEditor.vue",
     "lint": "vue-cli-service lint --ext .js,.vue,.ts --fix",
-    "test": "vue-cli-service test:unit",
     "release:samples": "vue-cli-service build && gh-pages -d dist",
-    "release": "standard-version",
-    "link-parent-bin": "link-parent-bin -c src",
-    "postinstall": "link-parent-bin -c src"
+    "test": "vue-cli-service test:unit"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@mdi/font": "^4.7.95",
     "buefy": "^0.8.9",
     "core-js": "^3.3.2",
     "cron-validator": "^1.1.0",
     "vue": "^2.6.10",
-    "vue-cron-editor-core": "file:src/core/vue-cron-editor-core-0.1.0.tgz",
     "vuetify": "^2.1.0"
   },
   "devDependencies": {
@@ -42,7 +33,6 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
     "gh-pages": "^2.1.1",
-    "link-parent-bin": "^1.0.2",
     "node-sass": "^4.13.1",
     "prettier": "^1.18.2",
     "sass": "^1.19.0",
@@ -50,7 +40,7 @@
     "standard-version": "^7.0.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.5.3",
-    "vue-cli-plugin-vuetify": "^2.0.2",
+    "vue-cli-plugin-vuetify": "^2.0.3",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.3.0",
     "webpack": "^4.41.5",
@@ -61,11 +51,9 @@
       "^.+\\.tsx?$": "ts-jest"
     }
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/karoletrych/vue-cron-editor.git"
-  },
-  "files": [
-    "dist"
-  ]
+  }
 }

@@ -1,20 +1,20 @@
 {
-  "name": "vue-cron-editor-buefy",
+  "name": "vue-cron-editor-vuetify",
   "license": "MIT",
   "version": "0.1.1",
-  "main": "dist/vue-cron-editor-buefy.umd.js",
-  "module": "dist/vue-cron-editor-buefy.esm.js",
-  "unpkg": "dist/vue-cron-editor-buefy.min.js",
+  "main": "dist/vue-cron-editor-vuetify.umd.js",
+  "module": "dist/vue-cron-editor-vuetify.esm.js",
+  "unpkg": "dist/vue-cron-editor-vuetify.min.js",
   "browser": {
-    "./sfc": "src/VueCronEditorBuefy.vue"
+    "./sfc": "src/VueCronEditorVuetify.vue"
   },
   "scripts": {
-    "build": "vue-cli-service build --target lib --name vue-cron-editor-buefy VueCronEditorBuefy.vue"
+    "build": "vue-cli-service build --target lib --name vue-cron-editor-vuetify VueCronEditorVuetify.vue"
   },
   "dependencies": {
-    "buefy": "^0.8.9",
     "core-js": "^3.3.2",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vuetify": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
@@ -26,7 +26,8 @@
     "ts-loader": "^6.2.1",
     "typescript": "^3.5.3",
     "vue-cli-plugin-vuetify": "^2.0.2",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.3.0"
   },
   "repository": {
     "type": "git",

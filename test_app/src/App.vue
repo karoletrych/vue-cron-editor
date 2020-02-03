@@ -1,34 +1,35 @@
 <template>
-  <div id="app">
-    <VueCronEditorBuefy
-        v-model="sample1CronExpression"
-    ></VueCronEditorBuefy>
-    {{sample1CronExpression}}
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >     
+    </v-app-bar>
+
+    <v-content>
+        <VueCronEditorVuetify v-model="cron"></VueCronEditorVuetify>
+        <VueCronEditorBuefy v-model="cron"></VueCronEditorBuefy>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import VueCronEditorBuefy from 'vue-cron-editor-buefy'
+import HelloWorld from './components/HelloWorld';
+import VueCronEditorVuetify from 'vue-cron-editor-vuetify';
+import VueCronEditorBuefy from 'vue-cron-editor-buefy';
+
 export default {
-  name: 'app',
+  name: 'App',
+
   components: {
     HelloWorld,
+    VueCronEditorVuetify,
     VueCronEditorBuefy
   },
-  data: () => ({
-    sample1CronExpression: "4 4 * * 0,2,3,5"
-  })
-}
-</script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data: () => ({
+    cron: "4 4 * * 0,2,3,5",
+  }),
+};
+</script>

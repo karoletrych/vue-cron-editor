@@ -30,7 +30,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx", "src/core/index.js", "src/core/vueCronEditorMixin.js"
+    "tests/**/*.tsx", 
+    "src/core/index.js", 
+    "src/core/vueCronEditorMixin.js"
   ],
   "exclude": [
     "node_modules"

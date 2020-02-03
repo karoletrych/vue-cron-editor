@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -12,10 +11,9 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env", "vuetify"
     ],
     "paths": {
-
     },
     "lib": [
       "esnext",
@@ -25,7 +23,11 @@
     ]
   },
   "include": [
-    "./*.ts", "vueCronEditorMixin.js"
+    "./*.ts",
+    "./*.js",
+    "./core/*.ts",
+    "./core/*.js",
+    "./*.vue"
   ],
   "exclude": [
     "node_modules"

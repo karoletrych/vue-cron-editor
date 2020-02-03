@@ -4,7 +4,7 @@
  * Functionality dependent on UI frameworks should be implemented in derived components
  */
 
-import { buildExpression, parseExpression } from "./cronExpressions";
+import { buildExpression, parseExpression } from "./cronExpressions.ts";
 import { isValidCron } from "cron-validator";
 
 const initialData = {

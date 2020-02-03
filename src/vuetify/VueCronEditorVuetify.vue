@@ -144,8 +144,8 @@
 </template>
 
 <script>
-import vueCronEditorMixin from "../core/vueCronEditorMixin";
-import defaultI18n from "../core/i18n";
+import vueCronEditorMixin from "./core/vueCronEditorMixin.js";
+import defaultI18n from "./core/i18n.ts";
 import NumberInput from "./NumberInput.vue";
 
 export default {
