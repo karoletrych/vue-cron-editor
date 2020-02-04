@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "release:samples": "vue-cli-service build && gh-pages -d dist"
   },
   "dependencies": {
     "vue": "^2.6.10",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@vue/cli-service": "^4.1.0",
+    "gh-pages": "^2.2.0",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "^2.0.3",
