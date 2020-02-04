@@ -7,11 +7,21 @@ https://karoletrych.github.io/vue-cron-editor/
 
 # Requirements
 - Vue ^2.0
-- Vuetify ^2.0
 
 # Installation
+There are currently two available implementations:
+- vue-cron-editor-vuetify
+    - Requires your application to use Vuetify ^2.0 and have your components wrapped inside `<v-app>` element.
+
+- vue-cron-editor-buefy
+    - No dependencies.
+
 ```
-npm install vue-cron-editor --save
+npm install vue-cron-editor-vuetify --save
+```
+or 
+```
+npm install vue-cron-editor-buefy --save
 ```
 
 # Usage
@@ -19,19 +29,19 @@ npm install vue-cron-editor --save
 <template>
   <v-app>
     <v-content>
-      <VueCronEditor v-model="cronExpression"/>
+      <VueCronEditorVuetify v-model="cronExpression"/>
       {{cronExpression}}
     </v-content>
   </v-app>
 </template>
 
 <script>
-import VueCronEditor from 'vue-cron-editor';
+import VueCronEditorVuetify from 'vue-cron-editor-vuetify';
 
 export default {
   name: 'App',
   components: {
-    VueCronEditor
+    VueCronEditorVuetify
   },
   data: () => ({
       cronExpression: "*/1 * * * *"
@@ -45,10 +55,10 @@ If none of the tabs can represent the given expression then **advanced** tab is 
 # i18n
 The language of the component can be selected with the ``locale`` prop.
 ```
-<vue-cron-editor
+<VueCronEditorVuetify
     v-model="expression"
     locale="pl"
-></vue-cron-editor>
+></VueCronEditorVuetify>
 ```
 Currently supported languages:
 - en
@@ -56,7 +66,7 @@ Currently supported languages:
 
 Custom locales can be provided via a ``customLocales`` prop:
 ```
-<vue-cron-editor
+<VueCronEditorVuetify
     v-model="expression"
     locale="test"
     :custom-locales="{
@@ -81,7 +91,7 @@ Custom locales can be provided via a ``customLocales`` prop:
         and: "and"
     }
 }"
-></vue-cron-editor>
+></VueCronEditorVuetify>
 ```
 
 # Contributing
