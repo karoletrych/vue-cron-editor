@@ -38,6 +38,9 @@ export default {
             if (this.numberRule(this.innerValue) === true) {
                 this.$emit("input", parseInt(this.innerValue));
             }
+        },
+        value() {
+            this.innerValue = this.value;
         }
     },
     mounted() {

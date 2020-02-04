@@ -1,13 +1,13 @@
 <template>
     <div class="px-2">
         <v-tabs v-model="activeTab" @change="reset">
-            <v-tab v-for="tab in tabs" :key="tab.key">{{ tab.key }}</v-tab>
+            <v-tab v-for="tab in tabs" :key="tab.key">{{ $t(tab.key)}}</v-tab>
 
             <v-tab-item :value="0">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{ $t("every") }}</div>
                     <number-input v-model="editorData.minuteInterval" />
-                    <div class="px-2">{{ $t("minutes") }}</div>
+                    <div class="px-2">{{ $t("mminutes") }}</div>
                 </v-card>
             </v-tab-item>
 
@@ -116,11 +116,7 @@
                     <number-input :min="1" :max="30" v-model="editorData.day" />
 
                     <div class="px-2">{{ $t("dayOfEvery") }}</div>
-                    <number-input
-                        :min="1"
-                        :max="12"
-                        v-model="editorData.monthInterval"
-                    />
+                    <number-input v-model="editorData.monthInterval" />
 
                     <div class="px-2">{{ $t("monthsAt") }}</div>
                     <number-input
@@ -148,12 +144,12 @@
 </template>
 
 <script>
-import vueCronEditorMixin from "./vueCronEditorMixin";
-import NumberInput from "./NumberInput";
-import defaultI18n from "./i18n";
+import vueCronEditorMixin from "./core/vueCronEditorMixin.js";
+import defaultI18n from "./core/i18n.ts";
+import NumberInput from "./NumberInput.vue";
 
 export default {
-    name: "VueCronEditor",
+    name: "VueCronEditorVuetify",
     mixins: [vueCronEditorMixin],
     components: { NumberInput },
     provide: function() {
