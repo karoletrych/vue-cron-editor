@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "vue": "^2.6.10",
-    "vue-cron-editor-buefy": "file:vue-cron-editor-buefy-0.1.1.tgz",
-    "vue-cron-editor-vuetify": "file:vue-cron-editor-vuetify-0.1.1.tgz",
+    "vue-cron-editor-buefy": "file:../src/buefy/vue-cron-editor-buefy-0.1.1.tgz",
+    "vue-cron-editor-vuetify": "file:../src/vuetify/vue-cron-editor-vuetify-0.1.1.tgz",
     "vuetify": "^2.1.0"
   },
   "devDependencies": {

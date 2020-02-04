@@ -9,7 +9,8 @@
     "./sfc": "src/VueCronEditorVuetify.vue"
   },
   "scripts": {
-    "build": "vue-cli-service build --target lib --name vue-cron-editor-vuetify VueCronEditorVuetify.vue"
+    "build": "vue-cli-service build --target lib --name vue-cron-editor-vuetify VueCronEditorVuetify.vue",
+    "pack": "npm run build && npm pack"
   },
   "dependencies": {
     "core-js": "^3.4.4",

@@ -83,3 +83,23 @@ Custom locales can be provided via a ``customLocales`` prop:
 }"
 ></vue-cron-editor>
 ```
+
+# Contributing
+To build the demo/samples app run in root directory:
+```
+npm install
+npm run serve
+```
+
+For testing the built packages:
+```
+npm install
+cd src/vuetify
+npm run pack
+cd ../buefy
+npm run pack
+
+cd ../../test_app
+npm install
+npm run serve
+```

@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postinstall": "link-parent-bin -c src"
   },
   "dependencies": {
     "buefy": "^0.8.10",
@@ -27,6 +28,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
+    "link-parent-bin": "^1.0.2",
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
     "sass": "^1.19.0",
