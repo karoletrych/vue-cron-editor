@@ -12,18 +12,14 @@
     "build": "vue-cli-service build --target lib --name vue-cron-editor-vuetify VueCronEditorVuetify.vue"
   },
   "dependencies": {
-    "core-js": "^3.3.2",
+    "core-js": "^3.4.4",
     "vue": "^2.6.10",
     "vuetify": "^2.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-typescript": "^4.0.5",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-typescript": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
-    "node-sass": "^4.13.1",
-    "sass": "^1.19.0",
-    "sass-loader": "^8.0.0",
-    "ts-loader": "^6.2.1",
     "typescript": "^3.5.3",
     "vue-cli-plugin-vuetify": "^2.0.3",
     "vue-template-compiler": "^2.6.10",
