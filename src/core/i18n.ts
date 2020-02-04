@@ -1,12 +1,12 @@
 export default {
     withRegisteredLocales(locales: Object) {
-        if (!locales) return this;
+        if (!locales) return {...this};
         return { ...this, ...locales };
     },
 
     en: {
         every: "Every",
-        minutes: "minute(s)",
+        mminutes: "minute(s)",
         hoursOnMinute: "hour(s) on minute",
         daysAt: "day(s) at",
         at: "at",
@@ -22,11 +22,17 @@ export default {
         sat: "Sat",
         sun: "Sun",
         hasToBeBetween: "Has to be between",
-        and: "and"
+        and: "and",
+        minutes: "MINUTES",
+        hourly: "HOURLY",
+        daily: "DAILY",
+        weekly: "WEEKLY",
+        monthly: "MONTHLY",
+        advanced: "ADVANCED"
     },
     pl: {
         every: "Co",
-        minutes: "minut",
+        mminutes: "minut",
         hoursOnMinute: "godzin w minucie",
         daysAt: "dni o",
         at: "o",
@@ -42,6 +48,12 @@ export default {
         sat: "So",
         sun: "Nie",
         hasToBeBetween: "Wymagana wartość pomiędzy",
-        and: "i"
+        and: "i",
+        minutes: "MINUTY",
+        hourly: "GODZINY",
+        daily: "DNI",
+        weekly: "TYGODNIE",
+        monthly: "MIESIĄCE",
+        advanced: "ZAAWANSOWANE"
     }
 };

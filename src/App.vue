@@ -146,28 +146,6 @@ export default {
     },
     data: () => ({
         sample1CronExpression: "4 4 * * 0,2,3,5",
-        customLocales: {
-            test: {
-                every: "Every",
-                minutes: "minute(s)",
-                hoursOnMinute: "hour(s) on minute",
-                daysAt: "day(s) at",
-                at: "at",
-                onThe: "On the",
-                dayOfEvery: "day of every",
-                monthsAt: "month(s) at",
-                everyDay: "Every",
-                mon: "Mon",
-                tue: "Tue",
-                wed: "Wed",
-                thu: "Thu",
-                fri: "Fri",
-                sat: "Sat",
-                sun: "Sun",
-                hasToBeBetween: "Has to be between",
-                and: "and"
-            }
-        },
         headers: [
             { text: "Id", value: "id" },
             { text: "Expression", value: "expression" },

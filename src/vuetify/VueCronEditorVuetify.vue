@@ -1,13 +1,13 @@
 <template>
     <div class="px-2">
         <v-tabs v-model="activeTab" @change="reset">
-            <v-tab v-for="tab in tabs" :key="tab.key">{{ tab.key }}</v-tab>
+            <v-tab v-for="tab in tabs" :key="tab.key">{{ $t(tab.key)}}</v-tab>
 
             <v-tab-item :value="0">
                 <v-card class="d-inline-flex pa-2 align-center" outlined tile>
                     <div class="px-2">{{ $t("every") }}</div>
                     <number-input v-model="editorData.minuteInterval" />
-                    <div class="px-2">{{ $t("minutes") }}</div>
+                    <div class="px-2">{{ $t("mminutes") }}</div>
                 </v-card>
             </v-tab-item>
 

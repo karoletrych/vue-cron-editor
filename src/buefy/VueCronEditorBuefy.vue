@@ -1,7 +1,7 @@
 <template>
     <div class="enable-bulma">
         <b-tabs v-model="activeTab" @change="reset">
-            <b-tab-item :value="0" label="MINUTES">
+            <b-tab-item :value="0" :label="$t('minutes')">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("every") }}</span>
@@ -13,7 +13,7 @@
                     </b-field>
                 </div>
             </b-tab-item>
-            <b-tab-item :value="1" label="HOURLY">
+            <b-tab-item :value="1" :label="$t('hourly')">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("every") }}</span>
@@ -34,7 +34,7 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="2" label="DAILY">
+            <b-tab-item :value="2" :label="$t('daily')">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("every") }}</span>
@@ -115,7 +115,7 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="4" label="MONTHLY">
+            <b-tab-item :value="4" :label="$t('monthly')">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("onThe") }}</span>
@@ -144,7 +144,7 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="5" label="ADVANCED">
+            <b-tab-item :value="5" :label="$t('advanced')">
                 <div class="card">
                     <b-field>
                         <b-input v-model="editorData.cronExpression"></b-input>
