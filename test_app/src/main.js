@@ -3,8 +3,10 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
+import { VTabs, VTab, VTabItem, VCheckbox } from 'vuetify/lib'
 
 new Vue({
     vuetify,
-    render: function (h) { return h(App) },
+    components: {VTabs, VTab, VTabItem, VCheckbox},
+  render: h => h(App)
 }).$mount('#app')

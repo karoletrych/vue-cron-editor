@@ -9,19 +9,16 @@ https://karoletrych.github.io/vue-cron-editor/
 - Vue ^2.0
 
 # Installation
-There are currently two available implementations:
-- vue-cron-editor-vuetify
-    - Requires your application to use Vuetify ^2.0 and have your components wrapped inside `<v-app>` element.
-
-- vue-cron-editor-buefy
-    - No dependencies.
-
-```
-npm install vue-cron-editor-vuetify --save
-```
-or 
+There are currently two versions available:
+- vue-cron-editor-buefy **(RECOMMENDED)**
 ```
 npm install vue-cron-editor-buefy --save
+```
+
+- vue-cron-editor-vuetify
+    - **NOTE**: Requires your application to use Vuetify ^2.0 and have your components wrapped inside `<v-app>` element.
+```
+npm install vue-cron-editor-vuetify --save
 ```
 
 # Usage
@@ -29,19 +26,19 @@ npm install vue-cron-editor-buefy --save
 <template>
   <v-app>
     <v-content>
-      <VueCronEditorVuetify v-model="cronExpression"/>
+      <VueCronEditorBuefy v-model="cronExpression"/>
       {{cronExpression}}
     </v-content>
   </v-app>
 </template>
 
 <script>
-import VueCronEditorVuetify from 'vue-cron-editor-vuetify';
+import VueCronEditorBuefy from 'vue-cron-editor-buefy';
 
 export default {
   name: 'App',
   components: {
-    VueCronEditorVuetify
+    VueCronEditorBuefy
   },
   data: () => ({
       cronExpression: "*/1 * * * *"
@@ -55,10 +52,10 @@ If none of the tabs can represent the given expression then **advanced** tab is 
 # i18n
 The language of the component can be selected with the ``locale`` prop.
 ```
-<VueCronEditorVuetify
+<VueCronEditorBuefy
     v-model="expression"
     locale="pl"
-></VueCronEditorVuetify>
+></VueCronEditorBuefy>
 ```
 Currently supported languages:
 - en
@@ -66,7 +63,7 @@ Currently supported languages:
 
 Custom locales can be provided via a ``customLocales`` prop:
 ```
-<VueCronEditorVuetify
+<VueCronEditorBuefy
     v-model="expression"
     locale="test"
     :custom-locales="{
@@ -91,7 +88,7 @@ Custom locales can be provided via a ``customLocales`` prop:
         and: "and"
     }
 }"
-></VueCronEditorVuetify>
+></VueCronEditorBuefy>
 ```
 
 # Contributing
