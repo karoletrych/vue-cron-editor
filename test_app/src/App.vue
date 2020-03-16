@@ -106,10 +106,15 @@
 </template>
 
 <script>
-
+import VueCronEditorVuetify from "vue-cron-editor-vuetify";
+import VueCronEditorBuefy from "vue-cron-editor-buefy";
 
 export default {
     name: "App",
+    components: {
+        VueCronEditorVuetify,
+        VueCronEditorBuefy
+    },
     methods: {
         editItem(item) {
             this.editedIndex = this.expressions.indexOf(item);

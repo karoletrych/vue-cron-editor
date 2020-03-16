@@ -47,13 +47,12 @@
                             icon="clock"
                             editable
                             @input="setDateTime"
-                            :value="dateTime"
                         />
                     </b-field>
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="3" :label="$t('weekly')">
+            <b-tab-item :value="3" label="WEEKLY">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("everyDay") }}</span>
@@ -111,7 +110,6 @@
                             icon="clock"
                             editable
                             @input="setDateTime"
-                            :value="dateTime"
                         />
                     </b-field>
                 </div>
@@ -141,7 +139,6 @@
                             icon="clock"
                             editable
                             @input="setDateTime"
-                            :value="dateTime"
                         />
                     </b-field>
                 </div>
@@ -212,14 +209,6 @@ export default {
     watch: {
         currentTab() {
             this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
-        }
-    },
-    computed: {
-        dateTime() {
-            let dateTime = new Date();
-            dateTime.setHours(this.editorData.hours);
-            dateTime.setMinutes(this.editorData.minutes);
-            return dateTime;
         }
     },
     methods: {
