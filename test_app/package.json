@@ -11,7 +11,7 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
-    "vue-cron-editor-buefy": "^0.1.1",
+    "vue-cron-editor-buefy": "^0.1.13",
     "vue-cron-editor-vuetify": "^0.1.1",
     "vuetify": "^2.1.0"
   },
