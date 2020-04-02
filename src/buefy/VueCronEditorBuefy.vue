@@ -9,7 +9,7 @@
                             :controls="false"
                             v-model="editorData.minuteInterval"
                         />
-                        <span class="centered-text">{{ $t("minutes") }}</span>
+                        <span class="centered-text">{{ $t("mminutes") }}</span>
                     </b-field>
                 </div>
             </b-tab-item>
@@ -150,6 +150,9 @@
             <b-tab-item :value="5" :label="$t('advanced')">
                 <div class="card">
                     <b-field>
+                        <span class="centered-text">{{
+                            $t("cronExpression")
+                        }}</span>
                         <b-input v-model="editorData.cronExpression"></b-input>
                     </b-field>
                 </div>

@@ -28,7 +28,8 @@ export default {
         daily: "DAILY",
         weekly: "WEEKLY",
         monthly: "MONTHLY",
-        advanced: "ADVANCED"
+        advanced: "ADVANCED",
+        cronExpression: "Cron expression:"
     },
     pl: {
         every: "Co",
@@ -37,8 +38,8 @@ export default {
         daysAt: "dni o",
         at: "o",
         onThe: "",
-        dayOfEvery: "dzień każdych",
-        monthsAt: "miesięcy o",
+        dayOfEvery: "dzień miesiąca, co",
+        monthsAt: "miesięcy, o godzinie",
         everyDay: "W każdy",
         mon: "Pon",
         tue: "Wt",
@@ -54,6 +55,7 @@ export default {
         daily: "DNI",
         weekly: "TYGODNIE",
         monthly: "MIESIĄCE",
-        advanced: "ZAAWANSOWANE"
+        advanced: "ZAAWANSOWANE",
+        cronExpression: "Wyrażenie Cron:"
     }
 };
