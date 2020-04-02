@@ -50,12 +50,12 @@ export default {
         sun: "Nie",
         hasToBeBetween: "Wymagana wartość pomiędzy",
         and: "i",
-        minutes: "MINUTY",
-        hourly: "GODZINY",
-        daily: "DNI",
-        weekly: "TYGODNIE",
-        monthly: "MIESIĄCE",
-        advanced: "ZAAWANSOWANE",
+        minutes: "Minuty",
+        hourly: "Godziny",
+        daily: "Dni",
+        weekly: "Tygodnie",
+        monthly: "Miesiące",
+        advanced: "Zaawansowane",
         cronExpression: "Wyrażenie Cron:"
     }
 };
