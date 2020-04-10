@@ -42,7 +42,8 @@ export default {
         this._loadDataFromExpression();
     },
     props: {
-        value: { type: String, default: "*/1 * * * *" }
+        value: { type: String, default: "*/1 * * * *" },
+        hideAdvanced: { type: Boolean, default: false }
     },
     data() {
         return {

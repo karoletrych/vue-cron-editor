@@ -147,7 +147,7 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="5" :label="$t('advanced')">
+            <b-tab-item v-if="hideAdvanced" :value="5" :label="$t('advanced')">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{
