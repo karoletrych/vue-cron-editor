@@ -17,14 +17,14 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-typescript": "^4.0.5",
-    "@vue/cli-service": "^4.0.0",
+    "@vue/cli-plugin-babel": "^4.3.1",
+    "@vue/cli-plugin-typescript": "^4.3.1",
+    "@vue/cli-service": "^4.3.1",
     "node-sass": "^4.13.1",
-    "sass": "^1.19.0",
+    "sass": "^1.26.3",
     "sass-loader": "^8.0.0",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.5.3",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
     "vue-template-compiler": "^2.6.10"
   },
   "repository": {
