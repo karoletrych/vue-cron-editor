@@ -9,8 +9,7 @@
     "./sfc": "src/VueCronEditorBuefy.vue"
   },
   "scripts": {
-    "build": "vue-cli-service build --target lib --name vue-cron-editor-buefy VueCronEditorBuefy.vue",
-    "pack": "npm run build && npm pack"
+    "build": "vue-cli-service build --target lib --name vue-cron-editor-buefy VueCronEditorBuefy.vue"
   },
   "dependencies": {
     "buefy": "^0.8.9",
@@ -26,7 +25,6 @@
     "sass-loader": "^8.0.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.5.3",
-    "vue-cli-plugin-vuetify": "^2.0.2",
     "vue-template-compiler": "^2.6.10"
   },
   "repository": {

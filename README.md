@@ -1,6 +1,6 @@
 [![Actions Status](https://github.com/karoletrych/vue-cron-editor/workflows/Node%20CI/badge.svg)](https://github.com/karoletrych/vue-cron-editor/actions)
 # vue-cron-editor
-VueCronEditor is a component library built with Vue & Vuetify allowing for easier editing of cron expressions.
+VueCronEditor is a component library built with Vue allowing for easier editing of cron expressions.
 
 # Demo
 https://karoletrych.github.io/vue-cron-editor/
@@ -9,16 +9,9 @@ https://karoletrych.github.io/vue-cron-editor/
 - Vue ^2.0
 
 # Installation
-There are currently two versions available:
-- vue-cron-editor-buefy **(RECOMMENDED)**
+- vue-cron-editor-buefy 
 ```
 npm install vue-cron-editor-buefy --save
-```
-
-- vue-cron-editor-vuetify
-    - **NOTE**: Requires your application to use Vuetify ^2.0 and have your components wrapped inside `<v-app>` element.
-```
-npm install vue-cron-editor-vuetify --save
 ```
 
 # Usage
@@ -98,15 +91,7 @@ npm install
 npm run serve
 ```
 
-For testing the built packages:
+To release version:
 ```
-npm install
-cd src/vuetify
-npm run pack
-cd ../buefy
-npm run pack
 
-cd ../../test_app
-npm install
-npm run serve
 ```
