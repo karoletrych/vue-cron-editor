@@ -7,7 +7,7 @@ function getMountedComponent(Component: any, propsData: any) {
     });
 }
 
-describe("VueCronEditorBuefy", () => {
+describe("isAdvancedVisible prop", () => {
     it("renders advanced tab when isAdvancedVisible is true", () => {
         let component = getMountedComponent(VueCronEditorBuefy, {
             isAdvancedTabVisible: true
