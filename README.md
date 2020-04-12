@@ -87,13 +87,13 @@ Custom locales can be provided via a ``customLocales`` prop:
 ```
 
 # Contributing
-To build the demo/samples app run in root directory:
+To build the samples app run in root directory:
 ```
 npm install
 npm run serve
 ```
 
-To release version:
+To run unit tests:
 ```
-
+npm run tests:unit
 ```
