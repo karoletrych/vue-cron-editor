@@ -16,12 +16,14 @@ jobs:
         npm ci
         npm run test:unit
     - name: build samples
-      run : |
+      run: |
         npx vue-cli-service build
+    - name: configure git credentials
+      run: |
+        git config user.name "Karol Etrych"
+        git config user.email "karol.etrych@gmail.com"
     - name: release samples to ghpages
       run: |
-        git config --global user.name "Karol Etrych"
-        git config --global user.email "karol.etrych@gmail.com"
         npx gh-pages -d dist
       env:
         CI: true
