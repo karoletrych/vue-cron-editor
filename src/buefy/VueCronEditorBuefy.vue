@@ -57,7 +57,7 @@
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("everyDay") }}</span>
-                        <div class="centered-text">
+                        <div class="centered-checkbox-group">
                             <b-checkbox
                                 v-model="editorData.days"
                                 native-value="0"
@@ -261,14 +261,24 @@ export default {
 
 <style lang="scss">
 .enable-bulma {
+    .control {
+        display: flex;
+        align-items: center;
+    }
     .centered-text {
+        padding-left: 16px;
+        padding-right: 16px;
         justify-content: center;
-        padding-bottom: calc(0.375em - 1px);
-        padding-left: 0.75em;
-        padding-right: 0.75em;
-        padding-top: calc(0.375em - 1px);
+        align-items: center;
         text-align: center;
         display: flex;
+    }
+    .centered-checkbox-group {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap
     }
 
     @import "~bulma/sass/utilities/functions";
@@ -279,13 +289,5 @@ export default {
     @import "~bulma";
     @import "~buefy/src/scss/buefy";
 
-    .centered-text {
-        justify-content: center;
-        padding-bottom: calc(0.375em - 1px);
-        padding-left: 0.75em;
-        padding-right: 0.75em;
-        padding-top: calc(0.375em - 1px);
-        text-align: center;
-    }
 }
 </style>
