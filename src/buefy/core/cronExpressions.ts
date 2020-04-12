@@ -102,7 +102,7 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
     }
     if (
         (groups = expression.match(
-            /^(\d+) (\d+) \* \* (\d)(,\d)?(,\d)?(,\d)?(,\d)?(,\d)?(\d)?$/
+            /^(\d+) (\d+) \* \* (\d)(,\d)?(,\d)?(,\d)?(,\d)?(,\d)?(,\d)?$/
         ))
     ) {
         const optionalDaysBeginIndex = 4;
