@@ -16,6 +16,8 @@ jobs:
         npm ci
         npm run test:unit
     - name: release samples
+      run: |
+        npm ci
         npm run release:samples
       env:
         CI: true
