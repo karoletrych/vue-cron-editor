@@ -268,6 +268,7 @@ export default {
     .centered-text {
         padding-left: 16px;
         padding-right: 16px;
+        
         justify-content: center;
         align-items: center;
         text-align: center;
