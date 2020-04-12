@@ -265,22 +265,23 @@ export default {
         display: flex;
         align-items: center;
     }
+
     .centered-text {
         padding-left: 16px;
         padding-right: 16px;
-
         justify-content: center;
         align-items: center;
-
         text-align: center;
         display: flex;
     }
+
     .centered-checkbox-group {
         justify-content: center;
         align-items: center;
         text-align: center;
-        display: flex;
         flex-wrap: wrap;
+
+        display: flex;
     }
 
     @import "~bulma/sass/utilities/functions";
