@@ -280,7 +280,6 @@ export default {
         align-items: center;
         text-align: center;
         flex-wrap: wrap;
-
         display: flex;
     }
 
