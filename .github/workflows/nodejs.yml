@@ -19,8 +19,9 @@ jobs:
       run : |
         npx vue-cli-service build
     - name: release samples to ghpages
-      uses: crazy-max/ghaction-github-pages@v1.4.0
-      with:
-        build_dir: dist
+      run: |
+        git config --global user.name "Karol Etrych"
+        git config --global user.email "karol.etrych@gmail.com"
+        npx gh-pages -d dist
       env:
         CI: true
