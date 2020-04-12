@@ -1,6 +1,6 @@
 <template>
     <div class="enable-bulma">
-        <b-tabs v-model="activeTab" @change="reset">
+        <b-tabs v-model="activeTab" @input="reset">
             <b-tab-item :value="0" :label="$t('minutes')" class="minutes-tab">
                 <div class="card">
                     <b-field>

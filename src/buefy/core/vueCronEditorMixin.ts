@@ -71,6 +71,7 @@ export default Vue.extend({
         _loadDataFromExpression() {
             const tabData = parseExpression(this.value);
             this.$data.editorData = { ...tabData };
+
             this.currentTab = tabData.type;
         },
         _updateCronExpr(event: TabUpdatedEvent) {
@@ -87,6 +88,7 @@ export default Vue.extend({
         resetToTab(tabKey: TabKey) {
             this.$data.editorData = Object.assign({}, initialData[tabKey]);
             this.currentTab = tabKey;
+
             this._updateCronExpr(initialData[tabKey]);
         }
     },
