@@ -42,6 +42,8 @@ export default {
 The editor tab will be set to one which is able to represent an initial expression given to a ``value`` prop (**minutes** tab in the example above). 
 If none of the tabs can represent the given expression then **advanced** tab is selected.
 
+To hide the **advanced** tab, set the `isAdvancedTabVisible` prop to `false`.
+
 # i18n
 The language of the component can be selected with the ``locale`` prop.
 ```

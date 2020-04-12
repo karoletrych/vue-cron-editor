@@ -1,7 +1,7 @@
 <template>
     <div class="enable-bulma">
         <b-tabs v-model="activeTab" @change="reset">
-            <b-tab-item :value="0" :label="$t('minutes')">
+            <b-tab-item :value="0" :label="$t('minutes')" class="minutes-tab">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("every") }}</span>
@@ -13,7 +13,7 @@
                     </b-field>
                 </div>
             </b-tab-item>
-            <b-tab-item :value="1" :label="$t('hourly')">
+            <b-tab-item :value="1" :label="$t('hourly')" class="hourly-tab">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("every") }}</span>
@@ -34,7 +34,7 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="2" :label="$t('daily')">
+            <b-tab-item :value="2" :label="$t('daily')" class="daily-tab">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("every") }}</span>
@@ -53,7 +53,7 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="3" :label="$t('weekly')">
+            <b-tab-item :value="3" :label="$t('weekly')" class="weekly-tab">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("everyDay") }}</span>
@@ -117,7 +117,7 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="4" :label="$t('monthly')">
+            <b-tab-item :value="4" :label="$t('monthly')" class="monthly-tab">
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ $t("onThe") }}</span>
@@ -147,7 +147,12 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="5" :label="$t('advanced')">
+            <b-tab-item
+                v-if="isAdvancedTabVisible"
+                :value="5"
+                :label="$t('advanced')"
+                class="advanced-tab"
+            >
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{
