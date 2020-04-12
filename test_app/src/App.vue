@@ -40,7 +40,7 @@
                                 <v-card>
                                     <v-card-title>
                                         <span class="headline"
-                                            >Adding a CRON expression</span
+                                            >Adding a cron expression</span
                                         >
                                     </v-card-title>
 
@@ -54,7 +54,7 @@
                                                         editedItem.expression
                                                     "
                                                 ></VueCronEditorBuefy>
-                                            CRON expression:
+                                            cron expression:
                                             {{ editedItem.expression }}
                                         </v-container>
                                     </v-card-text>

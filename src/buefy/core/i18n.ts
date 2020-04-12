@@ -11,8 +11,8 @@ export default {
         daysAt: "day(s) at",
         at: "at",
         onThe: "On the",
-        dayOfEvery: "day of every",
-        monthsAt: "month(s) at",
+        dayOfEvery: "day, of every",
+        monthsAt: "month(s), at",
         everyDay: "Every",
         mon: "Mon",
         tue: "Tue",
@@ -29,7 +29,7 @@ export default {
         weekly: "WEEKLY",
         monthly: "MONTHLY",
         advanced: "ADVANCED",
-        cronExpression: "Cron expression:"
+        cronExpression: "cron expression:"
     },
     pl: {
         every: "Co",
@@ -56,6 +56,6 @@ export default {
         weekly: "Tygodnie",
         monthly: "Miesiące",
         advanced: "Zaawansowane",
-        cronExpression: "Wyrażenie Cron:"
+        cronExpression: "Wyrażenie cron:"
     }
 };
