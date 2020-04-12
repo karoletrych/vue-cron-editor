@@ -4,11 +4,16 @@
  * Functionality dependent on UI frameworks should be implemented in derived components
  */
 
-import { buildExpression, parseExpression, TabUpdatedEvent, TabKey } from "./cronExpressions";
+import {
+    buildExpression,
+    parseExpression,
+    TabUpdatedEvent,
+    TabKey
+} from "./cronExpressions";
 import { isValidCron } from "cron-validator";
-import Vue from "vue"
+import Vue from "vue";
 
-const initialData : Record<TabKey, TabUpdatedEvent> = {
+const initialData: Record<TabKey, TabUpdatedEvent> = {
     minutes: {
         type: "minutes",
         minuteInterval: 1
@@ -44,8 +49,8 @@ const initialData : Record<TabKey, TabUpdatedEvent> = {
 };
 
 interface ComponentData {
-    editorData: Object,
-    currentTab: TabKey
+    editorData: Object;
+    currentTab: TabKey;
 }
 
 export default Vue.extend({
@@ -53,7 +58,8 @@ export default Vue.extend({
         this._loadDataFromExpression();
     },
     props: {
-        value: { type: String, default: "*/1 * * * *" }
+        value: { type: String, default: "*/1 * * * *" },
+        isAdvancedTabVisible: { type: Boolean, default: true }
     },
     data() {
         return <ComponentData>{
@@ -67,19 +73,18 @@ export default Vue.extend({
             this.$data.editorData = { ...tabData };
             this.currentTab = tabData.type;
         },
-        _updateCronExpr(event : TabUpdatedEvent) {
+        _updateCronExpr(event: TabUpdatedEvent) {
             const cronExpression = buildExpression({
                 ...event
             });
 
             if (isValidCron(cronExpression)) {
                 this.$emit("input", cronExpression);
-            }
-            else {
+            } else {
                 this.$emit("input", null);
             }
         },
-        resetToTab(tabKey : TabKey) {
+        resetToTab(tabKey: TabKey) {
             this.$data.editorData = Object.assign({}, initialData[tabKey]);
             this.currentTab = tabKey;
             this._updateCronExpr(initialData[tabKey]);

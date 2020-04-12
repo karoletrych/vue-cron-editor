@@ -1,6 +1,6 @@
 export default {
     withRegisteredLocales(locales: Object) {
-        if (!locales) return {...this};
+        if (!locales) return { ...this };
         return { ...this, ...locales };
     },
 

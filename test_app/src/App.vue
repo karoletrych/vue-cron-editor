@@ -9,12 +9,6 @@
                         v-model="sample1CronExpression"
                     ></VueCronEditorBuefy>
                 </section>
-                <section>
-                    <h3>vue-cron-editor-vuetify</h3>
-                    <VueCronEditorVuetify
-                        v-model="sample1CronExpression"
-                    ></VueCronEditorVuetify>
-                </section>
 
                 {{ sample1CronExpression }}
             </section>
@@ -60,15 +54,6 @@
                                                         editedItem.expression
                                                     "
                                                 ></VueCronEditorBuefy>
-                                            </section>
-                                                                                        <section>
-                                                <h3>vue-cron-editor-vuetify</h3>
-                                                <VueCronEditorVuetify
-                                                    v-model="
-                                                        editedItem.expression
-                                                    "
-                                                ></VueCronEditorVuetify>
-                                            </section>
                                             CRON expression:
                                             {{ editedItem.expression }}
                                         </v-container>
