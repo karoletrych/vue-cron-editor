@@ -268,9 +268,10 @@ export default {
     .centered-text {
         padding-left: 16px;
         padding-right: 16px;
-        
+
         justify-content: center;
         align-items: center;
+
         text-align: center;
         display: flex;
     }
@@ -279,7 +280,7 @@ export default {
         align-items: center;
         text-align: center;
         display: flex;
-        flex-wrap: wrap
+        flex-wrap: wrap;
     }
 
     @import "~bulma/sass/utilities/functions";
@@ -289,6 +290,5 @@ export default {
 
     @import "~bulma";
     @import "~buefy/src/scss/buefy";
-
 }
 </style>
