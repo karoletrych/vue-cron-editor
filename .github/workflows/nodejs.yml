@@ -17,7 +17,7 @@ jobs:
         npm run test:unit
     - name: build samples
       run : |
-        vue-cli-service build
+        npx vue-cli-service build
     - name: release samples to ghpages
       uses: crazy-max/ghaction-github-pages@v1.4.0
       with:
