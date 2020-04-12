@@ -15,9 +15,9 @@ jobs:
       run: |
         npm ci
         npm run test:unit
-    - name: release samples
-      run: |
-        npm ci
-        npm run release:samples
+    - name: Release Samples
+      uses: crazy-max/ghaction-github-pages@v1.4.0
+      with:
+        build_dir: dist
       env:
         CI: true
