@@ -51,6 +51,7 @@ const initialData: Record<TabKey, TabUpdatedEvent> = {
 interface ComponentData {
     editorData: Object;
     currentTab: TabKey;
+    innerValue: string | null;
 }
 
 export default Vue.extend({
@@ -63,6 +64,7 @@ export default Vue.extend({
     },
     data() {
         return <ComponentData>{
+            innerValue: "*/1 * * * *",
             editorData: Object.assign({}, initialData.minutes),
             currentTab: "minutes"
         };
@@ -74,14 +76,16 @@ export default Vue.extend({
 
             this.currentTab = tabData.type;
         },
-        _updateCronExpr(event: TabUpdatedEvent) {
+        _updateCronExpression(event: TabUpdatedEvent) {
             const cronExpression = buildExpression({
                 ...event
             });
 
             if (isValidCron(cronExpression)) {
+                this.innerValue = cronExpression;
                 this.$emit("input", cronExpression);
             } else {
+                this.innerValue = null;
                 this.$emit("input", null);
             }
         },
@@ -89,19 +93,22 @@ export default Vue.extend({
             this.$data.editorData = Object.assign({}, initialData[tabKey]);
             this.currentTab = tabKey;
 
-            this._updateCronExpr(initialData[tabKey]);
+            this._updateCronExpression(initialData[tabKey]);
         }
     },
     watch: {
         value: {
             handler() {
+                if (this.value == this.innerValue) {
+                    return;
+                }
                 this._loadDataFromExpression();
             }
         },
         editorData: {
             deep: true,
             handler(changedData) {
-                this._updateCronExpr(changedData);
+                this._updateCronExpression(changedData);
             }
         }
     }
