@@ -95,5 +95,5 @@ npm run serve
 
 To run unit tests:
 ```
-npm run tests:unit
+npm run test:unit
 ```
