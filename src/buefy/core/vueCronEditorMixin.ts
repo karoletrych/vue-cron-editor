@@ -56,6 +56,7 @@ interface ComponentData {
 
 export default Vue.extend({
     created() {
+        this.innerValue = this.value;
         this._loadDataFromExpression();
     },
     props: {

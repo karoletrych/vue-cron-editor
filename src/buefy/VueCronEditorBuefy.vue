@@ -237,11 +237,6 @@ export default {
             ];
         },
         reset(e) {
-            if (!this.tabsInitialized) {
-                this.tabsInitialized = true;
-                return;
-            }
-
             const tabKey = this.tabs.find(t => t.id === e).key;
             this.resetToTab(tabKey);
         },
