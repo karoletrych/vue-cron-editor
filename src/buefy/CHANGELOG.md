@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.6...v0.2.7) (2020-04-14)
+
+
+### Bug Fixes
+
+* preserba state on first switch of tab ([8b0371d](https://github.com/karoletrych/vue-cron-editor/commit/8b0371d692cf80ccea4e61b2c448b2fd01b8fb28))
+
 ### [0.2.6](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.4...v0.2.6) (2020-04-14)
 
 

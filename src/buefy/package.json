@@ -1,7 +1,7 @@
 {
   "name": "vue-cron-editor-buefy",
   "license": "MIT",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "main": "dist/vue-cron-editor-buefy.umd.js",
   "module": "dist/vue-cron-editor-buefy.esm.js",
   "unpkg": "dist/vue-cron-editor-buefy.min.js",
