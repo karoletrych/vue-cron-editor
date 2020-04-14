@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.4...v0.2.6) (2020-04-14)
+
+
+### Features
+
+* preserve state on switch to advanced ([755edeb](https://github.com/karoletrych/vue-cron-editor/commit/755edebb715708ebfe41156443c5ff208f740ae0))
+
+
+### Bug Fixes
+
+* error on all days checked ([#33](https://github.com/karoletrych/vue-cron-editor/issues/33)) ([e13deeb](https://github.com/karoletrych/vue-cron-editor/commit/e13deebb2485df3cc1d64031398e6fb6593b53ae))
+
 ### [0.2.5](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.4...v0.2.5) (2020-04-12)
 
 ### [0.2.4](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.2...v0.2.4) (2020-04-12)
