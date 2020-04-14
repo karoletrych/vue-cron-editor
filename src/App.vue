@@ -6,6 +6,7 @@
                 <section>
                     <h3>vue-cron-editor-buefy</h3>
                     <VueCronEditorBuefy
+                        :preserveStateOnSwitchToAdvanced="true"
                         v-model="sample1CronExpression"
                     ></VueCronEditorBuefy>
                 </section>

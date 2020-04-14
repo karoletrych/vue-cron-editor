@@ -60,7 +60,8 @@ export default Vue.extend({
     },
     props: {
         value: { type: String, default: "*/1 * * * *" },
-        isAdvancedTabVisible: { type: Boolean, default: true }
+        isAdvancedTabVisible: { type: Boolean, default: true },
+        preserveStateOnSwitchToAdvanced: { type: Boolean, default: false }
     },
     data() {
         return <ComponentData>{
@@ -90,9 +91,16 @@ export default Vue.extend({
             }
         },
         resetToTab(tabKey: TabKey) {
-            this.$data.editorData = Object.assign({}, initialData[tabKey]);
             this.currentTab = tabKey;
+            if (this.preserveStateOnSwitchToAdvanced && tabKey === "advanced") {
+                this.$data.editorData = {
+                    type: "advanced",
+                    cronExpression: this.innerValue
+                };
+                return;
+            }
 
+            this.$data.editorData = Object.assign({}, initialData[tabKey]);
             this._updateCronExpression(initialData[tabKey]);
         }
     },
