@@ -13,6 +13,7 @@
     "buefy": "^0.8.15",
     "core-js": "^3.6.5",
     "cron-validator": "^1.1.1",
+    "cronstrue": "^1.93.0",
     "vue": "^2.6.10",
     "vuetify": "^2.2.21"
   },

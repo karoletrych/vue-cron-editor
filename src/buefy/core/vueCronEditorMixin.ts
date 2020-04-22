@@ -10,7 +10,10 @@ import {
     TabUpdatedEvent,
     TabKey
 } from "./cronExpressions";
-import { isValidCron } from "cron-validator";
+import * as cronValidator from "cron-validator";
+import * as cronstrue from "cronstrue/i18n";
+import { createI18n } from "./i18n";
+
 import Vue from "vue";
 
 const initialData: Record<TabKey, TabUpdatedEvent> = {
@@ -52,26 +55,47 @@ interface ComponentData {
     editorData: Object;
     currentTab: TabKey;
     innerValue: string | null;
+    i18n: Record<string, string> | null;
 }
 
 export default Vue.extend({
+    provide() {
+        return {
+            i18n: createI18n(this.customLocales, this.locale)
+        };
+    },
     created() {
+        this.i18n = createI18n(this.customLocales, this.locale);
         this.innerValue = this.value;
         this._loadDataFromExpression();
     },
     props: {
         value: { type: String, default: "*/1 * * * *" },
         isAdvancedTabVisible: { type: Boolean, default: true },
-        preserveStateOnSwitchToAdvanced: { type: Boolean, default: false }
+        preserveStateOnSwitchToAdvanced: { type: Boolean, default: false },
+        locale: { type: String, default: "en" },
+        customLocales: { type: Object, default: null }
     },
     data() {
         return <ComponentData>{
             innerValue: "*/1 * * * *",
             editorData: Object.assign({}, initialData.minutes),
-            currentTab: "minutes"
+            currentTab: "minutes",
+            i18n: null
         };
     },
+    computed: {
+        explanation(): string {
+            if (!this.innerValue) return "";
+            return (cronstrue as any).toString(this.innerValue, {
+                locale: this.locale
+            });
+        }
+    },
     methods: {
+        $t(key: string) {
+            return this.i18n![key];
+        },
         _loadDataFromExpression() {
             const tabData = parseExpression(this.value);
             this.$data.editorData = { ...tabData };
@@ -83,7 +107,7 @@ export default Vue.extend({
                 ...event
             });
 
-            if (isValidCron(cronExpression)) {
+            if (cronValidator.isValidCron(cronExpression)) {
                 this.innerValue = cronExpression;
                 this.$emit("input", cronExpression);
             } else {

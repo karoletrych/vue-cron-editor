@@ -16,6 +16,7 @@
   "dependencies": {
     "buefy": "^0.8.9",
     "core-js": "^3.3.2",
+    "cronstrue": "^1.93.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {

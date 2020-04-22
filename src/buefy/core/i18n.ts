@@ -1,9 +1,4 @@
-export default {
-    withRegisteredLocales(locales: Object) {
-        if (!locales) return { ...this };
-        return { ...this, ...locales };
-    },
-
+export const defaultLocales: Record<string, Record<string, string>> = {
     en: {
         every: "Every",
         mminutes: "minute(s)",
@@ -59,3 +54,11 @@ export default {
         cronExpression: "Wyrażenie cron:"
     }
 };
+
+export function createI18n(
+    customLocales: Record<string, Record<string, string>>,
+    locale: string
+): Record<string, string> {
+    const allLocales = { ...defaultLocales, ...customLocales };
+    return allLocales[locale];
+}

@@ -159,6 +159,7 @@
                             $t("cronExpression")
                         }}</span>
                         <b-input v-model="editorData.cronExpression"></b-input>
+                        <span class="centered-text">{{ explanation }}</span>
                     </b-field>
                 </div>
             </b-tab-item>
@@ -167,9 +168,7 @@
 </template>
 
 <script>
-import defaultI18n from "./core/i18n";
 import vueCronEditorMixin from "./core/vueCronEditorMixin";
-
 import { BField } from "buefy/dist/components/field";
 import { BInput } from "buefy/dist/components/input";
 import { BTabs, BTabItem } from "buefy/dist/components/tabs";
@@ -189,19 +188,8 @@ export default {
         BNumberinput,
         BCheckbox
     },
-    provide: function() {
-        return {
-            i18n: this.createI18n()
-        };
-    },
-    props: {
-        locale: { type: String, default: "en" },
-        customLocales: { type: Object, default: null }
-    },
     data: () => ({
         activeTab: null,
-        tabsInitialized: false,
-        i18n: null,
         tabs: [
             { id: 0, key: "minutes" },
             { id: 1, key: "hourly" },
@@ -211,9 +199,6 @@ export default {
             { id: 5, key: "advanced" }
         ]
     }),
-    created() {
-        this.i18n = this.createI18n();
-    },
     mounted() {
         this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
     },
@@ -231,11 +216,6 @@ export default {
         }
     },
     methods: {
-        createI18n() {
-            return defaultI18n.withRegisteredLocales(this.customLocales)[
-                this.locale
-            ];
-        },
         reset(e) {
             const tabKey = this.tabs.find(t => t.id === e).key;
             this.resetToTab(tabKey);
@@ -246,9 +226,6 @@ export default {
             }
             this.editorData.hours = e.getHours();
             this.editorData.minutes = e.getMinutes();
-        },
-        $t(key) {
-            return this.i18n[key];
         }
     }
 };
