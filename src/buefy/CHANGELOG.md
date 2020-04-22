@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.8](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.7...v0.2.8) (2020-04-22)
+
+
+### Features
+
+* add explaining of advanced expressions, move i18n to mixin ([0560d1f](https://github.com/karoletrych/vue-cron-editor/commit/0560d1f6dd391d088262626f554108c53a78e60a))
+
 ### [0.2.7](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.6...v0.2.7) (2020-04-14)
 
 
