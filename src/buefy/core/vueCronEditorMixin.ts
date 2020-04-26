@@ -59,11 +59,6 @@ interface ComponentData {
 }
 
 export default Vue.extend({
-    provide() {
-        return {
-            i18n: createI18n(this.customLocales, this.locale)
-        };
-    },
     created() {
         this.i18n = createI18n(this.customLocales, this.locale);
         this.innerValue = this.value;
