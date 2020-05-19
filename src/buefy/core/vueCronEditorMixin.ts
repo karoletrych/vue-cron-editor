@@ -62,7 +62,7 @@ export default Vue.extend({
     created() {
         this.i18n = createI18n(this.customLocales, this.locale);
         this.innerValue = this.value;
-        this._loadDataFromExpression();
+        this.__loadDataFromExpression();
     },
     props: {
         value: { type: String, default: "*/1 * * * *" },
@@ -88,16 +88,16 @@ export default Vue.extend({
         }
     },
     methods: {
-        $t(key: string) {
+        _$t(key: string) {
             return this.i18n![key];
         },
-        _loadDataFromExpression() {
+        __loadDataFromExpression() {
             const tabData = parseExpression(this.value);
             this.$data.editorData = { ...tabData };
 
             this.currentTab = tabData.type;
         },
-        _updateCronExpression(event: TabUpdatedEvent) {
+        __updateCronExpression(event: TabUpdatedEvent) {
             const cronExpression = buildExpression({
                 ...event
             });
@@ -110,7 +110,7 @@ export default Vue.extend({
                 this.$emit("input", null);
             }
         },
-        resetToTab(tabKey: TabKey) {
+        _resetToTab(tabKey: TabKey) {
             this.currentTab = tabKey;
             if (this.preserveStateOnSwitchToAdvanced && tabKey === "advanced") {
                 this.$data.editorData = {
@@ -121,7 +121,7 @@ export default Vue.extend({
             }
 
             this.$data.editorData = Object.assign({}, initialData[tabKey]);
-            this._updateCronExpression(initialData[tabKey]);
+            this.__updateCronExpression(initialData[tabKey]);
         }
     },
     watch: {
@@ -130,13 +130,13 @@ export default Vue.extend({
                 if (this.value == this.innerValue) {
                     return;
                 }
-                this._loadDataFromExpression();
+                this.__loadDataFromExpression();
             }
         },
         editorData: {
             deep: true,
             handler(changedData) {
-                this._updateCronExpression(changedData);
+                this.__updateCronExpression(changedData);
             }
         }
     }

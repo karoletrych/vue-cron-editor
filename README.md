@@ -65,13 +65,13 @@ Custom locales can be provided via a ``customLocales`` prop:
     :custom-locales="{
     test: {
         every: "Every",
-        minutes: "minute(s)",
+        mminutes: "minute(s)",
         hoursOnMinute: "hour(s) on minute",
         daysAt: "day(s) at",
         at: "at",
         onThe: "On the",
-        dayOfEvery: "day of every",
-        monthsAt: "month(s) at",
+        dayOfEvery: "day, of every",
+        monthsAt: "month(s), at",
         everyDay: "Every",
         mon: "Mon",
         tue: "Tue",
@@ -81,7 +81,14 @@ Custom locales can be provided via a ``customLocales`` prop:
         sat: "Sat",
         sun: "Sun",
         hasToBeBetween: "Has to be between",
-        and: "and"
+        and: "and",
+        minutes: "MINUTES",
+        hourly: "HOURLY",
+        daily: "DAILY",
+        weekly: "WEEKLY",
+        monthly: "MONTHLY",
+        advanced: "ADVANCED",
+        cronExpression: "cron expression:"
     }
 }"
 ></VueCronEditorBuefy>

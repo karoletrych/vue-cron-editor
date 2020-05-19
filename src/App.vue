@@ -4,7 +4,6 @@
             <section>
                 <h2>Basic</h2>
                 <section>
-                    <h3>vue-cron-editor-buefy</h3>
                     <VueCronEditorBuefy
                         :preserveStateOnSwitchToAdvanced="true"
                         v-model="sample1CronExpression"
@@ -14,7 +13,7 @@
             </section>
 
             <section>
-                <h3>Grid editing</h3>
+                <h2>Grid editing</h2>
                 <v-data-table
                     :headers="headers"
                     :items-per-page="5"
