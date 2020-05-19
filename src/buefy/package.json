@@ -14,20 +14,20 @@
     "release:full": "npm install && npm run build && npm run release"
   },
   "dependencies": {
-    "buefy": "^0.8.9",
+    "buefy": "^0.8.19",
     "core-js": "^3.3.2",
-    "cronstrue": "^1.93.0",
+    "cronstrue": "^1.94.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.1",
     "@vue/cli-plugin-typescript": "^4.3.1",
     "@vue/cli-service": "^4.3.1",
-    "node-sass": "^4.13.1",
-    "sass": "^1.26.3",
+    "node-sass": "^4.14.1",
+    "sass": "^1.26.5",
     "sass-loader": "^8.0.0",
     "ts-loader": "^6.2.2",
-    "typescript": "^3.8.3",
+    "typescript": "^3.9.2",
     "vue-template-compiler": "^2.6.10"
   },
   "repository": {

@@ -1,28 +1,28 @@
 <template>
     <div class="enable-bulma">
         <b-tabs v-model="activeTab" @input="reset">
-            <b-tab-item :value="0" :label="$t('minutes')" class="minutes-tab">
+            <b-tab-item :value="0" :label="_$t('minutes')" class="minutes-tab">
                 <div class="card">
                     <b-field>
-                        <span class="centered-text">{{ $t("every") }}</span>
+                        <span class="centered-text">{{ _$t("every") }}</span>
                         <b-numberinput
                             :controls="false"
                             v-model="editorData.minuteInterval"
                         />
-                        <span class="centered-text">{{ $t("mminutes") }}</span>
+                        <span class="centered-text">{{ _$t("mminutes") }}</span>
                     </b-field>
                 </div>
             </b-tab-item>
-            <b-tab-item :value="1" :label="$t('hourly')" class="hourly-tab">
+            <b-tab-item :value="1" :label="_$t('hourly')" class="hourly-tab">
                 <div class="card">
                     <b-field>
-                        <span class="centered-text">{{ $t("every") }}</span>
+                        <span class="centered-text">{{ _$t("every") }}</span>
                         <b-numberinput
                             :controls="false"
                             v-model="editorData.hourInterval"
                         />
                         <span class="centered-text">{{
-                            $t("hoursOnMinute")
+                            _$t("hoursOnMinute")
                         }}</span>
                         <b-numberinput
                             :controls="false"
@@ -34,15 +34,15 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="2" :label="$t('daily')" class="daily-tab">
+            <b-tab-item :value="2" :label="_$t('daily')" class="daily-tab">
                 <div class="card">
                     <b-field>
-                        <span class="centered-text">{{ $t("every") }}</span>
+                        <span class="centered-text">{{ _$t("every") }}</span>
                         <b-numberinput
                             :controls="false"
                             v-model="editorData.dayInterval"
                         />
-                        <span class="centered-text">{{ $t("daysAt") }}</span>
+                        <span class="centered-text">{{ _$t("daysAt") }}</span>
                         <b-timepicker
                             icon="clock"
                             editable
@@ -53,60 +53,60 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="3" :label="$t('weekly')" class="weekly-tab">
+            <b-tab-item :value="3" :label="_$t('weekly')" class="weekly-tab">
                 <div class="card">
                     <b-field>
-                        <span class="centered-text">{{ $t("everyDay") }}</span>
+                        <span class="centered-text">{{ _$t("everyDay") }}</span>
                         <div class="centered-checkbox-group">
                             <b-checkbox
                                 v-model="editorData.days"
                                 native-value="0"
                             >
-                                {{ $t("sun") }}
+                                {{ _$t("sun") }}
                             </b-checkbox>
                             <b-checkbox
                                 v-model="editorData.days"
                                 native-value="1"
                             >
-                                {{ $t("mon") }}
+                                {{ _$t("mon") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
                                 native-value="2"
                             >
-                                {{ $t("tue") }}
+                                {{ _$t("tue") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
                                 native-value="3"
                             >
-                                {{ $t("wed") }}
+                                {{ _$t("wed") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
                                 native-value="4"
                             >
-                                {{ $t("thu") }}
+                                {{ _$t("thu") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
                                 native-value="5"
                             >
-                                {{ $t("fri") }}
+                                {{ _$t("fri") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
                                 native-value="6"
                             >
-                                {{ $t("sat") }}
+                                {{ _$t("sat") }}
                             </b-checkbox>
                         </div>
-                        <span class="centered-text">{{ $t("at") }}</span>
+                        <span class="centered-text">{{ _$t("at") }}</span>
                         <b-timepicker
                             icon="clock"
                             editable
@@ -117,17 +117,17 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="4" :label="$t('monthly')" class="monthly-tab">
+            <b-tab-item :value="4" :label="_$t('monthly')" class="monthly-tab">
                 <div class="card">
                     <b-field>
-                        <span class="centered-text">{{ $t("onThe") }}</span>
+                        <span class="centered-text">{{ _$t("onThe") }}</span>
                         <b-numberinput
                             :controls="false"
                             v-model="editorData.day"
                         />
 
                         <span class="centered-text">{{
-                            $t("dayOfEvery")
+                            _$t("dayOfEvery")
                         }}</span>
                         <b-numberinput
                             :min="1"
@@ -136,7 +136,7 @@
                             :controls="false"
                         />
 
-                        <span class="centered-text">{{ $t("monthsAt") }}</span>
+                        <span class="centered-text">{{ _$t("monthsAt") }}</span>
                         <b-timepicker
                             icon="clock"
                             editable
@@ -150,13 +150,13 @@
             <b-tab-item
                 v-if="isAdvancedTabVisible"
                 :value="5"
-                :label="$t('advanced')"
+                :label="_$t('advanced')"
                 class="advanced-tab"
             >
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{
-                            $t("cronExpression")
+                            _$t("cronExpression")
                         }}</span>
                         <b-input v-model="editorData.cronExpression"></b-input>
                         <span class="centered-text">{{ explanation }}</span>
@@ -218,7 +218,7 @@ export default {
     methods: {
         reset(e) {
             const tabKey = this.tabs.find(t => t.id === e).key;
-            this.resetToTab(tabKey);
+            this._resetToTab(tabKey);
         },
         setDateTime(e) {
             if (e == null) {
