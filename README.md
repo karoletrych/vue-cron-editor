@@ -27,6 +27,7 @@ npm install vue-cron-editor-buefy --save
 
 <script>
 import VueCronEditorBuefy from 'vue-cron-editor-buefy';
+// or include the vue-cron-editor-buefy.umd.js file and call: Vue.component("vue-cron-editor-buefy", window["vue-cron-editor-buefy"]);
 
 export default {
   name: 'App',
