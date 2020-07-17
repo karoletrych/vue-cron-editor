@@ -45,6 +45,7 @@ The editor tab will be set to the one which is able to represent an initial expr
 If none of the tabs can represent the given expression then **advanced** tab is selected.
 
 To hide the **advanced** tab, set the `isAdvancedTabVisible` prop to `false`.
+
 To preserve expression on switch to **advanced** tab set the `preserveStateOnSwitchToAdvanced` to `true`.
 
 # i18n
