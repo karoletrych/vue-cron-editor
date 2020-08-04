@@ -24,7 +24,7 @@ export const defaultLocales: Record<string, Record<string, string>> = {
         weekly: "WEEKLY",
         monthly: "MONTHLY",
         advanced: "ADVANCED",
-        cronExpression: "cron expression:"
+        cronExpression: "Cron expression:"
     },
     pl: {
         every: "Co",
@@ -78,14 +78,19 @@ export const defaultLocales: Record<string, Record<string, string>> = {
         weekly: "SEMANAL",
         monthly: "MENSAL",
         advanced: "AVANÇADO",
-        cronExpression: "expressão cron:"
+        cronExpression: "Expressão cron:"
     }
 };
+
+export function toCronstrueLocale(locale: string) {
+    if (locale == "pt") return "pt_BR";
+    else return locale;
+}
 
 export function createI18n(
     customLocales: Record<string, Record<string, string>>,
     locale: string
 ): Record<string, string> {
     const allLocales = { ...defaultLocales, ...customLocales };
-    return allLocales[locale];
+    return allLocales[locale] || allLocales["en"];
 }

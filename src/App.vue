@@ -1,11 +1,18 @@
 <template>
     <v-app>
         <v-container>
+            <v-select
+                :items="locales"
+                label="Language"
+                v-model="selectedLocale"
+                dense
+            ></v-select>
             <section>
                 <h2>Basic</h2>
                 <section>
                     <VueCronEditorBuefy
                         :preserveStateOnSwitchToAdvanced="true"
+                        :locale="selectedLocale"
                         v-model="sample1CronExpression"
                     ></VueCronEditorBuefy>
                 </section>
@@ -138,7 +145,9 @@ export default {
         expressions: [{ expression: "4 4 * * 0,2,3,5", id: 0 }],
         editedItem: {},
         dialog: false,
-        editedIndex: -1
+        editedIndex: -1,
+        locales: ["en", "pl", "pt"],
+        selectedLocale: "en"
     })
 };
 </script>
