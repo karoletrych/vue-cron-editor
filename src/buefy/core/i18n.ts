@@ -52,6 +52,33 @@ export const defaultLocales: Record<string, Record<string, string>> = {
         monthly: "Miesiące",
         advanced: "Zaawansowane",
         cronExpression: "Wyrażenie cron:"
+    },
+    it: {
+        every: 'Ogni',
+        mminutes: 'minuto/i',
+        hoursOnMinute: 'ora/e al minuto',
+        daysAt: 'giorno/i alle',
+        at: 'alle',
+        onThe: 'Al',
+        dayOfEvery: 'giorno, di ogni',
+        monthsAt: 'mese/i, alle',
+        everyDay: 'Ogni',
+        mon: 'Lun',
+        tue: 'Mar',
+        wed: 'Mer',
+        thu: 'Gio',
+        fri: 'Ven',
+        sat: 'Sab',
+        sun: 'Dom',
+        hasToBeBetween: 'Deve essere tra',
+        and: 'e',
+        minutes: 'MINUTI',
+        hourly: 'OGNI ORA',
+        daily: 'OGNI GIORNO',
+        weekly: 'OGNI SETTIMANA',
+        monthly: 'OGNI MESE',
+        advanced: 'AVANZATO',
+        cronExpression: 'espressione cron:'
     }
 };
 
