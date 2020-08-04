@@ -59,6 +59,8 @@ The language of the component can be selected with the ``locale`` prop.
 Currently supported languages:
 - en
 - pl
+- pt
+- it
 
 Custom locales can be provided via a ``customLocales`` prop:
 ```
