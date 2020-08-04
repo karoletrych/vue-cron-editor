@@ -17,12 +17,10 @@ npm install vue-cron-editor-buefy --save
 # Usage
 ```
 <template>
-  <v-app>
-    <v-content>
-      <VueCronEditorBuefy v-model="cronExpression"/>
-      {{cronExpression}}
-    </v-content>
-  </v-app>
+  <div>
+    <VueCronEditorBuefy v-model="cronExpression"/>
+    {{cronExpression}}
+  </div>
 </template>
 
 <script>
