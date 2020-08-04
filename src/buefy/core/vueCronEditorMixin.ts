@@ -12,7 +12,7 @@ import {
 } from "./cronExpressions";
 import * as cronValidator from "cron-validator";
 import * as cronstrue from "cronstrue/i18n";
-import { createI18n } from "./i18n";
+import { createI18n, toCronstrueLocale } from "./i18n";
 
 import Vue from "vue";
 
@@ -82,8 +82,10 @@ export default Vue.extend({
     computed: {
         explanation(): string {
             if (!this.innerValue) return "";
+
+            const cronstrueLocale = toCronstrueLocale(this.locale);
             return (cronstrue as any).toString(this.innerValue, {
-                locale: this.locale
+                locale: cronstrueLocale
             });
         }
     },
@@ -125,6 +127,9 @@ export default Vue.extend({
         }
     },
     watch: {
+        locale() {
+            this.i18n = createI18n(this.customLocales, this.locale);
+        },
         value: {
             handler() {
                 if (this.value == this.innerValue) {
