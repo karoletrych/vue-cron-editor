@@ -98,6 +98,7 @@
 
 <script>
 import VueCronEditorBuefy from "./buefy/VueCronEditorBuefy.vue";
+import { defaultLocales } from "./buefy/core/i18n";
 
 export default {
     name: "App",
@@ -146,7 +147,7 @@ export default {
         editedItem: {},
         dialog: false,
         editedIndex: -1,
-        locales: ["en", "pl", "pt"],
+        locales: Object.keys(defaultLocales),
         selectedLocale: "en"
     })
 };
