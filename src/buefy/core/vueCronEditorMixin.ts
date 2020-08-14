@@ -7,8 +7,9 @@
 import {
     buildExpression,
     parseExpression,
+    isEventValid,
     TabUpdatedEvent,
-    TabKey
+    TabKey,
 } from "./cronExpressions";
 import * as cronValidator from "cron-validator";
 import * as cronstrue from "cronstrue/i18n";
@@ -100,16 +101,24 @@ export default Vue.extend({
             this.currentTab = tabData.type;
         },
         __updateCronExpression(event: TabUpdatedEvent) {
+            if (!isEventValid(event)) {
+                this.innerValue = null;
+                this.$emit("input", null);
+                return;
+            }
+
             const cronExpression = buildExpression({
                 ...event
             });
 
-            if (cronValidator.isValidCron(cronExpression)) {
-                this.innerValue = cronExpression;
-                this.$emit("input", cronExpression);
-            } else {
+            if (!cronValidator.isValidCron(cronExpression)) {
                 this.innerValue = null;
                 this.$emit("input", null);
+                return;
+            }
+            else{
+                this.innerValue = cronExpression;
+                this.$emit("input", cronExpression);
             }
         },
         _resetToTab(tabKey: TabKey) {
@@ -141,7 +150,8 @@ export default Vue.extend({
         editorData: {
             deep: true,
             handler(changedData) {
-                this.__updateCronExpression(changedData);
+                const nonReactiveData = JSON.parse(JSON.stringify(changedData));
+                this.__updateCronExpression(nonReactiveData);
             }
         }
     }

@@ -1,25 +1,40 @@
-interface MinutesTabUpdatedEvent {
+export interface CronOptions {
+    useSeconds: boolean,
+    useBlankDay: false,
+    allowOnlyOneBlankDayField: boolean,
+    aliasDayOfWeek: boolean
+}
+
+export const basicPreset : CronOptions = {
+    aliasDayOfWeek: false,
+    allowOnlyOneBlankDayField: false,
+    useBlankDay: false,
+    useSeconds: false
+};
+
+
+export interface MinutesTabUpdatedEvent {
     type: "minutes";
     minuteInterval: number;
 }
-interface HourlyTabUpdatedEvent {
+export interface HourlyTabUpdatedEvent {
     type: "hourly";
     minutes: number;
     hourInterval: number;
 }
-interface DailyTabUpdatedEvent {
+export interface DailyTabUpdatedEvent {
     type: "daily";
     minutes: number;
     hours: number;
     dayInterval: number;
 }
-interface WeeklyTabUpdatedEvent {
+export interface WeeklyTabUpdatedEvent {
     type: "weekly";
     minutes: number;
     hours: number;
     days: string[];
 }
-interface MonthlyTabUpdatedEvent {
+export interface MonthlyTabUpdatedEvent {
     type: "monthly";
     minutes: number;
     hours: number;
@@ -27,7 +42,7 @@ interface MonthlyTabUpdatedEvent {
     monthInterval: number;
 }
 
-interface AdvancedTabUpdatedEvent {
+export interface AdvancedTabUpdatedEvent {
     type: "advanced";
     cronExpression: string;
 }
@@ -41,6 +56,13 @@ export type TabUpdatedEvent =
     | AdvancedTabUpdatedEvent;
 
 export type TabKey = TabUpdatedEvent[keyof TabUpdatedEvent];
+
+export const isEventValid = (e: TabUpdatedEvent) => {
+    if (e.type == "weekly" && e.days.length == 0)
+        return false;
+    else
+        return true;
+}
 
 export const buildExpression = (event: TabUpdatedEvent): string => {
     if (event.type === "minutes") {
@@ -56,7 +78,6 @@ export const buildExpression = (event: TabUpdatedEvent): string => {
         return (
             `${event.minutes} ${event.hours} * * ` +
             `${event.days
-                .filter(d => d)
                 .sort()
                 .join()}`
         );
