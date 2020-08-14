@@ -64,7 +64,17 @@ export const isEventValid = (e: TabUpdatedEvent) => {
         return true;
 }
 
-export const buildExpression = (event: TabUpdatedEvent): string => {
+const aliasToNumberMapping : Record<string, number> = {
+    "SUN": 0,
+    "MON": 1,
+    "TUE": 2,
+    "WED": 3,
+    "THU": 4,
+    "FRI": 5,
+    "SAT": 6,
+}
+
+export const buildExpression = (cronOptions: CronOptions, event: TabUpdatedEvent): string => {
     if (event.type === "minutes") {
         return `*/${event.minuteInterval} * * * *`;
     }
@@ -75,11 +85,15 @@ export const buildExpression = (event: TabUpdatedEvent): string => {
         return `${event.minutes} ${event.hours} */${event.dayInterval} * *`;
     }
     if (event.type === "weekly") {
+        if (!cronOptions.aliasDayOfWeek) {
+            event.days = event.days.map(d => aliasToNumberMapping[d].toString());
+        }
         return (
             `${event.minutes} ${event.hours} * * ` +
             `${event.days
                 .sort()
-                .join()}`
+                .join()
+            }`
         );
     }
     if (event.type === "monthly") {

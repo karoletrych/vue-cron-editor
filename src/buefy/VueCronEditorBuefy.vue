@@ -60,48 +60,48 @@
                         <div class="centered-checkbox-group">
                             <b-checkbox
                                 v-model="editorData.days"
-                                native-value="0"
+                                native-value="SUN"
                             >
                                 {{ _$t("sun") }}
                             </b-checkbox>
                             <b-checkbox
                                 v-model="editorData.days"
-                                native-value="1"
+                                native-value="MON"
                             >
                                 {{ _$t("mon") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
-                                native-value="2"
+                                native-value="TUE"
                             >
                                 {{ _$t("tue") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
-                                native-value="3"
+                                native-value="WED"
                             >
                                 {{ _$t("wed") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
-                                native-value="4"
+                                native-value="THU"
                             >
                                 {{ _$t("thu") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
-                                native-value="5"
+                                native-value="FRI"
                             >
                                 {{ _$t("fri") }}
                             </b-checkbox>
 
                             <b-checkbox
                                 v-model="editorData.days"
-                                native-value="6"
+                                native-value="SAT"
                             >
                                 {{ _$t("sat") }}
                             </b-checkbox>
