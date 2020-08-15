@@ -1,7 +1,7 @@
 import {
     parseExpression,
     basicPreset
-} from "../../src/buefy/core/cronExpressions";
+} from "../../src/buefy/core/buildExpression";
 
 test("parse week expression", () => {
     expect(parseExpression(basicPreset, "4 4 * * 0,2,3,5")).toStrictEqual({

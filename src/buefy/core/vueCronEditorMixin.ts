@@ -4,19 +4,14 @@
  * Functionality dependent on UI frameworks should be implemented in derived components
  */
 
-import {
-    buildExpression,
-    parseExpression,
-    isEventValid,
-    UiState,
-    TabKey,
-    basicPreset
-} from "./cronExpressions";
+import { buildExpression, isStateValid, TabKey } from "./buildExpression";
 import * as cronValidator from "cron-validator";
 import * as cronstrue from "cronstrue/i18n";
 import { createI18n, toCronstrueLocale } from "./i18n";
 
 import Vue from "vue";
+import { UiState, basicPreset } from "./expressionCommons";
+import { parseExpression } from "./parseExpression";
 
 const initialData: Record<TabKey, UiState> = {
     minutes: {
@@ -102,7 +97,7 @@ export default Vue.extend({
             this.currentTab = tabData.type;
         },
         __updateCronExpression(event: UiState) {
-            if (!isEventValid(event)) {
+            if (!isStateValid(event)) {
                 this.innerValue = null;
                 this.$emit("input", null);
                 return;

@@ -1,5 +1,6 @@
 import * as cronValidator from "cron-validator";
-import * as cronExpressions from "../../../src/buefy/core/cronExpressions";
+import cronValidate from "cron-validate";
+import * as cronExpressions from "../../../src/buefy/core/buildExpression";
 import * as fc from "fast-check";
 import { pre, Arbitrary, array, option } from "fast-check";
 import { state } from "./aribitraries";
@@ -9,13 +10,15 @@ declare type CronValidatorOptions = {
     seconds: boolean;
     allowBlankDay: boolean;
 };
-const validateResult = (
+const isResultValid = (
     state: cronExpressions.UiState,
     expr: string,
     options?: Partial<CronValidatorOptions>
 ) => {
     let isValid = cronValidator.isValidCron(expr, options);
-    if (!isValid) {
+    let isValid2 = cronValidate(expr);
+
+    if (!isValid || !isValid2) {
         console.log(JSON.stringify(expr));
         console.log(expr);
         return false;
@@ -45,7 +48,7 @@ test("with basic preset", () => {
                 state
             );
 
-            validateResult(state, expr);
+            return isResultValid(state, expr);
         })
     );
 });
@@ -64,7 +67,27 @@ test("when aliasing week days", () => {
                 state
             );
 
-            validateResult(state, expr, { alias: true });
+            return isResultValid(state, expr, { alias: true });
+        })
+    );
+});
+
+test("with seconds", () => {
+    fc.assert(
+        fc.property(state, e => {
+            let state = e as cronExpressions.UiState;
+            cronExpressions.basicPreset.aliasDayOfWeek = true;
+
+            let expr = cronExpressions.buildExpression(
+                {
+                    ...cronExpressions.basicPreset,
+                    aliasDayOfWeek: true,
+                    useSeconds: true
+                },
+                state
+            );
+
+            return isResultValid(state, expr, { alias: true, seconds: true });
         })
     );
 });
