@@ -8,8 +8,9 @@ import {
     buildExpression,
     parseExpression,
     isEventValid,
-    TabUpdatedEvent,
+    UiState,
     TabKey,
+    basicPreset
 } from "./cronExpressions";
 import * as cronValidator from "cron-validator";
 import * as cronstrue from "cronstrue/i18n";
@@ -17,7 +18,7 @@ import { createI18n, toCronstrueLocale } from "./i18n";
 
 import Vue from "vue";
 
-const initialData: Record<TabKey, TabUpdatedEvent> = {
+const initialData: Record<TabKey, UiState> = {
     minutes: {
         type: "minutes",
         minuteInterval: 1
@@ -95,19 +96,19 @@ export default Vue.extend({
             return this.i18n![key];
         },
         __loadDataFromExpression() {
-            const tabData = parseExpression(this.value);
+            const tabData = parseExpression(basicPreset, this.value);
             this.$data.editorData = { ...tabData };
 
             this.currentTab = tabData.type;
         },
-        __updateCronExpression(event: TabUpdatedEvent) {
+        __updateCronExpression(event: UiState) {
             if (!isEventValid(event)) {
                 this.innerValue = null;
                 this.$emit("input", null);
                 return;
             }
 
-            const cronExpression = buildExpression({
+            const cronExpression = buildExpression(basicPreset, {
                 ...event
             });
 
@@ -115,8 +116,7 @@ export default Vue.extend({
                 this.innerValue = null;
                 this.$emit("input", null);
                 return;
-            }
-            else{
+            } else {
                 this.innerValue = cronExpression;
                 this.$emit("input", cronExpression);
             }
