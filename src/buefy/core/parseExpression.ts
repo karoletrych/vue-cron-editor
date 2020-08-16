@@ -54,15 +54,6 @@ export const parseExpression = (
     options: CronOptions,
     expression: string
 ): UiState => {
-    const advanced: UiState = {
-        type: "advanced",
-        cronExpression: expression
-    };
-    const groups = expression.split(" ");
-    if (groups.length != 5 && groups.length != 6) {
-        return advanced;
-    }
-
     function parseSubExpr(expr: string): SubExpr {
         expr = expr.trim();
         let match;
@@ -120,6 +111,14 @@ export const parseExpression = (
         };
     }
 
+    const advanced: UiState = {
+        type: "advanced",
+        cronExpression: expression
+    };
+    const groups = expression.split(" ");
+    if (groups.length != 5 && groups.length != 6) {
+        return advanced;
+    }
     const cron: CronExpr =
         groups.length == 6
             ? {
@@ -128,7 +127,7 @@ export const parseExpression = (
                   hours: parseSubExpr(groups[2]),
                   dayOfTheMonth: parseSubExpr(groups[3]),
                   month: parseSubExpr(groups[4]),
-                  dayOfWeek: parseDayOfWeek(groups[4])
+                  dayOfWeek: parseDayOfWeek(groups[5])
               }
             : {
                   minutes: parseSubExpr(groups[0]),
@@ -136,7 +135,7 @@ export const parseExpression = (
                   dayOfTheMonth: parseSubExpr(groups[2]),
                   month: parseSubExpr(groups[3]),
                   dayOfWeek: parseDayOfWeek(groups[4])
-              };
+            };
     if (
         cron.minutes.type == "cronNumber" &&
         cron.minutes.at.type == "asterisk" &&
@@ -194,8 +193,7 @@ export const parseExpression = (
         cron.minutes.type == "number" &&
         cron.hours.type == "number" &&
         cron.dayOfTheMonth.type == "number" &&
-        cron.month.type == "cronNumber" &&
-        cron.month.at.type == "asterisk" &&
+        cron.month.type == "cronNumber" && cron.month.at.type == "asterisk" &&
         cron.dayOfWeek.type == "asterisk"
     )
         return {

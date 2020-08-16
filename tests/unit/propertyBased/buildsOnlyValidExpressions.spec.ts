@@ -32,7 +32,7 @@ const isResultValid = (
     );
     if (parsed.type != state.type) {
         console.log(
-            `expected to parse as ${state.type} but was ${parsed.type}`
+            `expected to parse ${JSON.stringify(state)} -> ${expr} as ${state.type} but was ${parsed.type}`
         );
         return false;
     }
