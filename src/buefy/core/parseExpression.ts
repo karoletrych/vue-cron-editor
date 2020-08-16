@@ -4,6 +4,38 @@ import {
     aliasToNumberMapping
 } from "./expressionCommons";
 
+type Number = {
+    type: "number";
+    value: number;
+};
+
+type Asterisk = {
+    type: "asterisk";
+};
+type QuestionMark = {
+    type: "question";
+};
+type CronNumber = {
+    type: "cronNumber";
+    at: Number | Asterisk;
+    every: Number;
+};
+type SubExpr = Number | CronNumber | Asterisk | QuestionMark;
+
+type SetOfDays = {
+    type: "setOfDays";
+    days: string[];
+};
+
+type CronExpr = {
+    seconds?: SubExpr;
+    minutes: SubExpr;
+    hours: SubExpr;
+    dayOfTheMonth: SubExpr;
+    month: SubExpr;
+    dayOfWeek: SetOfDays | Asterisk;
+};
+
 function toDayAlias(num: number): string {
     let alias = Object.keys(aliasToNumberMapping).find(
         k => aliasToNumberMapping[k] === num
@@ -31,101 +63,148 @@ export const parseExpression = (
         return advanced;
     }
 
-    function parseSeconds(expr: string): number {
-        return parseInt(expr);
+    function parseSubExpr(expr: string): SubExpr {
+        expr = expr.trim();
+        let match;
+        if ((match = expr.match(/\*\/(\d+)/)) != null) {
+            return {
+                type: "cronNumber",
+                at: { type: "asterisk" },
+                every: { type: "number", value: parseInt(match[1]) }
+            };
+        }
+        if ((match = expr.match(/(\d+)\/(\d+)/)) != null) {
+            return {
+                type: "cronNumber",
+                at: { type: "number", value: parseInt(match[0]) },
+                every: { type: "number", value: parseInt(match[1]) }
+            };
+        }
+        if ((match = expr.match(/(\d+)/)) != null) {
+            return {
+                type: "number",
+                value: parseInt(match[0])
+            };
+        }
+        if (expr == "?") {
+            return { type: "question" };
+        }
+        if (expr == "*") {
+            return { type: "asterisk" };
+        } 
+        throw new Error(`Unhandled subexpression: ${expr}`);
+        
     }
-    function parseMinutes(expr: string) {
-        expr.match(/\*\/(\d+)/);
-    }
-    function parseHours(expr: string) {}
-    function parseMonth(expr: string) {}
-    function parseDayOfWeek(expr: string): string[] {
+    function parseDayOfWeek(expr: string): Asterisk | SetOfDays {
+        expr = expr.trim();
+        if (expr == "*")
+            return {
+                type: "asterisk"
+            };
+
         let groups = expr.match(
-            /([a-zA-Z0-9]+)(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)/
+            /([a-zA-Z0-9]+)(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?/
         );
         if (groups == null) throw new Error(`invalid days expression ${expr}`);
-        return groups
-            .map(d => d && d.replace(/,/, ""))
-            .filter(d => d)
-            .map(d =>
-                options.aliasDayOfWeek && !isDayAlias(d)
-                    ? toDayAlias(parseInt(d))
-                    : d
-            );
+        return {
+            type: "setOfDays",
+            days: groups
+                .slice(1)
+                .map(d => d && d.replace(/,/, ""))
+                .filter(d => d)
+                .map(d =>
+                    (options.aliasDayOfWeek && !isDayAlias(d))
+                        ? toDayAlias(parseInt(d))
+                        : d
+                )
+        };
     }
-    function parseDays(expr: string) {}
 
-    const parsed =
+    const cron: CronExpr =
         groups.length == 6
             ? {
-                  seconds: parseSeconds(groups[0]),
-                  minutes: parseMinutes(groups[1]),
-                  hours: parseHours(groups[2]),
-                  days: parseDays(groups[3]),
-                  month: parseMonth(groups[4]),
-                  daysOfWeek: parseDayOfWeek(groups[4])
+                  seconds: parseSubExpr(groups[0]),
+                  minutes: parseSubExpr(groups[1]),
+                  hours: parseSubExpr(groups[2]),
+                  dayOfTheMonth: parseSubExpr(groups[3]),
+                  month: parseSubExpr(groups[4]),
+                  dayOfWeek: parseDayOfWeek(groups[4])
               }
             : {
-                  minutes: parseMinutes(groups[0]),
-                  hours: parseHours(groups[1]),
-                  days: parseDays(groups[2]),
-                  month: parseMonth(groups[3]),
-                  daysOfWeek: parseDayOfWeek(groups[4])
+                  minutes: parseSubExpr(groups[0]),
+                  hours: parseSubExpr(groups[1]),
+                  dayOfTheMonth: parseSubExpr(groups[2]),
+                  month: parseSubExpr(groups[3]),
+                  dayOfWeek: parseDayOfWeek(groups[4])
               };
+    if (
+        cron.minutes.type == "cronNumber" &&
+        cron.minutes.at.type == "asterisk" &&
+        cron.hours.type == "asterisk" &&
+        cron.dayOfTheMonth.type == "asterisk" &&
+        cron.month.type == "asterisk" &&
+        cron.dayOfWeek.type == "asterisk"
+    )
+        return {
+            type: "minutes",
+            minuteInterval: cron.minutes.every.value
+        };
+    if (
+        cron.minutes.type == "number" &&
+        cron.hours.type == "cronNumber" &&
+        cron.hours.at.type == "asterisk" &&
+        cron.dayOfTheMonth.type == "asterisk" &&
+        cron.month.type == "asterisk" &&
+        cron.dayOfWeek.type == "asterisk"
+    )
+        return {
+            type: "hourly",
+            minutes: cron.minutes.value,
+            hourInterval: cron.hours.every.value
+        };
 
-    // if ((groups = expression.match(/^\*\/(\d+) \* \* \* \*$/))) {
-    //     return {
-    //         type: "minutes",
-    //         minuteInterval: Number(groups[1])
-    //     };
-    // }
-    // if ((groups = expression.match(/^(\d +) \*\/(\d+) \* \* \*$/))) {
-    //     return {
-    //         type: "hourly",
-    //         minutes: Number(groups[1]),
-    //         hourInterval: Number(groups[2])
-    //     };
-    // }
-    // if ((groups = expression.match(/^(\d+) (\d+) \*\/(\d+) \* \*$/))) {
-    //     return {
-    //         type: "daily",
-    //         minutes: Number(groups[1]),
-    //         hours: Number(groups[2]),
-    //         dayInterval: Number(groups[3])
-    //     };
-    // }
-    // if (
-    //     (groups = expression.match(
-    //         /^(\d+) (\d+) \* \* ([a-zA-Z0-9]+)(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?$/
-    //     ))
-    // ) {
-    //     const optionalDaysBeginIndex = 4;
-    //     const matchesEndIndex = 10;
-    //     return {
-    //         type: "weekly",
-    //         minutes: Number(groups[1]),
-    //         hours: Number(groups[2]),
-    //         days: [groups[3]].concat(
-    //             groups
-    //             .slice(optionalDaysBeginIndex, matchesEndIndex)
-    //                  .map(d => d && d.replace(/,/, ""))
-    //                 .filter(d => d)
-    //                 .map(d =>
-    //                     options.aliasDayOfWeek && !isDayAlias(d)
-    //                          ? toDayAlias(parseInt(d))
-    //                         : d
-    //                 )
-    //         )
-    //     };
-    // }
-    // if ((groups = expression.match(/^(\d+) (\d+) (\d+) \*\/(\d+) \*$/))) {
-    //     return {
-    //         type: "monthly",
-    //         minutes: Number(groups[1]),
-    //         hours: Number(groups[2]),
-    //         day: Number(groups[3]),
-    //         monthInterval: Number(groups[4])
-    //     };
-    // }
+    if (
+        cron.minutes.type == "number" &&
+        cron.hours.type == "number" &&
+        cron.dayOfTheMonth.type == "cronNumber" &&
+        cron.dayOfTheMonth.at.type == "asterisk" &&
+        cron.month.type == "asterisk" &&
+        cron.dayOfWeek.type == "asterisk"
+    )
+        return {
+            type: "daily",
+            minutes: cron.minutes.value,
+            hours: cron.hours.value,
+            dayInterval: cron.dayOfTheMonth.every.value
+        };
+    if (
+        cron.minutes.type == "number" &&
+        cron.hours.type == "number" &&
+        cron.dayOfTheMonth.type == "asterisk" &&
+        cron.month.type == "asterisk" &&
+        cron.dayOfWeek.type == "setOfDays"
+    )
+        return {
+            type: "weekly",
+            minutes: cron.minutes.value,
+            hours: cron.hours.value,
+            days: cron.dayOfWeek.days
+        };
+    if (
+        cron.minutes.type == "number" &&
+        cron.hours.type == "number" &&
+        cron.dayOfTheMonth.type == "number" &&
+        cron.month.type == "cronNumber" &&
+        cron.month.at.type == "asterisk" &&
+        cron.dayOfWeek.type == "asterisk"
+    )
+        return {
+            type: "monthly",
+            minutes: cron.minutes.value,
+            hours: cron.hours.value,
+            day: cron.dayOfTheMonth.value,
+            monthInterval: cron.month.every.value
+        };
+
     return advanced;
 };

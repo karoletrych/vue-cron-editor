@@ -4,6 +4,8 @@ import * as cronExpressions from "../../../src/buefy/core/buildExpression";
 import * as fc from "fast-check";
 import { pre, Arbitrary, array, option } from "fast-check";
 import { state } from "./aribitraries";
+import { parseExpression } from '@/buefy/core/parseExpression';
+import { basicPreset, UiState } from '@/buefy/core/expressionCommons';
 
 declare type CronValidatorOptions = {
     alias: boolean;
@@ -11,7 +13,7 @@ declare type CronValidatorOptions = {
     allowBlankDay: boolean;
 };
 const isResultValid = (
-    state: cronExpressions.UiState,
+    state: UiState,
     expr: string,
     options?: Partial<CronValidatorOptions>
 ) => {
@@ -24,8 +26,8 @@ const isResultValid = (
         return false;
     }
 
-    const parsed = cronExpressions.parseExpression(
-        cronExpressions.basicPreset,
+    const parsed = parseExpression(
+        basicPreset,
         expr
     );
     if (parsed.type != state.type) {
@@ -41,10 +43,10 @@ const isResultValid = (
 test("with basic preset", () => {
     fc.assert(
         fc.property(state, e => {
-            let state = e as cronExpressions.UiState;
+            let state = e as UiState;
 
             let expr = cronExpressions.buildExpression(
-                cronExpressions.basicPreset,
+                basicPreset,
                 state
             );
 
@@ -56,12 +58,12 @@ test("with basic preset", () => {
 test("when aliasing week days", () => {
     fc.assert(
         fc.property(state, e => {
-            let state = e as cronExpressions.UiState;
-            cronExpressions.basicPreset.aliasDayOfWeek = true;
+            let state = e as UiState;
+            basicPreset.aliasDayOfWeek = true;
 
             let expr = cronExpressions.buildExpression(
                 {
-                    ...cronExpressions.basicPreset,
+                    ...basicPreset,
                     aliasDayOfWeek: true
                 },
                 state
@@ -75,12 +77,12 @@ test("when aliasing week days", () => {
 test("with seconds", () => {
     fc.assert(
         fc.property(state, e => {
-            let state = e as cronExpressions.UiState;
-            cronExpressions.basicPreset.aliasDayOfWeek = true;
+            let state = e as UiState;
+            basicPreset.aliasDayOfWeek = true;
 
             let expr = cronExpressions.buildExpression(
                 {
-                    ...cronExpressions.basicPreset,
+                    ...basicPreset,
                     aliasDayOfWeek: true,
                     useSeconds: true
                 },
