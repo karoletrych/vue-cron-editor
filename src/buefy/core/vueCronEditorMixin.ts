@@ -66,7 +66,17 @@ export default Vue.extend({
     },
     props: {
         value: { type: String, default: "*/1 * * * *" },
-        isAdvancedTabVisible: { type: Boolean, default: true },
+        visibleTabs: {
+            type: Array,
+            default: () => [
+                "minutes",
+                "hourly",
+                "daily",
+                "weekly",
+                "monthly",
+                "advanced"
+            ]
+        },
         preserveStateOnSwitchToAdvanced: { type: Boolean, default: false },
         locale: { type: String, default: "en" },
         customLocales: { type: Object, default: null }
@@ -95,8 +105,15 @@ export default Vue.extend({
         },
         __loadDataFromExpression() {
             const tabData = parseExpression(this.value);
+            if (!this.visibleTabs.includes(tabData.type)) {
+                this.$data.editorData = {
+                    type: "advanced",
+                    expression: this.value
+                };
+                this.currentTab = "advanced";
+                return;
+            }
             this.$data.editorData = { ...tabData };
-
             this.currentTab = tabData.type;
         },
         __updateCronExpression(event: TabUpdatedEvent) {
