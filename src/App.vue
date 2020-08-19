@@ -7,10 +7,39 @@
                 v-model="selectedLocale"
                 dense
             ></v-select>
+            <v-row fluid dense>
+                <v-checkbox
+                    label="minutes"
+                    value="minutes"
+                    v-model="visibleTabs"
+                />
+                <v-checkbox
+                    label="hourly"
+                    value="hourly"
+                    v-model="visibleTabs"
+                />
+                <v-checkbox label="daily" value="daily" v-model="visibleTabs" />
+                <v-checkbox
+                    label="weekly"
+                    value="weekly"
+                    v-model="visibleTabs"
+                />
+                <v-checkbox
+                    label="monthly"
+                    value="monthly"
+                    v-model="visibleTabs"
+                />
+                <v-checkbox
+                    label="advanced"
+                    value="advanced"
+                    v-model="visibleTabs"
+                />
+            </v-row>
             <section>
                 <h2>Basic</h2>
                 <section>
                     <VueCronEditorBuefy
+                        :visibleTabs="visibleTabs"
                         :preserveStateOnSwitchToAdvanced="true"
                         :locale="selectedLocale"
                         v-model="sample1CronExpression"
@@ -148,7 +177,15 @@ export default {
         dialog: false,
         editedIndex: -1,
         locales: Object.keys(defaultLocales),
-        selectedLocale: "en"
+        selectedLocale: "en",
+        visibleTabs: [
+            "minutes",
+            "hourly",
+            "daily",
+            "weekly",
+            "monthly",
+            "advanced"
+        ]
     })
 };
 </script>

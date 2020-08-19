@@ -8,16 +8,16 @@ function getMountedComponent(Component: any, propsData: any) {
 }
 
 describe("isAdvancedVisible prop", () => {
-    it("renders advanced tab when isAdvancedVisible is true", () => {
+    it("renders advanced tab when advanced is true", () => {
         let component = getMountedComponent(VueCronEditorBuefy, {
-            isAdvancedTabVisible: true
+            visibleTabs: ["monthly", "advanced"]
         });
         expect(component.find(".advanced-tab").exists()).toBe(true);
     });
 
     it("does not render advanced tab when isAdvancedVisible is false", () => {
         let component = getMountedComponent(VueCronEditorBuefy, {
-            isAdvancedTabVisible: false
+            visibleTabs: ["monthly"]
         });
         expect(component.find(".advanced-tab").exists()).toBe(false);
     });
