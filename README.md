@@ -42,7 +42,7 @@ export default {
 The editor tab will be set to the one which is able to represent an initial expression given to a ``value`` prop (**minutes** tab in the example above). 
 If none of the tabs can represent the given expression then **advanced** tab is selected.
 
-To show only some of the tabs specify them using `visibleTabs` prop:
+To show only some of the tabs, specify them using `visibleTabs` prop:
 ```:visibleTabs="['daily', 'weekly', 'monthly']"```
 Possible tabs: "minutes", "hourly", "daily", "weekly", "monthly", "advanced".
 
