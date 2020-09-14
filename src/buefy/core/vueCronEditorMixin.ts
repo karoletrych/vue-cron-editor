@@ -68,14 +68,16 @@ export default Vue.extend({
         value: { type: String, default: "*/1 * * * *" },
         visibleTabs: {
             type: Array,
-            default: () => [
-                "minutes",
-                "hourly",
-                "daily",
-                "weekly",
-                "monthly",
-                "advanced"
-            ]
+            default() {
+                return [
+                    "minutes",
+                    "hourly",
+                    "daily",
+                    "weekly",
+                    "monthly",
+                    "advanced"
+                ]
+            }
         },
         preserveStateOnSwitchToAdvanced: { type: Boolean, default: false },
         locale: { type: String, default: "en" },
