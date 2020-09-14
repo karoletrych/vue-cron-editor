@@ -61,6 +61,7 @@ Currently supported languages:
 - pl
 - pt
 - it
+- es
 
 Custom locales can be provided via a ``customLocales`` prop:
 ```
