@@ -39,7 +39,11 @@
     "prettier": "^1.19.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.0",
+<<<<<<< HEAD
+    "standard-version": "^8.0.2",
+=======
     "standard-version": "^9.0.0",
+>>>>>>> master
     "typescript": "~3.5.3",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.10",

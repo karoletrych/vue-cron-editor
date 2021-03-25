@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.14](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.13...v0.2.14) (2020-09-14)
+
+### [0.2.13](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.12...v0.2.13) (2020-08-19)
+
+
+### Features
+
+* make it possible to show/hide all tabs ([#52](https://github.com/karoletrych/vue-cron-editor/issues/52)) ([ed64c24](https://github.com/karoletrych/vue-cron-editor/commit/ed64c2403ec34e3b9b8302ca43088d8512b2f71a))
+
 ### [0.2.12](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.10...v0.2.12) (2020-08-04)
 * add it translation
 ### [0.2.11](https://github.com/karoletrych/vue-cron-editor/compare/v0.2.10...v0.2.11) (2020-08-04)

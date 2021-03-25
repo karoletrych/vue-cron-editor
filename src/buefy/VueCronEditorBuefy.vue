@@ -1,7 +1,12 @@
 <template>
-    <div class="enable-bulma">
+    <div class="enable-bulma" :key="visibleTabs.join()">
         <b-tabs v-model="activeTab" @input="reset">
-            <b-tab-item :value="0" :label="_$t('minutes')" class="minutes-tab">
+            <b-tab-item
+                v-if="visibleTabs.includes('minutes')"
+                :value="0"
+                :label="_$t('minutes')"
+                class="minutes-tab"
+            >
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ _$t("every") }}</span>
@@ -13,7 +18,12 @@
                     </b-field>
                 </div>
             </b-tab-item>
-            <b-tab-item :value="1" :label="_$t('hourly')" class="hourly-tab">
+            <b-tab-item
+                v-if="visibleTabs.includes('hourly')"
+                :value="1"
+                :label="_$t('hourly')"
+                class="hourly-tab"
+            >
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ _$t("every") }}</span>
@@ -34,7 +44,12 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="2" :label="_$t('daily')" class="daily-tab">
+            <b-tab-item
+                v-if="visibleTabs.includes('daily')"
+                :value="2"
+                :label="_$t('daily')"
+                class="daily-tab"
+            >
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ _$t("every") }}</span>
@@ -53,7 +68,12 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="3" :label="_$t('weekly')" class="weekly-tab">
+            <b-tab-item
+                v-if="visibleTabs.includes('weekly')"
+                :value="3"
+                :label="_$t('weekly')"
+                class="weekly-tab"
+            >
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ _$t("everyDay") }}</span>
@@ -117,7 +137,12 @@
                 </div>
             </b-tab-item>
 
-            <b-tab-item :value="4" :label="_$t('monthly')" class="monthly-tab">
+            <b-tab-item
+                v-if="visibleTabs.includes('monthly')"
+                :value="4"
+                :label="_$t('monthly')"
+                class="monthly-tab"
+            >
                 <div class="card">
                     <b-field>
                         <span class="centered-text">{{ _$t("onThe") }}</span>
@@ -148,7 +173,7 @@
             </b-tab-item>
 
             <b-tab-item
-                v-if="isAdvancedTabVisible"
+                v-if="visibleTabs.includes('advanced')"
                 :value="5"
                 :label="_$t('advanced')"
                 class="advanced-tab"
