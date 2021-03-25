@@ -2,7 +2,6 @@ import * as cronValidator from "cron-validator";
 import cronValidate from "cron-validate";
 import * as cronExpressions from "../../../src/buefy/core/buildExpression";
 import * as fc from "fast-check";
-import { pre, Arbitrary, array, option } from "fast-check";
 import { state } from "./aribitraries";
 import { parseExpression } from '@/buefy/core/parseExpression';
 import { basicPreset, UiState } from '@/buefy/core/expressionCommons';

@@ -50,67 +50,67 @@ function isDayAlias(s: string): boolean {
     return Object.keys(aliasToNumberMapping).includes(s);
 }
 
+function parseSubExpr(expr: string): SubExpr {
+    expr = expr.trim();
+    let match;
+    if ((match = expr.match(/\*\/(\d+)/)) != null) {
+        return {
+            type: "cronNumber",
+            at: { type: "asterisk" },
+            every: { type: "number", value: parseInt(match[1]) }
+        };
+    }
+    if ((match = expr.match(/(\d+)\/(\d+)/)) != null) {
+        return {
+            type: "cronNumber",
+            at: { type: "number", value: parseInt(match[0]) },
+            every: { type: "number", value: parseInt(match[1]) }
+        };
+    }
+    if ((match = expr.match(/(\d+)/)) != null) {
+        return {
+            type: "number",
+            value: parseInt(match[0])
+        };
+    }
+    if (expr == "?") {
+        return { type: "question" };
+    }
+    if (expr == "*") {
+        return { type: "asterisk" };
+    } 
+    throw new Error(`Unhandled subexpression: ${expr}`);
+    
+}
+function parseDayOfWeek(expr: string, aliasDayOfWeek: boolean): Asterisk | SetOfDays {
+    expr = expr.trim();
+    if (expr == "*")
+        return {
+            type: "asterisk"
+        };
+
+    let groups = expr.match(
+        /([a-zA-Z0-9]+)(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?/
+    );
+    if (groups == null) throw new Error(`invalid days expression ${expr}`);
+    return {
+        type: "setOfDays",
+        days: groups
+            .slice(1)
+            .map(d => d && d.replace(/,/, ""))
+            .filter(d => d)
+            .map(d =>
+                (aliasDayOfWeek && !isDayAlias(d))
+                    ? toDayAlias(parseInt(d))
+                    : d
+            )
+    };
+}
+
 export const parseExpression = (
     options: CronOptions,
     expression: string
 ): UiState => {
-    function parseSubExpr(expr: string): SubExpr {
-        expr = expr.trim();
-        let match;
-        if ((match = expr.match(/\*\/(\d+)/)) != null) {
-            return {
-                type: "cronNumber",
-                at: { type: "asterisk" },
-                every: { type: "number", value: parseInt(match[1]) }
-            };
-        }
-        if ((match = expr.match(/(\d+)\/(\d+)/)) != null) {
-            return {
-                type: "cronNumber",
-                at: { type: "number", value: parseInt(match[0]) },
-                every: { type: "number", value: parseInt(match[1]) }
-            };
-        }
-        if ((match = expr.match(/(\d+)/)) != null) {
-            return {
-                type: "number",
-                value: parseInt(match[0])
-            };
-        }
-        if (expr == "?") {
-            return { type: "question" };
-        }
-        if (expr == "*") {
-            return { type: "asterisk" };
-        } 
-        throw new Error(`Unhandled subexpression: ${expr}`);
-        
-    }
-    function parseDayOfWeek(expr: string): Asterisk | SetOfDays {
-        expr = expr.trim();
-        if (expr == "*")
-            return {
-                type: "asterisk"
-            };
-
-        let groups = expr.match(
-            /([a-zA-Z0-9]+)(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?/
-        );
-        if (groups == null) throw new Error(`invalid days expression ${expr}`);
-        return {
-            type: "setOfDays",
-            days: groups
-                .slice(1)
-                .map(d => d && d.replace(/,/, ""))
-                .filter(d => d)
-                .map(d =>
-                    (options.aliasDayOfWeek && !isDayAlias(d))
-                        ? toDayAlias(parseInt(d))
-                        : d
-                )
-        };
-    }
-
     const advanced: UiState = {
         type: "advanced",
         cronExpression: expression
@@ -119,6 +119,7 @@ export const parseExpression = (
     if (groups.length != 5 && groups.length != 6) {
         return advanced;
     }
+    let aliasDayOfWeek = options.aliasDayOfWeek;
     const cron: CronExpr =
         groups.length == 6
             ? {
@@ -127,14 +128,14 @@ export const parseExpression = (
                   hours: parseSubExpr(groups[2]),
                   dayOfTheMonth: parseSubExpr(groups[3]),
                   month: parseSubExpr(groups[4]),
-                  dayOfWeek: parseDayOfWeek(groups[5])
+                  dayOfWeek: parseDayOfWeek(groups[5], aliasDayOfWeek)
               }
             : {
                   minutes: parseSubExpr(groups[0]),
                   hours: parseSubExpr(groups[1]),
                   dayOfTheMonth: parseSubExpr(groups[2]),
                   month: parseSubExpr(groups[3]),
-                  dayOfWeek: parseDayOfWeek(groups[4])
+                  dayOfWeek: parseDayOfWeek(groups[4], aliasDayOfWeek)
             };
     if (
         cron.minutes.type == "cronNumber" &&
