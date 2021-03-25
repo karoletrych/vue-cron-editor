@@ -9,7 +9,7 @@ import * as cronstrue from "cronstrue/i18n";
 import { createI18n, toCronstrueLocale } from "./i18n";
 
 import Vue from "vue";
-import { UiState, basicPreset } from "./expressionCommons";
+import { UiState, Preset } from "./expressionCommons";
 import { parseExpression } from "./parseExpression";
 import { buildExpression, TabKey, isStateValid } from "./buildExpression";
 
@@ -78,14 +78,15 @@ export default Vue.extend({
         },
         preserveStateOnSwitchToAdvanced: { type: Boolean, default: false },
         locale: { type: String, default: "en" },
-        customLocales: { type: Object, default: null }
+        customLocales: { type: Object, default: null },
+        preset: { type: String, default: "basic" }
     },
     data() {
         return <ComponentData>{
             innerValue: "*/1 * * * *",
             editorData: Object.assign({}, initialData.minutes),
             currentTab: "minutes",
-            i18n: null
+            i18n: null,
         };
     },
     computed: {
@@ -103,7 +104,7 @@ export default Vue.extend({
             return this.i18n![key];
         },
         __loadDataFromExpression() {
-            const tabData = parseExpression(basicPreset, this.value);
+            const tabData = parseExpression(this.value);
             if (!this.visibleTabs.includes(tabData.type)) {
                 this.$data.editorData = {
                     type: "advanced",
@@ -122,7 +123,7 @@ export default Vue.extend({
                 return;
             }
 
-            const cronExpression = buildExpression(basicPreset, {
+            const cronExpression = buildExpression(this.preset as Preset, {
                 ...event
             });
 

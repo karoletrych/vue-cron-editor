@@ -4,7 +4,7 @@ import * as cronExpressions from "../../../src/buefy/core/buildExpression";
 import * as fc from "fast-check";
 import { state } from "./aribitraries";
 import { parseExpression } from '@/buefy/core/parseExpression';
-import { basicPreset, UiState } from '@/buefy/core/expressionCommons';
+import { UiState } from '@/buefy/core/expressionCommons';
 
 declare type CronValidatorOptions = {
     alias: boolean;
@@ -25,10 +25,7 @@ const isResultValid = (
         return false;
     }
 
-    const parsed = parseExpression(
-        basicPreset,
-        expr
-    );
+    const parsed = parseExpression(expr);
     if (parsed.type != state.type) {
         console.log(
             `expected to parse ${JSON.stringify(state)} -> ${expr} as ${state.type} but was ${parsed.type}`
@@ -45,7 +42,7 @@ test("with basic preset", () => {
             let state = e as UiState;
 
             let expr = cronExpressions.buildExpression(
-                basicPreset,
+                "basic",
                 state
             );
 
@@ -58,17 +55,9 @@ test("when aliasing week days", () => {
     fc.assert(
         fc.property(state, e => {
             let state = e as UiState;
-            basicPreset.aliasDayOfWeek = true;
+            let expr = cronExpressions.buildExpression("quartz", state);
 
-            let expr = cronExpressions.buildExpression(
-                {
-                    ...basicPreset,
-                    aliasDayOfWeek: true
-                },
-                state
-            );
-
-            return isResultValid(state, expr, { alias: true });
+            return isResultValid(state, expr);
         })
     );
 });
@@ -77,18 +66,9 @@ test("with seconds", () => {
     fc.assert(
         fc.property(state, e => {
             let state = e as UiState;
-            basicPreset.aliasDayOfWeek = true;
+            let expr = cronExpressions.buildExpression("quartz", state);
 
-            let expr = cronExpressions.buildExpression(
-                {
-                    ...basicPreset,
-                    aliasDayOfWeek: true,
-                    useSeconds: true
-                },
-                state
-            );
-
-            return isResultValid(state, expr, { alias: true, seconds: true });
+            return isResultValid(state, expr);
         })
     );
 });

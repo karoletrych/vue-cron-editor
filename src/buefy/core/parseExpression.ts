@@ -1,5 +1,10 @@
+/**
+ * parseExpression
+ * Parses given expression and picks a matching tab for it.
+ * It would be best if it was not dependent on cron preset or too many configurable options.
+ */
+
 import {
-    CronOptions,
     UiState,
     aliasToNumberMapping
 } from "./expressionCommons";
@@ -82,7 +87,7 @@ function parseSubExpr(expr: string): SubExpr {
     throw new Error(`Unhandled subexpression: ${expr}`);
     
 }
-function parseDayOfWeek(expr: string, aliasDayOfWeek: boolean): Asterisk | SetOfDays {
+function parseDayOfWeek(expr: string): Asterisk | SetOfDays {
     expr = expr.trim();
     if (expr == "*")
         return {
@@ -100,17 +105,14 @@ function parseDayOfWeek(expr: string, aliasDayOfWeek: boolean): Asterisk | SetOf
             .map(d => d && d.replace(/,/, ""))
             .filter(d => d)
             .map(d =>
-                (aliasDayOfWeek && !isDayAlias(d))
+                (!isDayAlias(d))
                     ? toDayAlias(parseInt(d))
                     : d
             )
     };
 }
 
-export const parseExpression = (
-    options: CronOptions,
-    expression: string
-): UiState => {
+export const parseExpression = (expression: string): UiState => {
     const advanced: UiState = {
         type: "advanced",
         cronExpression: expression
@@ -119,7 +121,6 @@ export const parseExpression = (
     if (groups.length != 5 && groups.length != 6) {
         return advanced;
     }
-    let aliasDayOfWeek = options.aliasDayOfWeek;
     const cron: CronExpr =
         groups.length == 6
             ? {
@@ -128,14 +129,14 @@ export const parseExpression = (
                   hours: parseSubExpr(groups[2]),
                   dayOfTheMonth: parseSubExpr(groups[3]),
                   month: parseSubExpr(groups[4]),
-                  dayOfWeek: parseDayOfWeek(groups[5], aliasDayOfWeek)
+                  dayOfWeek: parseDayOfWeek(groups[5])
               }
             : {
                   minutes: parseSubExpr(groups[0]),
                   hours: parseSubExpr(groups[1]),
                   dayOfTheMonth: parseSubExpr(groups[2]),
                   month: parseSubExpr(groups[3]),
-                  dayOfWeek: parseDayOfWeek(groups[4], aliasDayOfWeek)
+                  dayOfWeek: parseDayOfWeek(groups[4])
             };
     if (
         cron.minutes.type == "cronNumber" &&

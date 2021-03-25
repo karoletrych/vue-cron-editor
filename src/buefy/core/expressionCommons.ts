@@ -1,16 +1,4 @@
-export interface CronOptions {
-    useSeconds: boolean;
-    useBlankDay: false;
-    allowOnlyOneBlankDayField: boolean;
-    aliasDayOfWeek: boolean;
-}
-
-export const basicPreset: CronOptions = {
-    aliasDayOfWeek: false,
-    allowOnlyOneBlankDayField: false,
-    useBlankDay: false,
-    useSeconds: false
-};
+export type Preset = "basic" | "quartz"
 
 export interface MinutesTabState {
     type: "minutes";

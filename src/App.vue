@@ -8,6 +8,30 @@
                 dense
             ></v-select>
             <v-row fluid dense>
+                <v-select
+                label="Preset"
+                    v-model="selectedPreset"
+                    :items="presets"
+                >
+
+                </v-select>
+                <v-checkbox
+                    label="aliasDayOfWeek"
+                    value="aliasDayOfWeek"
+                    v-model="visibleTabs"
+                />
+                <v-checkbox
+                    label="useBlankDay"
+                    value="useBlankDay"
+                    v-model="visibleTabs"
+                />
+                <v-checkbox
+                    label="useSeconds"
+                    value="useSeconds"
+                    v-model="visibleTabs"
+                />
+            </v-row>
+            <v-row fluid dense>
                 <v-checkbox
                     label="minutes"
                     value="minutes"
@@ -42,6 +66,7 @@
                         :visibleTabs="visibleTabs"
                         :preserveStateOnSwitchToAdvanced="true"
                         :locale="selectedLocale"
+                        :preset="selectedPreset"
                         v-model="sample1CronExpression"
                     ></VueCronEditorBuefy>
                 </section>
@@ -83,10 +108,7 @@
                                         <v-container>
                                             <section>
                                                 <h3>vue-cron-editor-buefy</h3>
-                                                <VueCronEditorBuefy
-                                                    v-model="
-                                                        editedItem.expression
-                                                    "
+                                                <VueCronEditorBuefy v-model="editedItem.expression"
                                                 ></VueCronEditorBuefy>
                                             </section>
                                             cron expression:
@@ -178,6 +200,7 @@ export default {
         editedIndex: -1,
         locales: Object.keys(defaultLocales),
         selectedLocale: "en",
+        selectedPreset: "basic",
         visibleTabs: [
             "minutes",
             "hourly",
@@ -185,6 +208,10 @@ export default {
             "weekly",
             "monthly",
             "advanced"
+        ],
+        presets: [
+            "basic",
+            "quartz"
         ]
     })
 };
