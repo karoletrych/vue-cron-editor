@@ -9,11 +9,10 @@
             ></v-select>
             <v-row fluid dense>
                 <v-select
-                label="Preset"
+                    label="Preset"
                     v-model="selectedPreset"
                     :items="presets"
                 >
-
                 </v-select>
                 <v-checkbox
                     label="aliasDayOfWeek"
@@ -108,7 +107,10 @@
                                         <v-container>
                                             <section>
                                                 <h3>vue-cron-editor-buefy</h3>
-                                                <VueCronEditorBuefy v-model="editedItem.expression"
+                                                <VueCronEditorBuefy
+                                                    v-model="
+                                                        editedItem.expression
+                                                    "
                                                 ></VueCronEditorBuefy>
                                             </section>
                                             cron expression:
@@ -135,7 +137,7 @@
                             </v-dialog>
                         </v-toolbar>
                     </template>
-                    <template #item.action="{ item }">
+                    <template #item:action="{ item }">
                         <v-icon small class="mr-2" @click="editItem(item)"
                             >edit</v-icon
                         >
@@ -209,10 +211,7 @@ export default {
             "monthly",
             "advanced"
         ],
-        presets: [
-            "basic",
-            "quartz"
-        ]
+        presets: ["basic", "quartz"]
     })
 };
 </script>
