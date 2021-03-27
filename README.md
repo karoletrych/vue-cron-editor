@@ -100,12 +100,13 @@ Custom locales can be provided via a ``customLocales`` prop:
 ></VueCronEditorBuefy>
 ```
 
-# Contributing
+# Development
 To build the samples app run in root directory:
 ```
 npm install
 npm run serve
 ```
+In case you get “$attrs is readonly”,“$listeners is readonly” in console, clean the node_modules in root folder and in src/buefy (it's probably caused by duplicate vue loading by webpack.
 
 To run unit tests:
 ```
