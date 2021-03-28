@@ -117,3 +117,10 @@ To run unit tests:
 ```
 npm run test:unit
 ```
+
+To release version:
+```
+cd src/buefy
+npm run release:full
+npm publish
+```
