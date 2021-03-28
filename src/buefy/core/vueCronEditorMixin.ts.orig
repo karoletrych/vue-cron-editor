@@ -4,14 +4,14 @@
  * Functionality dependent on UI frameworks should be implemented in derived components
  */
 
+import { buildExpression, isStateValid, TabKey } from "./buildExpression";
 import * as cronValidator from "cron-validator";
 import * as cronstrue from "cronstrue/i18n";
 import { createI18n, toCronstrueLocale } from "./i18n";
 
 import Vue from "vue";
-import { UiState, CronSyntax } from "./expressionCommons";
+import { UiState, basicPreset } from "./expressionCommons";
 import { parseExpression } from "./parseExpression";
-import { buildExpression, TabKey, isStateValid } from "./buildExpression";
 
 const initialData: Record<TabKey, UiState> = {
     minutes: {
@@ -33,7 +33,7 @@ const initialData: Record<TabKey, UiState> = {
         type: "weekly",
         minutes: 0,
         hours: 0,
-        days: ["MON"]
+        days: ["1"]
     },
     monthly: {
         type: "monthly",
@@ -49,7 +49,7 @@ const initialData: Record<TabKey, UiState> = {
 };
 
 interface ComponentData {
-    editorData: UiState;
+    editorData: Object;
     currentTab: TabKey;
     innerValue: string | null;
     i18n: Record<string, string> | null;
@@ -73,13 +73,12 @@ export default Vue.extend({
                     "weekly",
                     "monthly",
                     "advanced"
-                ];
+                ]
             }
         },
         preserveStateOnSwitchToAdvanced: { type: Boolean, default: false },
         locale: { type: String, default: "en" },
-        customLocales: { type: Object, default: null },
-        cronSyntax: { type: String, default: "basic" }
+        customLocales: { type: Object, default: null }
     },
     data() {
         return <ComponentData>{
@@ -104,62 +103,53 @@ export default Vue.extend({
             return this.i18n![key];
         },
         __loadDataFromExpression() {
+<<<<<<< HEAD
+            const tabData = parseExpression(basicPreset, this.value);
+=======
             const tabData = parseExpression(this.value);
             if (!this.visibleTabs.includes(tabData.type)) {
-                this.editorData = {
+                this.$data.editorData = {
                     type: "advanced",
-                    cronExpression: this.value
+                    expression: this.value
                 };
                 this.currentTab = "advanced";
                 return;
             }
-            this.editorData = { ...tabData };
+>>>>>>> master
+            this.$data.editorData = { ...tabData };
             this.currentTab = tabData.type;
         },
-        __updateCronExpression(state: UiState) {
-            if (!isStateValid(state)) {
+        __updateCronExpression(event: UiState) {
+            if (!isStateValid(event)) {
                 this.innerValue = null;
                 this.$emit("input", null);
                 return;
             }
 
-            const cronExpression = buildExpression(
-                this.cronSyntax as CronSyntax,
-                {
-                    ...state
-                }
-            );
+            const cronExpression = buildExpression(basicPreset, {
+                ...event
+            });
 
-            if (!this._isValidExpression(cronExpression)) {
+            if (!cronValidator.isValidCron(cronExpression)) {
                 this.innerValue = null;
                 this.$emit("input", null);
                 return;
+            } else {
+                this.innerValue = cronExpression;
+                this.$emit("input", cronExpression);
             }
-            this.innerValue = cronExpression;
-            this.$emit("input", cronExpression);
-        },
-        _isValidExpression(cronExpression: string) {
-            let options =
-                this.cronSyntax == "quartz"
-                    ? {
-                          seconds: true,
-                          allowBlankDay: true,
-                          alias: true
-                      }
-                    : undefined;
-            return cronValidator.isValidCron(cronExpression, options);
         },
         _resetToTab(tabKey: TabKey) {
             this.currentTab = tabKey;
             if (this.preserveStateOnSwitchToAdvanced && tabKey === "advanced") {
-                this.editorData = {
+                this.$data.editorData = {
                     type: "advanced",
-                    cronExpression: this.innerValue as string
+                    cronExpression: this.innerValue
                 };
                 return;
             }
 
-            this.editorData = Object.assign({}, initialData[tabKey]);
+            this.$data.editorData = Object.assign({}, initialData[tabKey]);
             this.__updateCronExpression(initialData[tabKey]);
         }
     },
@@ -174,11 +164,6 @@ export default Vue.extend({
                 }
                 this.__loadDataFromExpression();
             }
-        },
-        cronSyntax() {
-            this.__updateCronExpression(
-                JSON.parse(JSON.stringify(this.editorData))
-            );
         },
         editorData: {
             deep: true,

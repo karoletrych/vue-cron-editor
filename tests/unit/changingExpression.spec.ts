@@ -13,13 +13,13 @@ describe("changing expression updates data", () => {
         let component = getMountedComponent(VueCronEditorBuefy, {
             value: "*/43 * * * *"
         });
-        component.setProps({ value: "0 0 * * 1,3,4" });
+        component.setProps({ value: "0 0 * * MON,WED,THU" });
 
         await Vue.nextTick();
 
         expect(component.vm.$data.currentTab).toBe("weekly");
         expect(component.vm.$data.editorData).toStrictEqual({
-            days: ["1", "3", "4"],
+            days: ["MON", "WED", "THU"],
             hours: 0,
             minutes: 0,
             type: "weekly"

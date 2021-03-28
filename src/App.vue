@@ -8,6 +8,14 @@
                 dense
             ></v-select>
             <v-row fluid dense>
+                <v-select
+                    label="Cron syntax"
+                    v-model="selectedSyntax"
+                    :items="syntaxes"
+                >
+                </v-select>
+            </v-row>
+            <v-row fluid dense>
                 <v-checkbox
                     label="minutes"
                     value="minutes"
@@ -42,6 +50,7 @@
                         :visibleTabs="visibleTabs"
                         :preserveStateOnSwitchToAdvanced="true"
                         :locale="selectedLocale"
+                        :cronSyntax="selectedSyntax"
                         v-model="sample1CronExpression"
                     ></VueCronEditorBuefy>
                 </section>
@@ -113,7 +122,7 @@
                             </v-dialog>
                         </v-toolbar>
                     </template>
-                    <template #item.action="{ item }">
+                    <template #item:action="{ item }">
                         <v-icon small class="mr-2" @click="editItem(item)"
                             >edit</v-icon
                         >
@@ -178,6 +187,7 @@ export default {
         editedIndex: -1,
         locales: Object.keys(defaultLocales),
         selectedLocale: "en",
+        selectedSyntax: "basic",
         visibleTabs: [
             "minutes",
             "hourly",
@@ -185,7 +195,8 @@ export default {
             "weekly",
             "monthly",
             "advanced"
-        ]
+        ],
+        syntaxes: ["basic", "quartz"]
     })
 };
 </script>

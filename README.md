@@ -42,6 +42,11 @@ export default {
 The editor tab will be set to the one which is able to represent an initial expression given to a ``value`` prop (**minutes** tab in the example above). 
 If none of the tabs can represent the given expression then **advanced** tab is selected.
 
+Kind of cron syntax can be selected with ``cronSyntax`` prop. Available: 
+  - `basic` (default) - (classic GNU version, 5 digits)
+  - `quartz` - (6 digits)
+
+
 To show only some of the tabs, specify them using `visibleTabs` prop:
 ```:visibleTabs="['daily', 'weekly', 'monthly']"```
 Possible tabs: "minutes", "hourly", "daily", "weekly", "monthly", "advanced".
@@ -100,12 +105,13 @@ Custom locales can be provided via a ``customLocales`` prop:
 ></VueCronEditorBuefy>
 ```
 
-# Contributing
+# Development
 To build the samples app run in root directory:
 ```
 npm install
 npm run serve
 ```
+In case you get “$attrs is readonly”,“$listeners is readonly” in console, clean the node_modules in root folder and in src/buefy (it's probably caused by duplicate vue loading by webpack.
 
 To run unit tests:
 ```
