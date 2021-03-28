@@ -1,4 +1,4 @@
-export type Preset = "basic" | "quartz";
+export type CronSyntax = "basic" | "quartz";
 
 export interface MinutesTabState {
     type: "minutes";

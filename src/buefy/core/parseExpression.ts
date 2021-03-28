@@ -1,7 +1,7 @@
 /**
  * parseExpression
  * Parses given expression and picks a matching tab for it.
- * It would be best if it was not dependent on cron preset or too many configurable options.
+ * It would be best if it was not dependent on cron syntax or too many configurable options.
  */
 
 import { UiState } from "./expressionCommons";
@@ -36,7 +36,7 @@ type CronExpr = {
     hours: SubExpr;
     dayOfTheMonth: SubExpr;
     month: SubExpr;
-    dayOfWeek: SetOfDays | Asterisk;
+    dayOfWeek: SetOfDays | Asterisk | QuestionMark;
 };
 
 function parseSubExpr(expr: string): SubExpr {
@@ -70,17 +70,21 @@ function parseSubExpr(expr: string): SubExpr {
     }
     throw new Error(`Unhandled subexpression: ${expr}`);
 }
-function parseDayOfWeek(expr: string): Asterisk | SetOfDays {
+function parseDayOfWeek(expr: string): Asterisk | SetOfDays | QuestionMark {
     expr = expr.trim();
     if (expr == "*")
         return {
             type: "asterisk"
         };
+    if (expr == "?")
+        return {
+            type: "question"
+        };
 
     let groups = expr.match(
         /([a-zA-Z0-9]+)(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?(,[a-zA-Z0-9]+)?/
     );
-    if (groups == null) throw new Error(`invalid days expression ${expr}`);
+    if (groups == null) throw new Error(`invalid days expression: ${expr}`);
     return {
         type: "setOfDays",
         days: groups
@@ -90,6 +94,12 @@ function parseDayOfWeek(expr: string): Asterisk | SetOfDays {
             .map(d => (!isDayAlias(d) ? toDayAlias(parseInt(d)) : d))
     };
 }
+
+const isAny = (token: SubExpr | SetOfDays): boolean =>
+    token.type == "question" || token.type == "asterisk";
+
+const isAnyTime = (token: Number | Asterisk): boolean =>
+    token.type == "asterisk" || (token.type == "number" && token.value == 0);
 
 export const parseExpression = (expression: string): UiState => {
     const advanced: UiState = {
@@ -119,11 +129,11 @@ export const parseExpression = (expression: string): UiState => {
               };
     if (
         cron.minutes.type == "cronNumber" &&
-        cron.minutes.at.type == "asterisk" &&
+        isAnyTime(cron.minutes.at) &&
         cron.hours.type == "asterisk" &&
         cron.dayOfTheMonth.type == "asterisk" &&
         cron.month.type == "asterisk" &&
-        cron.dayOfWeek.type == "asterisk"
+        isAny(cron.dayOfWeek)
     )
         return {
             type: "minutes",
@@ -132,10 +142,10 @@ export const parseExpression = (expression: string): UiState => {
     if (
         cron.minutes.type == "number" &&
         cron.hours.type == "cronNumber" &&
-        cron.hours.at.type == "asterisk" &&
+        isAnyTime(cron.hours.at) &&
         cron.dayOfTheMonth.type == "asterisk" &&
         cron.month.type == "asterisk" &&
-        cron.dayOfWeek.type == "asterisk"
+        isAny(cron.dayOfWeek)
     )
         return {
             type: "hourly",
@@ -149,7 +159,7 @@ export const parseExpression = (expression: string): UiState => {
         cron.dayOfTheMonth.type == "cronNumber" &&
         cron.dayOfTheMonth.at.type == "asterisk" &&
         cron.month.type == "asterisk" &&
-        cron.dayOfWeek.type == "asterisk"
+        isAny(cron.dayOfWeek)
     )
         return {
             type: "daily",
@@ -160,7 +170,7 @@ export const parseExpression = (expression: string): UiState => {
     if (
         cron.minutes.type == "number" &&
         cron.hours.type == "number" &&
-        cron.dayOfTheMonth.type == "asterisk" &&
+        isAny(cron.dayOfTheMonth) &&
         cron.month.type == "asterisk" &&
         cron.dayOfWeek.type == "setOfDays"
     )
@@ -176,7 +186,7 @@ export const parseExpression = (expression: string): UiState => {
         cron.dayOfTheMonth.type == "number" &&
         cron.month.type == "cronNumber" &&
         cron.month.at.type == "asterisk" &&
-        cron.dayOfWeek.type == "asterisk"
+        isAny(cron.dayOfWeek)
     )
         return {
             type: "monthly",

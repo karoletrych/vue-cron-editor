@@ -1,7 +1,7 @@
 import * as fc from "fast-check";
 
 const zero2sixty = fc.integer(0, 59);
-const zero2twentyThree = fc.integer(0, 23);
+const one2twentyThree = fc.integer(1, 23);
 const one2ThirtyOne = fc.integer(1, 31);
 const one2Twelve = fc.integer(1, 12);
 const one2safeInteger = fc.integer(1, Number.MAX_SAFE_INTEGER);
@@ -16,8 +16,7 @@ const arrayOfDays = fc.set(
         fc.constant("SAT"),
         fc.constant("SUN")
     ),
-    1,
-    7
+    { minLength: 1, maxLength: 7 }
 );
 
 const minutesStateArbitrary = fc.record({
@@ -28,27 +27,27 @@ const minutesStateArbitrary = fc.record({
 const hourlyStateArbitrary = fc.record({
     type: fc.constant("hourly"),
     minutes: zero2sixty,
-    hourInterval: zero2twentyThree
+    hourInterval: one2twentyThree
 });
 
 const dailyStateArbitrary = fc.record({
     type: fc.constant("daily"),
     minutes: zero2sixty,
-    hours: zero2twentyThree,
+    hours: one2twentyThree,
     dayInterval: one2safeInteger
 });
 
 const weeklyStateArbitrary = fc.record({
     type: fc.constant("weekly"),
     minutes: zero2sixty,
-    hours: zero2twentyThree,
+    hours: one2twentyThree,
     days: arrayOfDays
 });
 
 const monthlyStateArbitrary = fc.record({
     type: fc.constant("monthly"),
     minutes: zero2sixty,
-    hours: zero2twentyThree,
+    hours: one2twentyThree,
     day: one2ThirtyOne,
     monthInterval: one2Twelve
 });

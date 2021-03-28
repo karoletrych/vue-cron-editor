@@ -9,7 +9,7 @@ import * as cronstrue from "cronstrue/i18n";
 import { createI18n, toCronstrueLocale } from "./i18n";
 
 import Vue from "vue";
-import { UiState, Preset } from "./expressionCommons";
+import { UiState, CronSyntax } from "./expressionCommons";
 import { parseExpression } from "./parseExpression";
 import { buildExpression, TabKey, isStateValid } from "./buildExpression";
 import cron from "cron-validate";
@@ -50,7 +50,7 @@ const initialData: Record<TabKey, UiState> = {
 };
 
 interface ComponentData {
-    editorData: Object;
+    editorData: UiState;
     currentTab: TabKey;
     innerValue: string | null;
     i18n: Record<string, string> | null;
@@ -80,7 +80,7 @@ export default Vue.extend({
         preserveStateOnSwitchToAdvanced: { type: Boolean, default: false },
         locale: { type: String, default: "en" },
         customLocales: { type: Object, default: null },
-        preset: { type: String, default: "basic" }
+        cronSyntax: { type: String, default: "basic" }
     },
     data() {
         return <ComponentData>{
@@ -107,14 +107,14 @@ export default Vue.extend({
         __loadDataFromExpression() {
             const tabData = parseExpression(this.value);
             if (!this.visibleTabs.includes(tabData.type)) {
-                this.$data.editorData = {
+                this.editorData = {
                     type: "advanced",
-                    expression: this.value
+                    cronExpression: this.value
                 };
                 this.currentTab = "advanced";
                 return;
             }
-            this.$data.editorData = { ...tabData };
+            this.editorData = { ...tabData };
             this.currentTab = tabData.type;
         },
         __updateCronExpression(state: UiState) {
@@ -124,9 +124,12 @@ export default Vue.extend({
                 return;
             }
 
-            const cronExpression = buildExpression(this.preset as Preset, {
-                ...state
-            });
+            const cronExpression = buildExpression(
+                this.cronSyntax as CronSyntax,
+                {
+                    ...state
+                }
+            );
 
             if (!this._isValidExpression(cronExpression)) {
                 this.innerValue = null;
@@ -138,7 +141,7 @@ export default Vue.extend({
         },
         _isValidExpression(cronExpression: string) {
             let options =
-                this.preset == "quartz"
+                this.cronSyntax == "quartz"
                     ? {
                           seconds: true,
                           allowBlankDay: true,
@@ -173,7 +176,7 @@ export default Vue.extend({
                 this.__loadDataFromExpression();
             }
         },
-        preset() {
+        cronSyntax() {
             this.__updateCronExpression(
                 JSON.parse(JSON.stringify(this.editorData))
             );

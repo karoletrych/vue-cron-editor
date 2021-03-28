@@ -1,4 +1,4 @@
-import { UiState, Preset } from "./expressionCommons";
+import { UiState, CronSyntax } from "./expressionCommons";
 import { toDayNumber, toDayAlias } from "./dayAliases";
 
 export type TabKey = UiState[keyof UiState];
@@ -8,8 +8,8 @@ export function isStateValid(e: UiState) {
     else return true;
 }
 
-export const buildExpression = (preset: Preset, state: UiState): string => {
-    if (preset == "basic") {
+export const buildExpression = (syntax: CronSyntax, state: UiState): string => {
+    if (syntax == "basic") {
         if (state.type === "minutes") {
             return `*/${state.minuteInterval} * * * *`;
         }
@@ -32,7 +32,8 @@ export const buildExpression = (preset: Preset, state: UiState): string => {
         if (state.type === "advanced") {
             return state.cronExpression;
         }
-    } else if (preset === "quartz") {
+        throw `unknown event type: ${state}`;
+    } else if (syntax === "quartz") {
         if (state.type === "minutes") {
             return `0 0/${state.minuteInterval} * * * ?`;
         }
@@ -56,7 +57,7 @@ export const buildExpression = (preset: Preset, state: UiState): string => {
         if (state.type === "advanced") {
             return state.cronExpression;
         }
+        throw `unknown event type: ${state}`;
     }
-
-    throw `unknown event type: ${state}`;
+    throw `unknown syntax: ${syntax}`;
 };

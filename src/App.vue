@@ -9,9 +9,9 @@
             ></v-select>
             <v-row fluid dense>
                 <v-select
-                    label="Preset"
-                    v-model="selectedPreset"
-                    :items="presets"
+                    label="Cron syntax"
+                    v-model="selectedSyntax"
+                    :items="syntaxes"
                 >
                 </v-select>
                 <v-checkbox
@@ -65,7 +65,7 @@
                         :visibleTabs="visibleTabs"
                         :preserveStateOnSwitchToAdvanced="true"
                         :locale="selectedLocale"
-                        :preset="selectedPreset"
+                        :cronSyntax="selectedSyntax"
                         v-model="sample1CronExpression"
                     ></VueCronEditorBuefy>
                 </section>
@@ -202,7 +202,7 @@ export default {
         editedIndex: -1,
         locales: Object.keys(defaultLocales),
         selectedLocale: "en",
-        selectedPreset: "basic",
+        selectedSyntax: "basic",
         visibleTabs: [
             "minutes",
             "hourly",
@@ -211,7 +211,7 @@ export default {
             "monthly",
             "advanced"
         ],
-        presets: ["basic", "quartz"]
+        syntaxes: ["basic", "quartz"]
     })
 };
 </script>
