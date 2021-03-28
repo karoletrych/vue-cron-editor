@@ -153,14 +153,14 @@ export default Vue.extend({
         _resetToTab(tabKey: TabKey) {
             this.currentTab = tabKey;
             if (this.preserveStateOnSwitchToAdvanced && tabKey === "advanced") {
-                this.$data.editorData = {
+                this.editorData = {
                     type: "advanced",
-                    cronExpression: this.innerValue
+                    cronExpression: this.innerValue as string
                 };
                 return;
             }
 
-            this.$data.editorData = Object.assign({}, initialData[tabKey]);
+            this.editorData = Object.assign({}, initialData[tabKey]);
             this.__updateCronExpression(initialData[tabKey]);
         }
     },
