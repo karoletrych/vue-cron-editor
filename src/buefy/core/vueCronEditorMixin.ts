@@ -12,6 +12,7 @@ import Vue from "vue";
 import { UiState, Preset } from "./expressionCommons";
 import { parseExpression } from "./parseExpression";
 import { buildExpression, TabKey, isStateValid } from "./buildExpression";
+import cron from "cron-validate";
 
 const initialData: Record<TabKey, UiState> = {
     minutes: {
@@ -33,7 +34,7 @@ const initialData: Record<TabKey, UiState> = {
         type: "weekly",
         minutes: 0,
         hours: 0,
-        days: ["1"]
+        days: ["MON"]
     },
     monthly: {
         type: "monthly",
@@ -73,7 +74,7 @@ export default Vue.extend({
                     "weekly",
                     "monthly",
                     "advanced"
-                ]
+                ];
             }
         },
         preserveStateOnSwitchToAdvanced: { type: Boolean, default: false },
@@ -86,7 +87,7 @@ export default Vue.extend({
             innerValue: "*/1 * * * *",
             editorData: Object.assign({}, initialData.minutes),
             currentTab: "minutes",
-            i18n: null,
+            i18n: null
         };
     },
     computed: {
@@ -116,25 +117,35 @@ export default Vue.extend({
             this.$data.editorData = { ...tabData };
             this.currentTab = tabData.type;
         },
-        __updateCronExpression(event: UiState) {
-            if (!isStateValid(event)) {
+        __updateCronExpression(state: UiState) {
+            if (!isStateValid(state)) {
                 this.innerValue = null;
                 this.$emit("input", null);
                 return;
             }
 
             const cronExpression = buildExpression(this.preset as Preset, {
-                ...event
+                ...state
             });
 
-            if (!cronValidator.isValidCron(cronExpression)) {
+            if (!this._isValidExpression(cronExpression)) {
                 this.innerValue = null;
                 this.$emit("input", null);
                 return;
-            } else {
-                this.innerValue = cronExpression;
-                this.$emit("input", cronExpression);
             }
+            this.innerValue = cronExpression;
+            this.$emit("input", cronExpression);
+        },
+        _isValidExpression(cronExpression: string) {
+            let options =
+                this.preset == "quartz"
+                    ? {
+                          seconds: true,
+                          allowBlankDay: true,
+                          alias: true
+                      }
+                    : undefined;
+            return cronValidator.isValidCron(cronExpression, options);
         },
         _resetToTab(tabKey: TabKey) {
             this.currentTab = tabKey;
@@ -161,6 +172,11 @@ export default Vue.extend({
                 }
                 this.__loadDataFromExpression();
             }
+        },
+        preset() {
+            this.__updateCronExpression(
+                JSON.parse(JSON.stringify(this.editorData))
+            );
         },
         editorData: {
             deep: true,

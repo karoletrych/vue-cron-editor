@@ -10,7 +10,7 @@
     "release:samples": "vue-cli-service build && gh-pages -d dist"
   },
   "dependencies": {
-    "buefy": "^0.9.4",
+    "buefy": "^0.8.20",
     "core-js": "^3.9.1",
     "cron-validate": "^1.4.2",
     "cron-validator": "^1.2.1",

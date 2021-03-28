@@ -3,7 +3,7 @@
         <b-tabs v-model="activeTab" @input="reset">
             <b-tab-item
                 v-if="visibleTabs.includes('minutes')"
-                :value="0"
+                value="0"
                 :label="_$t('minutes')"
                 class="minutes-tab"
             >
@@ -20,7 +20,7 @@
             </b-tab-item>
             <b-tab-item
                 v-if="visibleTabs.includes('hourly')"
-                :value="1"
+                value="1"
                 :label="_$t('hourly')"
                 class="hourly-tab"
             >
@@ -46,7 +46,7 @@
 
             <b-tab-item
                 v-if="visibleTabs.includes('daily')"
-                :value="2"
+                value="2"
                 :label="_$t('daily')"
                 class="daily-tab"
             >
@@ -70,7 +70,7 @@
 
             <b-tab-item
                 v-if="visibleTabs.includes('weekly')"
-                :value="3"
+                value="3"
                 :label="_$t('weekly')"
                 class="weekly-tab"
             >
@@ -139,7 +139,7 @@
 
             <b-tab-item
                 v-if="visibleTabs.includes('monthly')"
-                :value="4"
+                value="4"
                 :label="_$t('monthly')"
                 class="monthly-tab"
             >
@@ -174,7 +174,7 @@
 
             <b-tab-item
                 v-if="visibleTabs.includes('advanced')"
-                :value="5"
+                value="5"
                 :label="_$t('advanced')"
                 class="advanced-tab"
             >
@@ -216,12 +216,12 @@ export default {
     data: () => ({
         activeTab: null,
         tabs: [
-            { id: 0, key: "minutes" },
-            { id: 1, key: "hourly" },
-            { id: 2, key: "daily" },
-            { id: 3, key: "weekly" },
-            { id: 4, key: "monthly" },
-            { id: 5, key: "advanced" }
+            { id: "0", key: "minutes" },
+            { id: "1", key: "hourly" },
+            { id: "2", key: "daily" },
+            { id: "3", key: "weekly" },
+            { id: "4", key: "monthly" },
+            { id: "5", key: "advanced" }
         ]
     }),
     mounted() {

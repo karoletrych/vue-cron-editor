@@ -1,8 +1,5 @@
-import {
-    UiState,
-    aliasToNumberMapping,
-    Preset
-} from "./expressionCommons";
+import { UiState, Preset } from "./expressionCommons";
+import { toDayNumber, toDayAlias } from "./dayAliases";
 
 export type TabKey = UiState[keyof UiState];
 
@@ -11,18 +8,7 @@ export function isStateValid(e: UiState) {
     else return true;
 }
 
-function toDayNumber(alias: string): number {
-    let number = aliasToNumberMapping[alias];
-    if (number == undefined) {
-        throw new Error("unhandled alias " + alias);
-    }
-    return number;
-}
-
-export const buildExpression = (
-    preset: Preset,
-    state: UiState
-): string => {
+export const buildExpression = (preset: Preset, state: UiState): string => {
     if (preset == "basic") {
         if (state.type === "minutes") {
             return `*/${state.minuteInterval} * * * *`;
@@ -34,11 +20,11 @@ export const buildExpression = (
             return `${state.minutes} ${state.hours} */${state.dayInterval} * *`;
         }
         if (state.type === "weekly") {
-            let days = state.days.map(d => toDayNumber(d).toString());
-            return (
-                `${state.minutes} ${state.hours} * * ` +
-                `${days.sort().join()}`
-            );
+            let days = state.days
+                .map(d => toDayNumber(d).toString())
+                .sort()
+                .join(",");
+            return `${state.minutes} ${state.hours} * * ${days}`;
         }
         if (state.type === "monthly") {
             return `${state.minutes} ${state.hours} ${state.day} */${state.monthInterval} *`;
@@ -46,28 +32,31 @@ export const buildExpression = (
         if (state.type === "advanced") {
             return state.cronExpression;
         }
-    }
-    else if (preset === "quartz") {
+    } else if (preset === "quartz") {
         if (state.type === "minutes") {
-            return `0 */${state.minuteInterval} * * * *`;
+            return `0 0/${state.minuteInterval} * * * ?`;
         }
         if (state.type === "hourly") {
-            return `0 ${state.minutes} */${state.hourInterval} * * *`;
+            return `0 ${state.minutes} 0/${state.hourInterval} * * ?`;
         }
         if (state.type === "daily") {
-            return `0 ${state.minutes} ${state.hours} */${state.dayInterval} * *`;
+            return `0 ${state.minutes} ${state.hours} */${state.dayInterval} * ?`;
         }
         if (state.type === "weekly") {
-            let days = state.days.map(d => toDayNumber(d).toString());
-            return `0 ${state.minutes} ${state.hours} * * ${days.sort().join()}`;
+            let days = state.days
+                .map(d => toDayNumber(d))
+                .sort()
+                .map(d => toDayAlias(d))
+                .join(",");
+            return `0 ${state.minutes} ${state.hours} ? * ${days}`;
         }
         if (state.type === "monthly") {
-            return `0 ${state.minutes} ${state.hours} ${state.day} */${state.monthInterval} *`;
+            return `0 ${state.minutes} ${state.hours} ${state.day} */${state.monthInterval} ?`;
         }
         if (state.type === "advanced") {
             return state.cronExpression;
         }
     }
-    
+
     throw `unknown event type: ${state}`;
 };

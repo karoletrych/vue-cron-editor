@@ -4,10 +4,8 @@
  * It would be best if it was not dependent on cron preset or too many configurable options.
  */
 
-import {
-    UiState,
-    aliasToNumberMapping
-} from "./expressionCommons";
+import { UiState } from "./expressionCommons";
+import { toDayAlias, isDayAlias } from "./dayAliases";
 
 type Number = {
     type: "number";
@@ -41,20 +39,6 @@ type CronExpr = {
     dayOfWeek: SetOfDays | Asterisk;
 };
 
-function toDayAlias(num: number): string {
-    let alias = Object.keys(aliasToNumberMapping).find(
-        k => aliasToNumberMapping[k] === num
-    );
-    if (alias == undefined) {
-        throw new Error(`unhandled number ${num}`);
-    }
-    return alias;
-}
-
-function isDayAlias(s: string): boolean {
-    return Object.keys(aliasToNumberMapping).includes(s);
-}
-
 function parseSubExpr(expr: string): SubExpr {
     expr = expr.trim();
     let match;
@@ -83,9 +67,8 @@ function parseSubExpr(expr: string): SubExpr {
     }
     if (expr == "*") {
         return { type: "asterisk" };
-    } 
+    }
     throw new Error(`Unhandled subexpression: ${expr}`);
-    
 }
 function parseDayOfWeek(expr: string): Asterisk | SetOfDays {
     expr = expr.trim();
@@ -104,11 +87,7 @@ function parseDayOfWeek(expr: string): Asterisk | SetOfDays {
             .slice(1)
             .map(d => d && d.replace(/,/, ""))
             .filter(d => d)
-            .map(d =>
-                (!isDayAlias(d))
-                    ? toDayAlias(parseInt(d))
-                    : d
-            )
+            .map(d => (!isDayAlias(d) ? toDayAlias(parseInt(d)) : d))
     };
 }
 
@@ -137,7 +116,7 @@ export const parseExpression = (expression: string): UiState => {
                   dayOfTheMonth: parseSubExpr(groups[2]),
                   month: parseSubExpr(groups[3]),
                   dayOfWeek: parseDayOfWeek(groups[4])
-            };
+              };
     if (
         cron.minutes.type == "cronNumber" &&
         cron.minutes.at.type == "asterisk" &&
@@ -195,7 +174,8 @@ export const parseExpression = (expression: string): UiState => {
         cron.minutes.type == "number" &&
         cron.hours.type == "number" &&
         cron.dayOfTheMonth.type == "number" &&
-        cron.month.type == "cronNumber" && cron.month.at.type == "asterisk" &&
+        cron.month.type == "cronNumber" &&
+        cron.month.at.type == "asterisk" &&
         cron.dayOfWeek.type == "asterisk"
     )
         return {
