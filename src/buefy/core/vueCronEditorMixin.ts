@@ -12,7 +12,6 @@ import Vue from "vue";
 import { UiState, CronSyntax } from "./expressionCommons";
 import { parseExpression } from "./parseExpression";
 import { buildExpression, TabKey, isStateValid } from "./buildExpression";
-import cron from "cron-validate";
 
 const initialData: Record<TabKey, UiState> = {
     minutes: {

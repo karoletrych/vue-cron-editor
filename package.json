@@ -12,7 +12,6 @@
   "dependencies": {
     "buefy": "^0.8.20",
     "core-js": "^3.9.1",
-    "cron-validate": "^1.4.2",
     "cron-validator": "^1.2.1",
     "cronstrue": "^1.110.0",
     "vue": "^2.6.12",

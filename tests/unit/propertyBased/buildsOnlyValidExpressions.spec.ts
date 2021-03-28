@@ -1,5 +1,4 @@
 import * as cronValidator from "cron-validator";
-import cronValidate from "cron-validate";
 import * as cronExpressions from "../../../src/buefy/core/buildExpression";
 import * as fc from "fast-check";
 import { state } from "./aribitraries";
@@ -17,9 +16,8 @@ const isResultValid = (
     options?: Partial<CronValidatorOptions>
 ) => {
     let isValid = cronValidator.isValidCron(expr, options);
-    let isValid2 = cronValidate(expr);
 
-    if (!isValid || !isValid2) {
+    if (!isValid) {
         console.log(
             "Invalid expression produced: " +
                 expr +

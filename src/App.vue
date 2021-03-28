@@ -14,21 +14,6 @@
                     :items="syntaxes"
                 >
                 </v-select>
-                <v-checkbox
-                    label="aliasDayOfWeek"
-                    value="aliasDayOfWeek"
-                    v-model="visibleTabs"
-                />
-                <v-checkbox
-                    label="useBlankDay"
-                    value="useBlankDay"
-                    v-model="visibleTabs"
-                />
-                <v-checkbox
-                    label="useSeconds"
-                    value="useSeconds"
-                    v-model="visibleTabs"
-                />
             </v-row>
             <v-row fluid dense>
                 <v-checkbox
