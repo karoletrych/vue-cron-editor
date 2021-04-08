@@ -52,14 +52,14 @@ function parseSubExpr(expr: string): SubExpr {
     if ((match = expr.match(/(\d+)\/(\d+)/)) != null) {
         return {
             type: "cronNumber",
-            at: { type: "number", value: parseInt(match[0]) },
-            every: { type: "number", value: parseInt(match[1]) }
+            at: { type: "number", value: parseInt(match[1]) },
+            every: { type: "number", value: parseInt(match[2]) }
         };
     }
     if ((match = expr.match(/(\d+)/)) != null) {
         return {
             type: "number",
-            value: parseInt(match[0])
+            value: parseInt(match[1])
         };
     }
     if (expr == "?") {
