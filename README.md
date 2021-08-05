@@ -5,7 +5,7 @@ VueCronEditor is a component library built with Vue allowing for easier editing 
 # Demo
 https://karoletrych.github.io/vue-cron-editor/
 
-The code is here: https://github.com/karoletrych/vue-cron-editor/blob/master/src/App.vue
+(The code is here: https://github.com/karoletrych/vue-cron-editor/blob/master/src/App.vue)
 
 # Requirements
 - Vue ^2.0
