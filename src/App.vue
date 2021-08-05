@@ -96,6 +96,9 @@
                                                     v-model="
                                                         editedItem.expression
                                                     "
+                                                    :visibleTabs="visibleTabs"
+                                                    :locale="selectedLocale"
+                                                    :cronSyntax="selectedSyntax"
                                                 ></VueCronEditorBuefy>
                                             </section>
                                             cron expression:
@@ -122,11 +125,13 @@
                             </v-dialog>
                         </v-toolbar>
                     </template>
-                    <template #item:action="{ item }">
-                        <v-icon small class="mr-2" @click="editItem(item)"
-                            >edit</v-icon
-                        >
-                        <v-icon small @click="deleteItem(item)">delete</v-icon>
+                    <template v-slot:item.actions="{ item }">
+                        <v-icon small class="mr-2" @click="editItem(item)">
+                            mdi-pencil
+                        </v-icon>
+                        <v-icon small @click="deleteItem(item)">
+                            mdi-delete
+                        </v-icon>
                     </template>
                 </v-data-table>
             </section>
@@ -179,7 +184,7 @@ export default {
         headers: [
             { text: "Id", value: "id" },
             { text: "Expression", value: "expression" },
-            { text: "Actions", value: "action", sortable: false }
+            { text: "Actions", value: "actions", sortable: false }
         ],
         expressions: [{ expression: "4 4 * * 0,2,3,5", id: 0 }],
         editedItem: {},

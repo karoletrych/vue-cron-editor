@@ -7,6 +7,14 @@ test("parse minutes expression", () => {
     });
 });
 
+test("parse quartz hours expression", () => {
+    expect(parseExpression("0 0 0/1 * * ?")).toStrictEqual({
+        type: "hourly",
+        hourInterval: 1,
+        minutes: 0
+    });
+});
+
 test("parse week expression", () => {
     expect(parseExpression("4 4 * * 0,2,3,5")).toStrictEqual({
         type: "weekly",
