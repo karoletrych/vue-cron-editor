@@ -97,6 +97,9 @@
                                                         editedItem.expression
                                                     "
                                                     :visibleTabs="visibleTabs"
+                                                    :preserveStateOnSwitchToAdvanced="
+                                                        true
+                                                    "
                                                     :locale="selectedLocale"
                                                     :cronSyntax="selectedSyntax"
                                                 ></VueCronEditorBuefy>
