@@ -7,14 +7,12 @@
                 v-model="selectedLocale"
                 dense
             ></v-select>
-            <v-row fluid dense>
-                <v-select
-                    label="Cron syntax"
-                    v-model="selectedSyntax"
-                    :items="syntaxes"
-                >
-                </v-select>
-            </v-row>
+            <v-select
+                label="Cron syntax"
+                v-model="selectedSyntax"
+                :items="syntaxes"
+            >
+            </v-select>
             <v-row fluid dense>
                 <v-checkbox
                     label="minutes"
