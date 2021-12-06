@@ -193,7 +193,7 @@
 </template>
 
 <script>
-import vueCronEditorMixin from "./vueCronEditorMixin";
+import vueCronEditorMixin from "./vueCronEditorMixin.ts";
 // import { BField } from "buefy/dist/components/field";
 // import { BInput } from "buefy/dist/components/input";
 // import { BTabs, BTabItem } from "buefy/dist/components/tabs";
