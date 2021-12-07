@@ -1,6 +1,7 @@
 <template>
     <div>
-        <vue-cron-editor-oruga></vue-cron-editor-oruga>
+        <VueCronEditorOruga v-model="cronExpression"/>
+        {{cronExpression}}
     </div>
 </template>
 
@@ -12,6 +13,9 @@ export default {
     components: {
       VueCronEditorOruga
     },
+    data: () => ({
+      cronExpression: "*/1 * * * *"
+    }),
 };
 </script>
 

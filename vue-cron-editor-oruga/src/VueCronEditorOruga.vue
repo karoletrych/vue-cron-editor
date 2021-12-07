@@ -1,152 +1,152 @@
 <template>
     <div class="enable-bulma" :key="visibleTabs.join()">
-        <b-tabs v-model="activeTab" @input="reset">
-            <b-tab-item
+        <o-tabs v-model="activeTab" @update:modelValue="reset">
+            <o-tab-item
                 v-if="visibleTabs.includes('minutes')"
                 value="0"
                 :label="_$t('minutes')"
                 class="minutes-tab"
             >
                 <div class="card">
-                    <b-field>
+                    <o-field>
                         <span class="centered-text">{{ _$t("every") }}</span>
-                        <b-numberinput
+                        <o-input
                             :controls="false"
                             v-model="editorData.minuteInterval"
                         />
                         <span class="centered-text">{{ _$t("mminutes") }}</span>
-                    </b-field>
+                    </o-field>
                 </div>
-            </b-tab-item>
-            <b-tab-item
+            </o-tab-item>
+            <o-tab-item
                 v-if="visibleTabs.includes('hourly')"
                 value="1"
                 :label="_$t('hourly')"
                 class="hourly-tab"
             >
                 <div class="card">
-                    <b-field>
+                    <o-field>
                         <span class="centered-text">{{ _$t("every") }}</span>
-                        <b-numberinput
+                        <o-input
                             :controls="false"
                             v-model="editorData.hourInterval"
                         />
                         <span class="centered-text">{{
                             _$t("hoursOnMinute")
                         }}</span>
-                        <b-numberinput
+                        <o-input
                             :controls="false"
                             :min="0"
                             :max="59"
                             v-model="editorData.minutes"
                         />
-                    </b-field>
+                    </o-field>
                 </div>
-            </b-tab-item>
+            </o-tab-item>
 
-            <b-tab-item
+            <o-tab-item
                 v-if="visibleTabs.includes('daily')"
                 value="2"
                 :label="_$t('daily')"
                 class="daily-tab"
             >
                 <div class="card">
-                    <b-field>
+                    <o-field>
                         <span class="centered-text">{{ _$t("every") }}</span>
-                        <b-numberinput
+                        <o-input
                             :controls="false"
                             v-model="editorData.dayInterval"
                         />
                         <span class="centered-text">{{ _$t("daysAt") }}</span>
-                        <b-timepicker
+                        <o-timepicker
                             icon="clock"
                             editable
                             @input="setDateTime"
                             :value="dateTime"
                         />
-                    </b-field>
+                    </o-field>
                 </div>
-            </b-tab-item>
+            </o-tab-item>
 
-            <b-tab-item
+            <o-tab-item
                 v-if="visibleTabs.includes('weekly')"
                 value="3"
                 :label="_$t('weekly')"
                 class="weekly-tab"
             >
                 <div class="card">
-                    <b-field>
+                    <o-field>
                         <span class="centered-text">{{ _$t("everyDay") }}</span>
                         <div class="centered-checkbox-group">
-                            <b-checkbox
+                            <o-checkbox
                                 v-model="editorData.days"
                                 native-value="SUN"
                             >
                                 {{ _$t("sun") }}
-                            </b-checkbox>
-                            <b-checkbox
+                            </o-checkbox>
+                            <o-checkbox
                                 v-model="editorData.days"
                                 native-value="MON"
                             >
                                 {{ _$t("mon") }}
-                            </b-checkbox>
+                            </o-checkbox>
 
-                            <b-checkbox
+                            <o-checkbox
                                 v-model="editorData.days"
                                 native-value="TUE"
                             >
                                 {{ _$t("tue") }}
-                            </b-checkbox>
+                            </o-checkbox>
 
-                            <b-checkbox
+                            <o-checkbox
                                 v-model="editorData.days"
                                 native-value="WED"
                             >
                                 {{ _$t("wed") }}
-                            </b-checkbox>
+                            </o-checkbox>
 
-                            <b-checkbox
+                            <o-checkbox
                                 v-model="editorData.days"
                                 native-value="THU"
                             >
                                 {{ _$t("thu") }}
-                            </b-checkbox>
+                            </o-checkbox>
 
-                            <b-checkbox
+                            <o-checkbox
                                 v-model="editorData.days"
                                 native-value="FRI"
                             >
                                 {{ _$t("fri") }}
-                            </b-checkbox>
+                            </o-checkbox>
 
-                            <b-checkbox
+                            <o-checkbox
                                 v-model="editorData.days"
                                 native-value="SAT"
                             >
                                 {{ _$t("sat") }}
-                            </b-checkbox>
+                            </o-checkbox>
                         </div>
                         <span class="centered-text">{{ _$t("at") }}</span>
-                        <b-timepicker
+                        <o-timepicker
                             icon="clock"
                             editable
                             @input="setDateTime"
                             :value="dateTime"
                         />
-                    </b-field>
+                    </o-field>
                 </div>
-            </b-tab-item>
+            </o-tab-item>
 
-            <b-tab-item
+            <o-tab-item
                 v-if="visibleTabs.includes('monthly')"
                 value="4"
                 :label="_$t('monthly')"
                 class="monthly-tab"
             >
                 <div class="card">
-                    <b-field>
+                    <o-field>
                         <span class="centered-text">{{ _$t("onThe") }}</span>
-                        <b-numberinput
+                        <o-input
                             :controls="false"
                             v-model="editorData.day"
                         />
@@ -154,7 +154,7 @@
                         <span class="centered-text">{{
                             _$t("dayOfEvery")
                         }}</span>
-                        <b-numberinput
+                        <o-input
                             :min="1"
                             :max="12"
                             v-model="editorData.monthInterval"
@@ -162,33 +162,33 @@
                         />
 
                         <span class="centered-text">{{ _$t("monthsAt") }}</span>
-                        <b-timepicker
+                        <o-timepicker
                             icon="clock"
                             editable
                             @input="setDateTime"
                             :value="dateTime"
                         />
-                    </b-field>
+                    </o-field>
                 </div>
-            </b-tab-item>
+            </o-tab-item>
 
-            <b-tab-item
+            <o-tab-item
                 v-if="visibleTabs.includes('advanced')"
                 value="5"
                 :label="_$t('advanced')"
                 class="advanced-tab"
             >
                 <div class="card">
-                    <b-field>
+                    <o-field>
                         <span class="centered-text">{{
                             _$t("cronExpression")
                         }}</span>
-                        <b-input v-model="editorData.cronExpression"></b-input>
+                        <o-input v-model="editorData.cronExpression"></o-input>
                         <span class="centered-text">{{ explanation }}</span>
-                    </b-field>
+                    </o-field>
                 </div>
-            </b-tab-item>
-        </b-tabs>
+            </o-tab-item>
+        </o-tabs>
     </div>
 </template>
 
