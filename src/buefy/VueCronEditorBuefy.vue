@@ -230,6 +230,10 @@ export default {
     watch: {
         currentTab() {
             this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
+            this.activeTab &&
+                this.$emit("change-selected-tab", {
+                    ...this.tabs[this.activeTab]
+                });
         }
     },
     computed: {
