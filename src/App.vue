@@ -50,6 +50,7 @@
                         :locale="selectedLocale"
                         :cronSyntax="selectedSyntax"
                         v-model="sample1CronExpression"
+                        @change-selected-tab="handleChangeSelectedTab"
                     ></VueCronEditorBuefy>
                 </section>
                 {{ sample1CronExpression }}
@@ -136,6 +137,10 @@
                     </template>
                 </v-data-table>
             </section>
+
+            <v-snackbar v-model="snackbar" timeout="1000">
+                {{ snackbarText }}
+            </v-snackbar>
         </v-container>
     </v-app>
 </template>
@@ -178,6 +183,10 @@ export default {
                 this.expressions[newIndex - 1].id = newIndex;
             }
             this.close();
+        },
+        handleChangeSelectedTab(selectedTab) {
+            this.snackbar = true;
+            this.snackbarText = `Selected tab: ${selectedTab.key}, id: ${selectedTab.id}`;
         }
     },
     data: () => ({
@@ -202,7 +211,9 @@ export default {
             "monthly",
             "advanced"
         ],
-        syntaxes: ["basic", "quartz"]
+        syntaxes: ["basic", "quartz"],
+        snackbar: false,
+        snackbarText: ""
     })
 };
 </script>
