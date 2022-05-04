@@ -56,13 +56,14 @@ interface ComponentData {
 }
 
 export default defineComponent({
+    emits: ["update:modelValue"],
     created() {
         this.i18n = createI18n(this.customLocales, this.locale);
-        this.innerValue = this.value;
+        this.innerValue = this.modelValue;
         this.__loadDataFromExpression();
     },
     props: {
-        value: { type: String as PropType<string>, default: "*/1 * * * *" },
+        modelValue: { type: String as PropType<string>, default: "*/1 * * * *" },
         visibleTabs: {
             type: Array,
             default: () => [
@@ -102,11 +103,11 @@ export default defineComponent({
             return this.i18n![key];
         },
         __loadDataFromExpression() {
-            const tabData = parseExpression(this.value);
+            const tabData = parseExpression(this.modelValue);
             if (!this.visibleTabs.includes(tabData.type)) {
                 this.editorData = {
                     type: "advanced",
-                    cronExpression: this.value
+                    cronExpression: this.modelValue
                 };
                 this.currentTab = "advanced";
                 return;
@@ -167,7 +168,7 @@ export default defineComponent({
         },
         value: {
             handler() {
-                if (this.value == this.innerValue) {
+                if (this.modelValue == this.innerValue) {
                     return;
                 }
                 this.__loadDataFromExpression();

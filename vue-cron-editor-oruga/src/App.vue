@@ -1,6 +1,9 @@
 <template>
     <div>
-        <VueCronEditorOruga v-model="cronExpression"/>
+        <VueCronEditorOruga 
+        v-model="cronExpression"
+        :preserve-state-on-switch-to-advanced="true"
+        />
         {{cronExpression}}
     </div>
 </template>

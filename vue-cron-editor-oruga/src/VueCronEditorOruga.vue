@@ -57,11 +57,13 @@
                             :controls="false"
                             v-model="editorData.dayInterval"
                         />
+
                         <span class="centered-text">{{ _$t("daysAt") }}</span>
+
                         <o-timepicker
-                            icon="clock"
+                            hour-format="24"
                             editable
-                            @input="setDateTime"
+                            @update:modelValue="setDateTime"
                             :value="dateTime"
                         />
                     </o-field>
@@ -128,9 +130,9 @@
                         </div>
                         <span class="centered-text">{{ _$t("at") }}</span>
                         <o-timepicker
-                            icon="clock"
+                            hour-format="24"
                             editable
-                            @input="setDateTime"
+                            @update:modelValue="setDateTime"
                             :value="dateTime"
                         />
                     </o-field>
@@ -146,10 +148,7 @@
                 <div class="card">
                     <o-field>
                         <span class="centered-text">{{ _$t("onThe") }}</span>
-                        <o-input
-                            :controls="false"
-                            v-model="editorData.day"
-                        />
+                        <o-input :controls="false" v-model="editorData.day" />
 
                         <span class="centered-text">{{
                             _$t("dayOfEvery")
@@ -163,9 +162,9 @@
 
                         <span class="centered-text">{{ _$t("monthsAt") }}</span>
                         <o-timepicker
-                            icon="clock"
+                            hour-format="24"
                             editable
-                            @input="setDateTime"
+                            @update:modelValue="setDateTime"
                             :value="dateTime"
                         />
                     </o-field>
@@ -193,6 +192,8 @@
 </template>
 
 <script>
+// import "@oruga-ui/theme-bulma/dist/bulma.css";
+
 import vueCronEditorMixin from "./vueCronEditorMixin.ts";
 // import { BField } from "buefy/dist/components/field";
 // import { BInput } from "buefy/dist/components/input";
@@ -225,12 +226,14 @@ export default {
         ]
     }),
     mounted() {
-        this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
+        this.activeTab = this.tabs.find((t) => t.key === this.currentTab).id;
     },
     watch: {
         currentTab() {
-            this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
-        }
+            this.activeTab = this.tabs.find(
+                (t) => t.key === this.currentTab
+            ).id;
+        },
     },
     computed: {
         dateTime() {
@@ -238,11 +241,11 @@ export default {
             dateTime.setHours(this.editorData.hours);
             dateTime.setMinutes(this.editorData.minutes);
             return dateTime;
-        }
+        },
     },
     methods: {
         reset(e) {
-            const tabKey = this.tabs.find(t => t.id === e).key;
+            const tabKey = this.tabs.find((t) => t.id === e).key;
             this._resetToTab(tabKey);
         },
         setDateTime(e) {
@@ -251,8 +254,8 @@ export default {
             }
             this.editorData.hours = e.getHours();
             this.editorData.minutes = e.getMinutes();
-        }
-    }
+        },
+    },
 };
 </script>
 
@@ -284,8 +287,5 @@ export default {
 
     $primary: #3273dc;
     $primary-invert: findColorInvert($primary);
-
-    @import "~bulma";
-    @import "~buefy/src/scss/buefy";
 }
 </style>
